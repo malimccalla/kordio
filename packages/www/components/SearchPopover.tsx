@@ -11,9 +11,68 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import React, { cloneElement, useState } from 'react';
 
-import styled, { media } from '../styles';
+import styled, { css, media } from '../styles';
 import { SearchIcon } from './icons';
 import Text from './Text';
+
+const results = [
+  {
+    id: 1,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 2,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 3,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 4,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 5,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 6,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 7,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 8,
+    name: 'Marketing in the 21st century',
+    url: 'google.com',
+    category: 'Marketing',
+    imageUrl: 'https://picsum.photos/200',
+  },
+];
 
 interface Props {
   open?: boolean;
@@ -66,7 +125,9 @@ export const Dialog = ({
                 })}
               >
                 {render({
-                  close: () => setOpen(false),
+                  close: () => {
+                    setOpen(false);
+                  },
                   labelId,
                   descriptionId,
                 })}
@@ -86,11 +147,13 @@ const SearchPopover = () => {
   const onSearchInputChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const currentQuery = (e.target as HTMLInputElement).value;
 
-    if (searchQuery !== '') {
+    if (currentQuery !== '') {
       setHasSearchQuery(true);
     } else {
       setHasSearchQuery(false);
     }
+
+    console.log(hasSearchQuery);
 
     setSearchQuery(currentQuery);
   };
@@ -99,7 +162,7 @@ const SearchPopover = () => {
     <Dialog
       render={({ close }) => (
         <SearchContainer>
-          <DialogSearchBox>
+          <DialogSearchBox hasSearchQuery={hasSearchQuery}>
             <IconBox>
               <SearchIcon size="24px" />
             </IconBox>
@@ -113,6 +176,18 @@ const SearchPopover = () => {
               <CloseButton onClick={close}>Cancel</CloseButton>
             </CancelSection>
           </DialogSearchBox>
+          {hasSearchQuery && (
+            <Results>
+              {results.map((result) => {
+                return (
+                  <ResultContainer key={result.id}>
+                    <ResultImage src={result.imageUrl} />
+                    {result.name}
+                  </ResultContainer>
+                );
+              })}
+            </Results>
+          )}
         </SearchContainer>
       )}
     >
@@ -126,8 +201,44 @@ const SearchPopover = () => {
   );
 };
 
+const ResultImage = styled.div<{ src: string }>`
+  width: 6rem;
+  height: 6rem;
+  border-radius: 4px;
+  background-image: url(${(props) => props.src});
+`;
+
+const ResultContainer = styled.div`
+  width: 100%;
+  height: 8rem;
+  padding-left: 1rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: white; // ${(props) => props.theme.colors.white};
+  border-radius: 7px;
+  margin-bottom: 1frem;
+`;
+
+const Results = styled.div`
+  background-color: rgba(230, 230, 230);
+  width: 100%;
+  max-height: 80vh;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+
+  overflow-x: scroll;
+
+  padding: 0.6rem;
+
+  ${media.large`
+    max-height: calc(100vh - 7rem);
+  `}
+`;
+
 const SearchContainer = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const CancelSection = styled.div`
@@ -181,7 +292,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const DialogSearchBox = styled.div`
+const DialogSearchBox = styled.div<{ hasSearchQuery: boolean }>`
   display: flex;
   height: 7rem;
   width: 104rem;
@@ -193,6 +304,13 @@ const DialogSearchBox = styled.div`
   background-color: white;
   border-radius: 11px;
   box-shadow: 0 4px 0 0 rgba(197, 197, 197);
+
+  ${(props) =>
+    props.hasSearchQuery &&
+    css`
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    `}
 
   ${media.large`
     width: 100vw;
