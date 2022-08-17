@@ -9,7 +9,7 @@ import {
 } from 'react-instantsearch-dom';
 
 import Page from '../components/Page';
-import Popover from '../components/Popover';
+import Popover from '../components/SearchPopover';
 import { searchClient } from '../lib/searchClient';
 import styled from '../styles';
 
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         <Main>
           <Title>The #1 Place for Music Industry Contacts & Resources</Title>
           <Refer>
-            (but <Span>don&apos;t tell anyone</Span> 🤫)
+            (but <Span>don&apos;t tell anyone &rarr;</Span> 🤫)
           </Refer>
 
           <SearchSection>
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 
           <Grid>
             <Card>
-              <CardTitle>Radio, Blogs, & Media</CardTitle>
+              <CardTitle>Radio, Blogs, & Media &rarr;</CardTitle>
               <CardDescription>
                 Submit your music to tastemakers and brands accross Radio, Blogs
                 & Media.
@@ -49,28 +49,28 @@ const Home: NextPage = () => {
             </Card>
 
             <Card>
-              <CardTitle>Networking & Events</CardTitle>
+              <CardTitle>Networking & Events &rarr;</CardTitle>
               <CardDescription>
                 Mingle with industry folk at upcoming events hosted in your area
               </CardDescription>
             </Card>
 
             <Card>
-              <CardTitle>Fan Engagement</CardTitle>
+              <CardTitle>Fan Engagement &rarr;</CardTitle>
               <CardDescription>
                 Growth and engagement tips for nurturing a sustainable fanbase
               </CardDescription>
             </Card>
 
             <Card>
-              <CardTitle>Record Labels</CardTitle>
+              <CardTitle>Record Labels &rarr;</CardTitle>
               <CardDescription>
                 Contact record label execs and get your music heard by A&Rs!
               </CardDescription>
             </Card>
 
             <Card>
-              <CardTitle>Tools & Technology</CardTitle>
+              <CardTitle>Tools & Technology &rarr;</CardTitle>
               <CardDescription>
                 Leverage the latest technology to keep up to date with industry
                 trends
@@ -78,7 +78,7 @@ const Home: NextPage = () => {
             </Card>
 
             <Card>
-              <CardTitle>Law & Business</CardTitle>
+              <CardTitle>Law & Business &rarr;</CardTitle>
               <CardDescription>
                 Tips and contacts to help make sense of the legal side of the
                 industry
@@ -94,12 +94,7 @@ const Home: NextPage = () => {
 
 const Container = styled.div`
   padding: 3.5rem;
-  background-image: linear-gradient(
-    90deg,
-    #000000 0%,
-    #c3e1fc 100%,
-    #d8ded6 100%
-  );
+  background-color: ${(props) => props.theme.colors.black};
 `;
 
 const Main = styled.main`
@@ -154,17 +149,26 @@ const Card = styled.div`
   text-decoration: none;
   border-radius: 10px;
   background-color: ${(props) => props.theme.colors.black};
+  border: 1px solid #999;
   flex-direction: column;
   color: white;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.5s ease;
   max-width: 33.5rem;
   min-height: 20.7rem;
   text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+    color: ${(props) => props.theme.colors.blue};
+    border: 1px solid white;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 2rem;
   justify-content: space-between;
 `;
 
@@ -174,44 +178,48 @@ const ButtonNav = styled.div`
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.primary};
-  text-decoration: underline;
+  color: ${(props) => props.theme.colors.blue};
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const AuthButton = styled.button`
-  background-color: ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.blue};
   color: white;
-  height: 5rem;
+  height: 4.2rem;
   display: flex;
   align-items: center;
   border-radius: 5000px;
-  padding: 0 3rem;
+  padding: 0 2rem;
   justify-content: center;
 
-  transition: all 1s ease;
+  transition: all 0.7s ease;
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 `;
 
 const SubmitResourceButton = styled.button`
   margin-right: 2rem;
-  height: 5rem;
+  height: 4.2rem;
   border: 1px solid white;
-  padding: 0 2rem;
+  padding: 0 1.4rem;
   display: flex;
   align-items: center;
   border-radius: 5000px;
   background: none;
   color: white;
 
-  transition: all 1s ease;
+  transition: all 0.7s ease;
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 `;
 
@@ -253,7 +261,7 @@ const TrendingSearches = styled.p`
 const Logo = styled.div`
   color: white;
   font-weight: 700;
-  font-size: 3.2rem;
+  font-size: 3.8rem;
 `;
 
 export default Home;
