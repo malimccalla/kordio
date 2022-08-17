@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
-import { theme } from './theme'
+import { theme } from './theme';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -27,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
     min-height: 100%;
     width: 100%;
     box-sizing: border-box;
-    background-color: ${theme.colors.background};
+    background-color: ${theme.colors.black};
     color: ${theme.colors.black};
     padding: 0;
     margin: 0;
@@ -50,7 +50,14 @@ const GlobalStyles = createGlobalStyle`
     -webkit-overflow-scrolling: touch;
     font-family: ${theme.fontStack};
     font-size: 1.6rem;
+
+    ::selection {
+      background: ${theme.colors.pink}; /* WebKit/Blink Browsers */
+    }   
+    ::-moz-selection {
+      background: ${theme.colors.pink}; /* Gecko Browsers */
+    }
   }
 `;
 
-export default GlobalStyles
+export default GlobalStyles;

@@ -1,3 +1,5 @@
+import { getEnabledCategories } from 'trace_events';
+
 import {
   FloatingFocusManager,
   FloatingOverlay,
@@ -11,65 +13,181 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import React, { cloneElement, useState } from 'react';
 
-import styled, { css, media } from '../styles';
+import styled, { css, media, theme } from '../styles';
 import { SearchIcon } from './icons';
 import Text from './Text';
 
+const icons = [
+  'book',
+  'article',
+  'app',
+  'website',
+  'money',
+  'person',
+  'company',
+  'megaphone',
+];
+
 const results = [
   {
-    id: 1,
-    name: 'Marketing in the 21st century',
+    id: 0,
+    featured: true,
+    name: 'A Featured Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+    ],
     imageUrl: 'https://picsum.photos/200',
+    type: 'person',
+  },
+  {
+    id: 1,
+    name: 'A Relevant Contact or Resource',
+    url: 'google.com',
+    categories: [
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+    ],
+    imageUrl: 'https://picsum.photos/200',
+    type: 'person',
   },
   {
     id: 2,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+    ],
     imageUrl: 'https://picsum.photos/200',
+    type: 'company',
   },
   {
     id: 3,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 2, name: 'article', color: theme.colors.blue },
+    ],
     imageUrl: 'https://picsum.photos/200',
+    type: 'article',
   },
   {
     id: 4,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 2, name: 'article', color: theme.colors.blue },
+    ],
     imageUrl: 'https://picsum.photos/200',
+    type: 'video',
   },
   {
     id: 5,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+    ],
     imageUrl: 'https://picsum.photos/200',
+    type: 'tech',
   },
   {
     id: 6,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+    ],
     imageUrl: 'https://picsum.photos/200',
   },
   {
     id: 7,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+    ],
     imageUrl: 'https://picsum.photos/200',
   },
   {
     id: 8,
-    name: 'Marketing in the 21st century',
+    name: 'A Relevant Contact or Resource',
     url: 'google.com',
-    category: 'Marketing',
+    categories: [
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 2, name: 'article', color: theme.colors.blue },
+    ],
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 9,
+    name: 'A Relevant Contact or Resource',
+    url: 'google.com',
+    categories: [
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+    ],
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 10,
+    name: 'A Relevant Contact or Resource',
+    url: 'google.com',
+    categories: [
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 2, name: 'article', color: theme.colors.blue },
+    ],
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 11,
+    name: 'A Relevant Contact or Resource',
+    url: 'google.com',
+    categories: [
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 2, name: 'article', color: theme.colors.blue },
+    ],
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 12,
+    name: 'A Relevant Contact or Resource',
+    url: 'google.com',
+    categories: [
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+    ],
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: 13,
+    name: 'A Relevant Contact or Resource',
+    url: 'google.com',
+    categories: [
+      { id: 1, name: 'marketing', color: theme.colors.pink },
+      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 3, name: 'blog', color: theme.colors.secondary },
+    ],
     imageUrl: 'https://picsum.photos/200',
   },
 ];
@@ -153,8 +271,6 @@ const SearchPopover = () => {
       setHasSearchQuery(false);
     }
 
-    console.log(hasSearchQuery);
-
     setSearchQuery(currentQuery);
   };
 
@@ -180,9 +296,30 @@ const SearchPopover = () => {
             <Results>
               {results.map((result) => {
                 return (
-                  <ResultContainer key={result.id}>
-                    <ResultImage src={result.imageUrl} />
-                    {result.name}
+                  <ResultContainer featured={result.featured} key={result.id}>
+                    <ResultLeft>
+                      <ResultImage src={result.imageUrl} />
+                      <TextContainer>
+                        <Text fontSize="1.6rem" fontWeight="500">
+                          {result.name}
+                        </Text>
+                        <Categories>
+                          {result.categories.map((category) => {
+                            return (
+                              <Category
+                                color={category.color}
+                                key={category.id}
+                              >
+                                {category.name}
+                              </Category>
+                            );
+                          })}
+                        </Categories>
+                      </TextContainer>
+                    </ResultLeft>
+                    <ResultRight>
+                      <ArrowBox>&rarr;</ArrowBox>
+                    </ResultRight>
                   </ResultContainer>
                 );
               })}
@@ -201,29 +338,93 @@ const SearchPopover = () => {
   );
 };
 
-const ResultImage = styled.div<{ src: string }>`
-  width: 6rem;
-  height: 6rem;
-  border-radius: 4px;
-  background-image: url(${(props) => props.src});
+const Categories = styled.div`
+  display: flex;
 `;
 
-const ResultContainer = styled.div`
+const Category = styled.div<{ color: string }>`
+  background-color: ${(props) => props.color}BB;
+  font-size: 1.3rem;
+  height: 2rem;
+  font-weight: 500;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5000px;
+  margin-right: 6px;
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 1rem;
+`;
+
+const ArrowBox = styled.div`
+  height: 3rem;
+  width: 3rem;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  display: none;
+`;
+
+const ResultLeft = styled.div`
+  display: flex;
+`;
+
+const ResultRight = styled.div``;
+
+const ResultImage = styled.div<{ src: string }>`
+  width: 4.4rem;
+  height: 4.4rem;
+  background-size: cover;
+  border-radius: 4px;
+  background-color: #eee; ;
+`;
+
+const ResultContainer = styled.div<{ featured: boolean }>`
   width: 100%;
   height: 8rem;
-  padding-left: 1rem;
-  align-items: center;
-  display: flex;
+  padding: 0 2rem;
   flex-direction: row;
-  background-color: white; // ${(props) => props.theme.colors.white};
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  background-color: white;
   border-radius: 7px;
-  margin-bottom: 1frem;
+  margin-bottom: 0.6rem;
+
+  ${(props) =>
+    props.featured &&
+    css`
+      border-top: 12px solid ${(props) => props.theme.colors.pink};
+      height: 10rem;
+    `}
+
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.blue};
+    cursor: pointer;
+    color: white;
+  }
+
+  &:hover ${ArrowBox} {
+    display: flex;
+    color: ${(props) => props.theme.colors.blue};
+  }
 `;
 
 const Results = styled.div`
   background-color: rgba(230, 230, 230);
   width: 100%;
   max-height: 80vh;
+  min-height: 80vh;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
 
@@ -276,6 +477,8 @@ const IconBox = styled.div`
   justify-content: center;
   height: 3rem;
   width: 3rem;
+
+  transition: all 0.3s ease;
 `;
 
 const SearchInput = styled.input`
@@ -335,6 +538,11 @@ const DummySearchBox = styled.div`
   &:hover {
     cursor: pointer;
     background-color: #eaeaea;
+  }
+
+  &:hover ${IconBox} {
+    /* transform: rotate(20deg); */
+    transform: scale(1.1);
   }
 `;
 

@@ -1,7 +1,4 @@
-import styled from 'styled-components';
-
 export const Search = ({ size }: { size: string }) => (
-  // <SearchButton>
   <svg
     preserveAspectRatio="xMinYMax meet"
     width={size}
@@ -22,17 +19,4 @@ export const Search = ({ size }: { size: string }) => (
       </g>
     </g>
   </svg>
-  // </SearchButton>
 );
-
-// const SearchButton = styled.button`
-//   height: 16px;
-//   width: 16px;
-//   font-size: 1px;
-//   background-color: transparent;
-//   outline: none;
-//   border: none;
-//   &:hover {
-//     cursor: pointer;
-//   }
-// `;

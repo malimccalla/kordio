@@ -16,9 +16,10 @@ import styled from '../styles';
 const Home: NextPage = () => {
   return (
     <Page title="KORD – The #1 Place for music industry contacts and resources">
+      <Banner />
       <Container>
         <Header>
-          <Logo>KORD</Logo>
+          <Logo>Platform.</Logo>
           <ButtonNav>
             <SubmitResourceButton>Submit Resource</SubmitResourceButton>
             <AuthButton>Signup / Login</AuthButton>
@@ -27,7 +28,11 @@ const Home: NextPage = () => {
         <Main>
           <Title>The #1 Place for Music Industry Contacts & Resources</Title>
           <Refer>
-            (but <Span>don&apos;t tell anyone &rarr;</Span> 🤫)
+            (but{' '}
+            <Span onClick={() => alert('TODO: Implement referral system')}>
+              don&apos;t tell anyone &rarr;
+            </Span>{' '}
+            🤫)
           </Refer>
 
           <SearchSection>
@@ -85,12 +90,18 @@ const Home: NextPage = () => {
               </CardDescription>
             </Card>
           </Grid>
-          <AllCategoriesButton>All Categories</AllCategoriesButton>
+          <AllCategoriesButton>More Categories</AllCategoriesButton>
         </Main>
       </Container>
     </Page>
   );
 };
+
+const Banner = styled.div`
+  height: 1rem;
+  background-color: ${(props) => props.theme.colors.pink};
+  width: 100%;
+`;
 
 const Container = styled.div`
   padding: 3.5rem;
@@ -107,12 +118,14 @@ const Main = styled.main`
   align-items: center;
 `;
 const AllCategoriesButton = styled.button`
-  height: 5rem;
-  width: 20rem;
+  height: 4.2rem;
+  width: 16rem;
   margin-top: 2rem;
   border-radius: 5000px;
+  color: white;
 
   transition: all 1s ease;
+  background-color: ${(props) => props.theme.colors.blue};
 
   &:hover {
     cursor: pointer;
@@ -138,6 +151,15 @@ const Grid = styled.div`
   max-width: 108rem;
 `;
 
+const CardTitle = styled.h2`
+  font-size: 2.2rem;
+`;
+
+const CardDescription = styled.p`
+  margin-top: 1rem;
+  color: #d8d8d8;
+`;
+
 const Card = styled.div`
   margin: 1rem;
   padding: 2rem;
@@ -160,8 +182,15 @@ const Card = styled.div`
   &:hover {
     cursor: pointer;
     transform: scale(1.01);
-    color: ${(props) => props.theme.colors.blue};
     border: 1px solid white;
+  }
+
+  &:hover ${CardTitle} {
+    color: ${(props) => props.theme.colors.blue};
+  }
+
+  &:hover ${CardDescription} {
+    color: white;
   }
 `;
 
@@ -228,15 +257,6 @@ const Refer = styled.p`
   font-size: 2rem;
   color: white;
   font-weight: 500;
-`;
-
-const CardTitle = styled.h2`
-  font-size: 2.2rem;
-  text-decoration: underline;
-`;
-
-const CardDescription = styled.p`
-  margin-top: 1rem;
 `;
 
 const SearchSection = styled.div`
