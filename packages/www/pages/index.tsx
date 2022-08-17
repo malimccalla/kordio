@@ -32,15 +32,10 @@ const Home: NextPage = () => {
 
           <SearchSection>
             <Popover />
-            {/* <InstantSearch
-              indexName="dev_contacts"
-              searchClient={searchClient}
-            >
-              <SearchBox />
-              <Hits />
-            </InstantSearch> */}
             <TrendingSearches>
-              Trending: logic pro tips, radio stations, music blogs
+              Trending: <TrendingSearch>logic pro tips</TrendingSearch>,{' '}
+              <TrendingSearch>radio stations</TrendingSearch>,{' '}
+              <TrendingSearch>music blogs</TrendingSearch>
             </TrendingSearches>
           </SearchSection>
 
@@ -63,7 +58,7 @@ const Home: NextPage = () => {
             <Card>
               <CardTitle>Fan Engagement</CardTitle>
               <CardDescription>
-                Growth and engagement tips for growing a sustainable fanbase
+                Growth and engagement tips for nurturing a sustainable fanbase
               </CardDescription>
             </Card>
 
@@ -192,10 +187,17 @@ const AuthButton = styled.button`
   border-radius: 5000px;
   padding: 0 3rem;
   justify-content: center;
+
+  transition: all 1s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
 `;
 
 const SubmitResourceButton = styled.button`
-  margin-right: 3rem;
+  margin-right: 2rem;
   height: 5rem;
   border: 1px solid white;
   padding: 0 2rem;
@@ -204,11 +206,17 @@ const SubmitResourceButton = styled.button`
   border-radius: 5000px;
   background: none;
   color: white;
+
+  transition: all 1s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
 `;
 
 const Refer = styled.p`
   margin: 2.4rem 0;
-  margin-top: 3rem;
   font-size: 2rem;
   color: white;
   font-weight: 500;
@@ -228,9 +236,18 @@ const SearchSection = styled.div`
   width: 100%;
 `;
 
+const TrendingSearch = styled.span`
+  color: #d8d8d8;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+`;
+
 const TrendingSearches = styled.p`
   color: white;
-  margin-top: 1rem;
+  margin-top: 1.4rem;
 `;
 
 const Logo = styled.div`
