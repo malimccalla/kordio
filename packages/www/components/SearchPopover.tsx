@@ -296,9 +296,15 @@ const SearchPopover = () => {
             <Results>
               {results.map((result) => {
                 return (
-                  <ResultContainer featured={result.featured} key={result.id}>
+                  <ResultContainer featured={!!result.featured} key={result.id}>
                     <ResultLeft>
-                      <ResultImage src={result.imageUrl} />
+                      <ResultImage src={result.imageUrl}>
+                        <Text fontWeight="500" color="#999">
+                          {result.name[
+                            Math.floor(Math.random() * result.name.length)
+                          ].toLocaleUpperCase()}
+                        </Text>
+                      </ResultImage>
                       <TextContainer>
                         <Text fontSize="1.6rem" fontWeight="500">
                           {result.name}
@@ -381,7 +387,11 @@ const ResultRight = styled.div``;
 const ResultImage = styled.div<{ src: string }>`
   width: 4.4rem;
   height: 4.4rem;
+  display: flex;
+  font-size: 2.6rem;
   background-size: cover;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
   background-color: #eee; ;
 `;
@@ -401,7 +411,7 @@ const ResultContainer = styled.div<{ featured: boolean }>`
   ${(props) =>
     props.featured &&
     css`
-      border-top: 12px solid ${(props) => props.theme.colors.pink};
+      border-top: 8px solid ${(props) => props.theme.colors.pink};
       height: 10rem;
     `}
 
