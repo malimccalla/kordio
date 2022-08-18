@@ -393,7 +393,7 @@ const ResultImage = styled.div<{ src: string }>`
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  background-color: #eee; ;
+  background-color: #eee;
 `;
 
 const ResultContainer = styled.div<{ featured: boolean }>`
@@ -411,8 +411,20 @@ const ResultContainer = styled.div<{ featured: boolean }>`
   ${(props) =>
     props.featured &&
     css`
-      border-top: 8px solid ${(props) => props.theme.colors.pink};
+      /* border-top: 8px solid ${(props) => props.theme.colors.pink}; */
+      background: #43c6ac; /* fallback for old browsers */
+      background: -webkit-linear-gradient(
+        to left,
+        #f8ffae,
+        #43c6ac
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        to left,
+        #f8ffae,
+        #43c6ac
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       height: 10rem;
+      color: white;
     `}
 
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
