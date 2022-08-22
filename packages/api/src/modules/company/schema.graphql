@@ -1,0 +1,12 @@
+type Company {
+  id: String!
+  name: String
+  contactEmail: String
+  location: String
+  website: String
+  description: String
+}
+
+type Query {
+  companies: [Company]
+}
