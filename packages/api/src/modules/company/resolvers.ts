@@ -1,15 +1,12 @@
-const resolvers = {
+import { PrismaClient } from '@prisma/client';
+
+import { Resolvers } from '../../typings/types';
+
+const resolvers: Resolvers = {
   Query: {
-    companies: () => {
-      return [
-        {
-          id: '1',
-          name: 'Acme Co',
-          contactEmail: 'example@example.com',
-          location: 'London, UK',
-          website: 'example.com',
-        },
-      ];
+    companies: async (_, __, { prisma }) => {
+      const companies = prisma.company.findMany();
+      return companies;
     },
   },
 };

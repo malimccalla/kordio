@@ -1,14 +1,17 @@
 import 'dotenv/config';
 
+import { PrismaClient } from '@prisma/client';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
 import schema from './schema';
 
 const port = process.env.PORT || 4000;
+const prisma = new PrismaClient();
 
 const apolloServer = new ApolloServer({
   schema,
+  context: { prisma },
   csrfPrevention: true,
   cache: 'bounded',
   /**
