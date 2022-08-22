@@ -10,3 +10,26 @@ type Company {
 type Query {
   companies: [Company]
 }
+
+type Mutation {
+  createCompany(input: CreateCompanyInput!): CreateCompanyPayload!
+}
+
+input CreateCompanyInput {
+  name: String
+  contactEmail: String
+  location: String
+  website: String
+  description: String
+}
+
+type CreateCompanyPayload {
+  ok: Boolean!
+  errors: [Error!]
+  company: Company
+}
+
+type Error {
+  path: String
+  message: String
+}

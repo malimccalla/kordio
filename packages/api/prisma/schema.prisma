@@ -12,7 +12,7 @@ datasource db {
 
 model Company {
   id           String  @id @default(uuid())
-  name         String
+  name         String?
   contactEmail String? @map("contact_email")
   location     String?
   website      String?

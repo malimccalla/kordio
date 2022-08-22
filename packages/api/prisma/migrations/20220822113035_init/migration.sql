@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "companies" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT,
     "contact_email" TEXT,
     "location" TEXT,
     "website" TEXT,

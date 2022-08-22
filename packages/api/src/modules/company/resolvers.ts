@@ -1,5 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
 import { Resolvers } from '../../typings/types';
 
 const resolvers: Resolvers = {
@@ -7,6 +5,24 @@ const resolvers: Resolvers = {
     companies: async (_, __, { prisma }) => {
       const companies = prisma.company.findMany();
       return companies;
+    },
+  },
+  Mutation: {
+    createCompany: async (_, { input }, { prisma }) => {
+      if (!input.name) {
+        return {
+          ok: false,
+          errors: [
+            { path: 'createCompany', message: 'name of company is required' },
+          ],
+        };
+      }
+
+      const company = await prisma.company.create({
+        data: input,
+      });
+
+      return { ok: true, errors: null, company };
     },
   },
 };

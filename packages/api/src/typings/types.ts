@@ -5,6 +5,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -28,6 +29,37 @@ export type Company = {
   location?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
+};
+
+export type CreateCompanyInput = {
+  contactEmail?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  location?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  website?: InputMaybe<Scalars['String']>;
+};
+
+export type CreateCompanyPayload = {
+  __typename?: 'CreateCompanyPayload';
+  company?: Maybe<Company>;
+  errors?: Maybe<Array<Error>>;
+  ok: Scalars['Boolean'];
+};
+
+export type Error = {
+  __typename?: 'Error';
+  message?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createCompany: CreateCompanyPayload;
+};
+
+
+export type MutationCreateCompanyArgs = {
+  input: CreateCompanyInput;
 };
 
 export type Query = {
@@ -107,6 +139,10 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Category: ResolverTypeWrapper<Category>;
   Company: ResolverTypeWrapper<Company>;
+  CreateCompanyInput: CreateCompanyInput;
+  CreateCompanyPayload: ResolverTypeWrapper<CreateCompanyPayload>;
+  Error: ResolverTypeWrapper<Error>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
@@ -116,6 +152,10 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Category: Category;
   Company: Company;
+  CreateCompanyInput: CreateCompanyInput;
+  CreateCompanyPayload: CreateCompanyPayload;
+  Error: Error;
+  Mutation: {};
   Query: {};
   String: Scalars['String'];
 };
@@ -136,6 +176,23 @@ export type CompanyResolvers<ContextType = Context, ParentType extends Resolvers
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CreateCompanyPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['CreateCompanyPayload'] = ResolversParentTypes['CreateCompanyPayload']> = {
+  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
+  errors?: Resolver<Maybe<Array<ResolversTypes['Error']>>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ErrorResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Error'] = ResolversParentTypes['Error']> = {
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createCompany?: Resolver<ResolversTypes['CreateCompanyPayload'], ParentType, ContextType, RequireFields<MutationCreateCompanyArgs, 'input'>>;
+};
+
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   companies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
 };
@@ -143,6 +200,9 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 export type Resolvers<ContextType = Context> = {
   Category?: CategoryResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
+  CreateCompanyPayload?: CreateCompanyPayloadResolvers<ContextType>;
+  Error?: ErrorResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
