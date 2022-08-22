@@ -1,14 +1,10 @@
 import 'dotenv/config';
 
-import http from 'http';
-
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import express from 'express';
 
 import schema from './schema';
 
-const app = express();
 const port = process.env.PORT || 4000;
 
 const apolloServer = new ApolloServer({
@@ -25,6 +21,6 @@ const apolloServer = new ApolloServer({
   plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
 });
 
-apolloServer.listen().then(({ url }) => {
+apolloServer.listen({ port }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
