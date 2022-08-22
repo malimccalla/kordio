@@ -7,10 +7,6 @@ import express from 'express';
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.get('/', (req, res) => {
-  res.send('Express + TypeScript Server');
-});
-
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.

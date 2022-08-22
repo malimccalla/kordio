@@ -7,7 +7,6 @@
   "description": "KORD API",
   "main": "src/index.ts",
   "scripts": {
-    "start:dev": "tsc-watch --onSuccess \"node src/index.ts\"",
     "start": "node dist/src/index.js",
     "seed": "ts-node prisma/seed.ts",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",

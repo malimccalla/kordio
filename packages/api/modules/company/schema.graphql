@@ -1,0 +1,14 @@
+type Company {
+  id: String
+  name: String
+  people: [Contact]
+  primaryContact: Contact
+}
+
+type Contact {
+  id: String
+  name: String
+  givenName: String
+  lastName: String
+  email: String
+}
