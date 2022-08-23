@@ -11,6 +11,7 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
+import Link from 'next/link';
 import React, { cloneElement, useState } from 'react';
 
 import styled, { css, media, theme } from '../styles';
@@ -258,7 +259,7 @@ export const Dialog = ({
   );
 };
 
-const SearchPopover = () => {
+const SearchPopover = (props: { height?: string; borderRadius?: string }) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [hasSearchQuery, setHasSearchQuery] = React.useState(false);
 
@@ -296,37 +297,39 @@ const SearchPopover = () => {
             <Results>
               {results.map((result) => {
                 return (
-                  <ResultContainer featured={!!result.featured} key={result.id}>
-                    <ResultLeft>
-                      <ResultImage src={result.imageUrl}>
-                        <Text fontWeight="500" color="#999">
-                          {result.name[
-                            Math.floor(Math.random() * result.name.length)
-                          ].toLocaleUpperCase()}
-                        </Text>
-                      </ResultImage>
-                      <TextContainer>
-                        <Text fontSize="1.6rem" fontWeight="500">
-                          {result.name}
-                        </Text>
-                        <Categories>
-                          {result.categories.map((category) => {
-                            return (
-                              <Category
-                                color={category.color}
-                                key={category.id}
-                              >
-                                {category.name}
-                              </Category>
-                            );
-                          })}
-                        </Categories>
-                      </TextContainer>
-                    </ResultLeft>
-                    <ResultRight>
-                      <ArrowBox>&rarr;</ArrowBox>
-                    </ResultRight>
-                  </ResultContainer>
+                  <Link key={result.id} href={`/contact/${result.id}`}>
+                    <ResultContainer featured={!!result.featured}>
+                      <ResultLeft>
+                        <ResultImage src={result.imageUrl}>
+                          <Text fontWeight="500" color="#999">
+                            {result.name[
+                              Math.floor(Math.random() * result.name.length)
+                            ].toLocaleUpperCase()}
+                          </Text>
+                        </ResultImage>
+                        <TextContainer>
+                          <Text fontSize="1.6rem" fontWeight="500">
+                            {result.name}
+                          </Text>
+                          <Categories>
+                            {result.categories.map((category) => {
+                              return (
+                                <Category
+                                  color={category.color}
+                                  key={category.id}
+                                >
+                                  {category.name}
+                                </Category>
+                              );
+                            })}
+                          </Categories>
+                        </TextContainer>
+                      </ResultLeft>
+                      <ResultRight>
+                        <ArrowBox>&rarr;</ArrowBox>
+                      </ResultRight>
+                    </ResultContainer>
+                  </Link>
                 );
               })}
             </Results>
@@ -334,7 +337,7 @@ const SearchPopover = () => {
         </SearchContainer>
       )}
     >
-      <DummySearchBox>
+      <DummySearchBox height={props.height} borderRadius={props.borderRadius}>
         <IconBox>
           <SearchIcon size="20px" />
         </IconBox>
@@ -544,16 +547,16 @@ const DialogSearchBox = styled.div<{ hasSearchQuery: boolean }>`
   `}
 `;
 
-const DummySearchBox = styled.div`
-  height: 6rem;
+const DummySearchBox = styled.div<{ height?: string; borderRadius?: string }>`
+  height: ${(props) => props.height || '6rem'};
   display: flex;
   padding-left: 2rem;
+  width: 100%;
   align-items: center;
   color: #999999;
   font-size: 1.8rem;
-  margin-top: 1rem;
   background-color: white;
-  border-radius: 11px;
+  border-radius: ${(props) => props.borderRadius || '11px'};
   box-shadow: 0 4px 0 0 rgba(197, 197, 197);
   transition: all 0.3s ease;
 

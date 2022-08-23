@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       <Banner />
       <Container>
         <Header>
-          <Logo>Platform.</Logo>
+          <Logo>KORD</Logo>
           <ButtonNav>
             <SubmitResourceButton>Submit Resource</SubmitResourceButton>
             <AuthButton>Signup / Login</AuthButton>
