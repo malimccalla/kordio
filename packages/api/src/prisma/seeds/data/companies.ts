@@ -1,6 +1,4 @@
-import { Prisma } from '@prisma/client';
-import { v4 } from 'uuid';
-
+import { nanoid } from 'nanoid';
 // Prisma.Enumerable<Prisma.CompanyCreateManyInput>
 
 const company1 = '7f716322-c972-43ee-bba2-6896787beb55';
@@ -57,6 +55,7 @@ const company50 = '6d0aab03-400a-405c-bcc7-1216a33e838d';
 export const companies = [
   {
     id: company1,
+    slug: nanoid(6),
     name: 'Akira',
     contactEmail: 'stevie@akirarecords.com',
     phoneNumber: '',
@@ -64,6 +63,7 @@ export const companies = [
   },
   {
     id: company2,
+    slug: nanoid(6),
     name: 'Black Cat Music Promotions',
     contactEmail: 'martin.furlong@gmail.com',
     phoneNumber: '07508038866',
@@ -71,6 +71,7 @@ export const companies = [
   },
   {
     id: company3,
+    slug: nanoid(6),
     name: 'CloseUp Promotions',
     contactEmail: 'closeuppromotions@gmail.com',
     phoneNumber: '',
@@ -78,6 +79,7 @@ export const companies = [
   },
   {
     id: company4,
+    slug: nanoid(6),
     name: 'Communion',
     contactEmail: 'presents@communionmusic.co.uk',
     phoneNumber: '',
@@ -85,6 +87,7 @@ export const companies = [
   },
   {
     id: company5,
+    slug: nanoid(6),
     name: 'Flag Promotions',
     contactEmail: 'frankflag.fd@googlemail.com',
     phoneNumber: '07713126938',
@@ -92,6 +95,7 @@ export const companies = [
   },
   {
     id: company6,
+    slug: nanoid(6),
     name: 'Get In Her Ears',
     contactEmail: 'marigetinherears@gmail.com',
     phoneNumber: '',
@@ -99,6 +103,7 @@ export const companies = [
   },
   {
     id: company7,
+    slug: nanoid(6),
     name: 'Glasswerk',
     contactEmail: 'via website:\nhttps://glasswerk.co.uk/contact/',
     phoneNumber: '01517079044',
@@ -106,6 +111,7 @@ export const companies = [
   },
   {
     id: company8,
+    slug: nanoid(6),
     name: 'HOT VOX',
     contactEmail: 'info@hotvox.co.uk',
     phoneNumber: '',
@@ -113,6 +119,7 @@ export const companies = [
   },
   {
     id: company9,
+    slug: nanoid(6),
     name: 'ILUVLIVE',
     contactEmail: 'info@iluvlive.co.uk',
     phoneNumber: '02086712161',
@@ -120,6 +127,7 @@ export const companies = [
   },
   {
     id: company10,
+    slug: nanoid(6),
     name: 'Live A Little Louder',
     contactEmail: 'info@livealittlelouder.co.uk',
     phoneNumber: '',
@@ -127,6 +135,7 @@ export const companies = [
   },
   {
     id: company11,
+    slug: nanoid(6),
     name: 'Lost In The Manor',
     contactEmail: 'chris@lostinthemanor.co.uk',
     phoneNumber: '',
@@ -134,6 +143,7 @@ export const companies = [
   },
   {
     id: company12,
+    slug: nanoid(6),
     name: 'Loud Women',
     contactEmail: 'loudwomenclub@gmail.com',
     phoneNumber: '',
@@ -141,6 +151,7 @@ export const companies = [
   },
   {
     id: company13,
+    slug: nanoid(6),
     name: 'MaDa Music Entertainment',
     contactEmail: 'adam@madamusic.com',
     phoneNumber: '',
@@ -148,6 +159,7 @@ export const companies = [
   },
   {
     id: company14,
+    slug: nanoid(6),
     name: 'The Nest Collective',
     contactEmail: 'info@thenestcollective.co.uk',
     phoneNumber: '',
@@ -155,6 +167,7 @@ export const companies = [
   },
   {
     id: company15,
+    slug: nanoid(6),
     name: 'Nightshift Promotions',
     contactEmail: 'nightshiftpromotions@gmail.com',
     phoneNumber: '',
@@ -162,6 +175,7 @@ export const companies = [
   },
   {
     id: company16,
+    slug: nanoid(6),
     name: 'Scared To Dance',
     contactEmail: 'paul@scaredtodance.co.uk',
     phoneNumber: '',
@@ -169,6 +183,7 @@ export const companies = [
   },
   {
     id: company17,
+    slug: nanoid(6),
     name: 'Serious',
     contactEmail: 'development@serious.org.uk',
     phoneNumber: '020 7324 1880',
@@ -176,6 +191,7 @@ export const companies = [
   },
   {
     id: company18,
+    slug: nanoid(6),
     name: 'Substance Gigs',
     contactEmail: 'shaun@substancegigs.com',
     phoneNumber: '',
@@ -183,6 +199,7 @@ export const companies = [
   },
   {
     id: company19,
+    slug: nanoid(6),
     name: 'Success Express',
     contactEmail: 'bookings@semusic.org',
     phoneNumber: '07984338108',
@@ -190,6 +207,7 @@ export const companies = [
   },
   {
     id: company20,
+    slug: nanoid(6),
     name: 'Sucker',
     contactEmail: 'info@suckerofficial.co.uk',
     phoneNumber: '',
@@ -197,6 +215,7 @@ export const companies = [
   },
   {
     id: company21,
+    slug: nanoid(6),
     name: '93 Feet East',
     contactEmail: 'hello@93feeteast.co.uk',
     phoneNumber: '',
@@ -204,6 +223,7 @@ export const companies = [
   },
   {
     id: company22,
+    slug: nanoid(6),
     name: 'This Feeling',
     contactEmail: 'this_feeling@outlook.com',
     phoneNumber: '',
@@ -211,6 +231,7 @@ export const companies = [
   },
   {
     id: company23,
+    slug: nanoid(6),
     name: 'White Heat',
     contactEmail: 'marcus@whiteheatmayfair.com\nmatty@whiteheatmayfair.com',
     phoneNumber: '',
@@ -218,6 +239,7 @@ export const companies = [
   },
   {
     id: company24,
+    slug: nanoid(6),
     name: 'Woodburner',
     contactEmail: 'theo@woodburner.tv',
     phoneNumber: '',
@@ -225,6 +247,7 @@ export const companies = [
   },
   {
     id: company25,
+    slug: nanoid(6),
     name: 'Printworks',
     contactEmail: 'info@printworkslondon.co.uk',
     phoneNumber: '',
@@ -232,6 +255,7 @@ export const companies = [
   },
   {
     id: company26,
+    slug: nanoid(6),
     name: 'LoveJuice',
     contactEmail: 'info@wearelovejuice.com',
     phoneNumber: '',
@@ -239,6 +263,7 @@ export const companies = [
   },
   {
     id: company27,
+    slug: nanoid(6),
     name: 'Phonox',
     contactEmail: 'erin@thecolumbogroup.com',
     phoneNumber: '',
@@ -246,6 +271,7 @@ export const companies = [
   },
   {
     id: company28,
+    slug: nanoid(6),
     name: 'The Jazz Café',
     contactEmail: 'info@thejazzcafelondon.com',
     phoneNumber: '',
@@ -253,6 +279,7 @@ export const companies = [
   },
   {
     id: company29,
+    slug: nanoid(6),
     name: 'Junction 2',
     contactEmail: 'INFO@JUNCTION2.LONDON',
     phoneNumber: '',
@@ -260,6 +287,7 @@ export const companies = [
   },
   {
     id: company30,
+    slug: nanoid(6),
     name: 'Boiler Room.',
     contactEmail: 'INFO@BOILERROOM.TV',
     phoneNumber: '',
@@ -267,6 +295,7 @@ export const companies = [
   },
   {
     id: company31,
+    slug: nanoid(6),
     name: 'Percolate.',
     contactEmail: 'info@percolatemusic.co.uk',
     phoneNumber: '',
@@ -274,6 +303,7 @@ export const companies = [
   },
   {
     id: company32,
+    slug: nanoid(6),
     name: 'WeGotTickets',
     contactEmail: 'https://www.wegottickets.com/contact',
     phoneNumber: '',
@@ -281,6 +311,7 @@ export const companies = [
   },
   {
     id: company33,
+    slug: nanoid(6),
     name: 'BIRD ON THE WIRE',
     contactEmail: 'info@birdonthewire.net',
     phoneNumber: '',
@@ -288,6 +319,7 @@ export const companies = [
   },
   {
     id: company34,
+    slug: nanoid(6),
     name: 'Eat Your Own Ears',
     contactEmail: 'info@eatyourownears.com',
     phoneNumber: '',
@@ -295,6 +327,7 @@ export const companies = [
   },
   {
     id: company35,
+    slug: nanoid(6),
     name: 'DEEP MEDi Musik',
     contactEmail: 'info@deepmedi.com',
     phoneNumber: '',
@@ -302,6 +335,7 @@ export const companies = [
   },
   {
     id: company36,
+    slug: nanoid(6),
     name: 'Field Day',
     contactEmail: 'info@fielddayfestivals.com',
     phoneNumber: '',
@@ -309,6 +343,7 @@ export const companies = [
   },
   {
     id: company37,
+    slug: nanoid(6),
     name: 'AEG presents',
     contactEmail: 'https://aegpresents.zendesk.com/hc/en-us/requests/new',
     phoneNumber: '',
@@ -316,6 +351,7 @@ export const companies = [
   },
   {
     id: company38,
+    slug: nanoid(6),
     name: 'Broadwick Live',
     contactEmail: 'info@broadwicklive.com',
     phoneNumber: '',
@@ -323,6 +359,7 @@ export const companies = [
   },
   {
     id: company39,
+    slug: nanoid(6),
     name: 'KOKOElectronic',
     contactEmail: 'electronic@koko.uk.com',
     phoneNumber: '',
@@ -330,6 +367,7 @@ export const companies = [
   },
   {
     id: company40,
+    slug: nanoid(6),
     name: 'Lowercase Events UK',
     contactEmail: 'tee@lowercasegroup.co.uk',
     phoneNumber: '',
@@ -337,6 +375,7 @@ export const companies = [
   },
   {
     id: company41,
+    slug: nanoid(6),
     name: 'Chronic Fonk',
     contactEmail: 'info@clfartcafe.org',
     phoneNumber: '',
@@ -344,6 +383,7 @@ export const companies = [
   },
   {
     id: company42,
+    slug: nanoid(6),
     name: 'Hootananny Brixton',
     contactEmail: 'info@hootananny.co.uk',
     phoneNumber: '',
@@ -351,6 +391,7 @@ export const companies = [
   },
   {
     id: company43,
+    slug: nanoid(6),
     name: 'fabric',
     contactEmail: 'info@fabriclondon.com',
     phoneNumber: '',
@@ -358,6 +399,7 @@ export const companies = [
   },
   {
     id: company44,
+    slug: nanoid(6),
     name: 'Weird Science',
     contactEmail: 'contact@weirdscience.uk',
     phoneNumber: '',
@@ -365,6 +407,7 @@ export const companies = [
   },
   {
     id: company45,
+    slug: nanoid(6),
     name: 'Percolate',
     contactEmail: 'info@percolatemusic.co.uk',
     phoneNumber: '',
@@ -372,6 +415,7 @@ export const companies = [
   },
   {
     id: company46,
+    slug: nanoid(6),
     name: 'Basing House',
     contactEmail: 'Enquiries@basinghouse.co.uk',
     phoneNumber: '',
@@ -379,6 +423,7 @@ export const companies = [
   },
   {
     id: company47,
+    slug: nanoid(6),
     name: 'Tola Peckham',
     contactEmail: 'info@tolapeckham.com',
     phoneNumber: '',
@@ -386,6 +431,7 @@ export const companies = [
   },
   {
     id: company48,
+    slug: nanoid(6),
     name: 'Anjunadeep',
     contactEmail: 'dom@anjunadeep.com',
     phoneNumber: '',
@@ -393,6 +439,7 @@ export const companies = [
   },
   {
     id: company49,
+    slug: nanoid(6),
     name: 'Cafe 1001',
     contactEmail: 'info@cafe1001.co.uk',
     phoneNumber: '',
@@ -400,6 +447,7 @@ export const companies = [
   },
   {
     id: company50,
+    slug: nanoid(6),
     name: 'Crossbreed',
     contactEmail: 'crossbreedworld@gmail.com',
     phoneNumber: '',

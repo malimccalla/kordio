@@ -19,6 +19,7 @@ const resolvers: Resolvers = {
       }
 
       const company = await prisma.company.create({
+        // @ts-ignore
         data: input,
       });
 
