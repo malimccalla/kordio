@@ -43,7 +43,7 @@ const Text = styled.p<{
   ${(props) => props.maxWidth && `max-width: ${props.maxWidth};`}
   color: ${(props) => props.color || 'inherit'};
   font-size: ${(props) => props.fontSize || 'inherit'};
-  font-weight: ${(props) => props.fontWeight || 'normal'};
+  font-weight: ${(props) => props.fontWeight || 'inherit'};
   ${(props) =>
     props.truncate &&
     css`

@@ -16,10 +16,9 @@ const Header = () => {
               </Text>
             </Logo>
           </Link>
-          <SearchPopover height="5rem" borderRadius="500px" />
+          <SearchPopover boxShadow="none" height="5rem" borderRadius="500px" />
         </Left>
         <Right>
-          <SubmitResourceButton>Submit Resource</SubmitResourceButton>
           <AuthButton>Signup / Login</AuthButton>
         </Right>
       </Main>

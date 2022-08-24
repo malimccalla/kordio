@@ -259,7 +259,11 @@ export const Dialog = ({
   );
 };
 
-const SearchPopover = (props: { height?: string; borderRadius?: string }) => {
+const SearchPopover = (props: {
+  height?: string;
+  borderRadius?: string;
+  boxShadow?: string;
+}) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [hasSearchQuery, setHasSearchQuery] = React.useState(false);
 
@@ -337,7 +341,11 @@ const SearchPopover = (props: { height?: string; borderRadius?: string }) => {
         </SearchContainer>
       )}
     >
-      <DummySearchBox height={props.height} borderRadius={props.borderRadius}>
+      <DummySearchBox
+        boxShadow={props.boxShadow}
+        height={props.height}
+        borderRadius={props.borderRadius}
+      >
         <IconBox>
           <SearchIcon size="20px" />
         </IconBox>
@@ -547,7 +555,11 @@ const DialogSearchBox = styled.div<{ hasSearchQuery: boolean }>`
   `}
 `;
 
-const DummySearchBox = styled.div<{ height?: string; borderRadius?: string }>`
+const DummySearchBox = styled.div<{
+  height?: string;
+  borderRadius?: string;
+  boxShadow?: string;
+}>`
   height: ${(props) => props.height || '6rem'};
   display: flex;
   padding-left: 2rem;
@@ -557,7 +569,8 @@ const DummySearchBox = styled.div<{ height?: string; borderRadius?: string }>`
   font-size: 1.8rem;
   background-color: white;
   border-radius: ${(props) => props.borderRadius || '11px'};
-  box-shadow: 0 4px 0 0 rgba(197, 197, 197);
+
+  box-shadow: ${(props) => props.boxShadow || '0 4px 0 0 rgba(197, 197, 197)'};
   transition: all 0.3s ease;
 
   &:hover {
