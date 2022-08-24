@@ -2,7 +2,8 @@ type Company {
   id: String!
   name: String
   contactEmail: String
-  location: String
+  address: String
+  phoneNumber: String
   website: String
   description: String
 }

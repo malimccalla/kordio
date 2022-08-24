@@ -8,10 +8,13 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist/src/index.js",
-    "seed": "ts-node prisma/seed.ts",
+    "seed": "npx prisma db seed",
     "dev": "nodemon src/index.ts",
     "gen:types": "graphql-codegen",
     "build": "npx tsc"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seeds/index.ts"
   },
   "dependencies": {
     "@graphql-tools/load-files": "^6.6.1",

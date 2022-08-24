@@ -11,12 +11,32 @@ datasource db {
 }
 
 model Company {
-  id           String  @id @default(uuid())
-  name         String?
-  contactEmail String? @map("contact_email")
-  location     String?
-  website      String?
-  description  String?
+  id                    String                  @id @default(uuid())
+  name                  String?
+  contactEmail          String?                 @map("contact_email")
+  location              String?
+  website               String?
+  description           String?
+  categoriesOnCompanies CategoriesOnCompanies[]
 
   @@map("companies")
+}
+
+model Category {
+  id                    String                  @id @default(uuid())
+  name                  String
+  color                 String
+  categoriesOnCompanies CategoriesOnCompanies[]
+
+  @@map("categories")
+}
+
+model CategoriesOnCompanies {
+  company    Company  @relation(fields: [companyId], references: [id])
+  companyId  String   @map("company_id") // relation scalar field (used in the `@relation` attribute above)
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @map("category_id") // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([companyId, categoryId])
+  @@map("categories_on_companies")
 }
