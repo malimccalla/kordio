@@ -2,6 +2,7 @@ type Category {
   id: String!
   name: String!
   color: String
+  companies: [Company!]
 }
 
 type Query {

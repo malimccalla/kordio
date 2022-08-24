@@ -6,6 +6,7 @@ type Company {
   phoneNumber: String
   website: String
   description: String
+  categories: [Category!]
 }
 
 type Query {
@@ -22,6 +23,9 @@ input CreateCompanyInput {
   location: String
   website: String
   description: String
+  primaryCategoryId: String
+  secondaryCategoryId: String
+  tertiaryCategoryId: String
 }
 
 type CreateCompanyPayload {

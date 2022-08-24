@@ -25,6 +25,16 @@ const resolvers: Resolvers = {
       return { ok: true, errors: null, company };
     },
   },
+  Company: {
+    categories: async (company, _, { prisma }) => {
+      const res = await prisma.categoriesOnCompanies.findMany({
+        where: { companyId: company.id },
+        include: { category: true },
+      });
+
+      return res.map((data) => data.category);
+    },
+  },
 };
 
 export default resolvers;

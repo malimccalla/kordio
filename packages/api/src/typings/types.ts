@@ -18,6 +18,7 @@ export type Scalars = {
 export type Category = {
   __typename?: 'Category';
   color?: Maybe<Scalars['String']>;
+  companies?: Maybe<Array<Company>>;
   id: Scalars['String'];
   name: Scalars['String'];
 };
@@ -25,6 +26,7 @@ export type Category = {
 export type Company = {
   __typename?: 'Company';
   address?: Maybe<Scalars['String']>;
+  categories?: Maybe<Array<Category>>;
   contactEmail?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
@@ -38,6 +40,9 @@ export type CreateCompanyInput = {
   description?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  primaryCategoryId?: InputMaybe<Scalars['String']>;
+  secondaryCategoryId?: InputMaybe<Scalars['String']>;
+  tertiaryCategoryId?: InputMaybe<Scalars['String']>;
   website?: InputMaybe<Scalars['String']>;
 };
 
@@ -165,6 +170,7 @@ export type ResolversParentTypes = {
 
 export type CategoryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
   color?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  companies?: Resolver<Maybe<Array<ResolversTypes['Company']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -172,6 +178,7 @@ export type CategoryResolvers<ContextType = Context, ParentType extends Resolver
 
 export type CompanyResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Company'] = ResolversParentTypes['Company']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  categories?: Resolver<Maybe<Array<ResolversTypes['Category']>>, ParentType, ContextType>;
   contactEmail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
