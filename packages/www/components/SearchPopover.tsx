@@ -301,7 +301,7 @@ const SearchPopover = (props: {
             <Results>
               {results.map((result) => {
                 return (
-                  <Link key={result.id} href={`/contact/${result.id}`}>
+                  <Link key={result.id} href={`/company/${result.id}`}>
                     <ResultContainer featured={!!result.featured}>
                       <ResultLeft>
                         <ResultImage src={result.imageUrl}>

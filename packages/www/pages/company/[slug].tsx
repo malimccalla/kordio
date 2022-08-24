@@ -4,7 +4,7 @@ import Page from '../../components/Page';
 import Text from '../../components/Text';
 import styled, { media } from '../../styles';
 
-const Contact = () => {
+const CompanyPage = () => {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -196,4 +196,4 @@ const Container = styled.div`
   height: calc(100vh - 11rem);
 `;
 
-export default Contact;
+export default CompanyPage;
