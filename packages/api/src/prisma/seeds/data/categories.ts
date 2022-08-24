@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 export const c1 = '2185cb5d-eb39-488b-a9c1-f8cb18986c73';
 export const c2 = '5911fc43-43a7-473f-873b-9be1df831cae';
 export const c3 = '0dcbeed3-e307-40b4-bee1-d0990b808e96';
@@ -15,7 +17,7 @@ export const c14 = '114c75f5-d478-4077-909c-51e43704d56e';
 export const c15 = '2cb67d21-6e5f-4e39-9764-c9ca8da2380b';
 export const c16 = '9e29ade4-c791-4e73-be8f-b3a403d8583d';
 
-export const categories = [
+export const categories: Prisma.Enumerable<Prisma.CategoryCreateManyInput> = [
   { id: c1, name: 'Live Performance', color: '#b6ab7c' },
   { id: c2, name: 'Record Labels', color: '#3338b6' },
   { id: c3, name: 'Studios & Production', color: '#70c8bc' },

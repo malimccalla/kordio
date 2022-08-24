@@ -1,7 +1,11 @@
 import { Resolvers } from '../../typings/types';
 
 const resolvers: Resolvers = {
-  Query: {},
+  Query: {
+    categories: (_, __, { prisma }) => {
+      return prisma.category.findMany();
+    },
+  },
   Mutation: {},
 };
 

@@ -1,8 +1,10 @@
 -- CreateTable
-CREATE TABLE "companies" (
+CREATE TABLE "companies"
+(
     "id" TEXT NOT NULL,
     "name" TEXT,
     "contact_email" TEXT,
+    "phone_number" TEXT,
     "location" TEXT,
     "website" TEXT,
     "description" TEXT,
@@ -11,7 +13,8 @@ CREATE TABLE "companies" (
 );
 
 -- CreateTable
-CREATE TABLE "categories" (
+CREATE TABLE "categories"
+(
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "color" TEXT NOT NULL,
@@ -20,7 +23,8 @@ CREATE TABLE "categories" (
 );
 
 -- CreateTable
-CREATE TABLE "categories_on_companies" (
+CREATE TABLE "categories_on_companies"
+(
     "company_id" TEXT NOT NULL,
     "category_id" TEXT NOT NULL,
 
@@ -28,7 +32,11 @@ CREATE TABLE "categories_on_companies" (
 );
 
 -- AddForeignKey
-ALTER TABLE "categories_on_companies" ADD CONSTRAINT "categories_on_companies_company_id_fkey" FOREIGN KEY ("company_id") REFERENCES "companies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "categories_on_companies" ADD CONSTRAINT "categories_on_companies_company_id_fkey" FOREIGN KEY ("company_id") REFERENCES "companies"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "categories_on_companies" ADD CONSTRAINT "categories_on_companies_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "categories_on_companies" ADD CONSTRAINT "categories_on_companies_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories"("id")
+ON DELETE RESTRICT ON
+UPDATE CASCADE;

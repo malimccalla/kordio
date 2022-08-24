@@ -11,22 +11,23 @@ datasource db {
 }
 
 model Company {
-  id                    String                  @id @default(uuid())
-  name                  String?
-  contactEmail          String?                 @map("contact_email")
-  location              String?
-  website               String?
-  description           String?
-  categoriesOnCompanies CategoriesOnCompanies[]
+  id           String                  @id @default(uuid())
+  name         String?
+  contactEmail String?                 @map("contact_email")
+  phoneNumber  String?                 @map("phone_number")
+  location     String?
+  website      String?
+  description  String?
+  categories   CategoriesOnCompanies[]
 
   @@map("companies")
 }
 
 model Category {
-  id                    String                  @id @default(uuid())
-  name                  String
-  color                 String
-  categoriesOnCompanies CategoriesOnCompanies[]
+  id        String                  @id @default(uuid())
+  name      String
+  color     String
+  companies CategoriesOnCompanies[]
 
   @@map("categories")
 }
