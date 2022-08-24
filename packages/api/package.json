@@ -11,6 +11,7 @@
     "seed": "npx prisma db seed",
     "dev": "nodemon src/index.ts",
     "gen:types": "graphql-codegen",
+    "studio": "npx prisma studio",
     "build": "npx tsc"
   },
   "prisma": {

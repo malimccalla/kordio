@@ -5,9 +5,7 @@ CREATE TABLE "companies" (
     "slug" TEXT NOT NULL,
     "contact_email" TEXT,
     "phone_number" TEXT,
-    "location" TEXT,
     "website" TEXT,
-    "description" TEXT,
 
     CONSTRAINT "companies_pkey" PRIMARY KEY ("id")
 );
@@ -16,7 +14,7 @@ CREATE TABLE "companies" (
 CREATE TABLE "categories" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "color" TEXT NOT NULL,
+    "color" TEXT,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
 );
