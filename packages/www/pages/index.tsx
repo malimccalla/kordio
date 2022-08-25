@@ -15,13 +15,13 @@ import styled from '../styles';
 
 const Home: NextPage = () => {
   return (
-    <Page title="KORD – The #1 Place for music industry contacts and resources">
+    <Page title="Hypedeck – The #1 Place for music industry contacts and resources">
       <Banner />
       <Container>
         <Header>
-          <Logo>KORD</Logo>
+          <Logo>Hypedeck.</Logo>
           <ButtonNav>
-            <SubmitResourceButton>Submit Resource</SubmitResourceButton>
+            <SubmitResourceButton>Free artist pack</SubmitResourceButton>
             <AuthButton>Signup / Login</AuthButton>
           </ButtonNav>
         </Header>

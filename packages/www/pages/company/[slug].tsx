@@ -103,7 +103,7 @@ const SaveContactButton = styled.div`
   }
 `;
 
-const LinkSpan = styled.div`
+const LinkSpan = styled.span`
   color: ${(props) => props.theme.colors.blue};
 
   &:hover {
