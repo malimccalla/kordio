@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import Page from '../../components/Page';
@@ -6,34 +7,33 @@ import { GET_COMPANY_QUERY } from '../../data/companies';
 import { addApolloState, initializeApollo } from '../../lib/apolloClient';
 import styled, { media } from '../../styles';
 
-const CompanyPage = () => {
-  const router = useRouter();
-  const { slug } = router.query;
-
-  const tags = [{ id: 2, text: 'Sync', color: '#3BFFA4' }];
-
+const CompanyPage = ({ data: { company } }: any) => {
   return (
     <Page title="Contact">
       <Container>
         <ContactCard>
           <CardHeader>
-            <Picture />
+            <Picture>
+              <Text fontSize="8rem" fontWeight="700" color="#999">
+                {company.name[0].toUpperCase()}
+              </Text>
+            </Picture>
             <HeaderRight>
               <Text
                 paddingBottom="2rem"
-                fontSize="5.2rem"
+                fontSize="4.2rem"
                 fontWeight="600"
                 color="white"
               >
-                Acme Co.
+                {company.name}
               </Text>
-              <Tags>
-                {tags.map((tag) => (
-                  <Tag color={tag.color} key={tag.id}>
-                    <Text color="white">{tag.text}</Text>
-                  </Tag>
+              <Categories>
+                {company.categories.map((category: any) => (
+                  <Category color={category.color} key={category.id}>
+                    <Text fontSize="1.4rem">{category.name}</Text>
+                  </Category>
                 ))}
-              </Tags>
+              </Categories>
             </HeaderRight>
           </CardHeader>
           <CardBody>
@@ -47,7 +47,7 @@ const CompanyPage = () => {
                 </DetailKey>
                 <DetailValue>
                   <Text color="white">
-                    <LinkSpan>https://acme.com</LinkSpan>
+                    <LinkSpan>{company.website}</LinkSpan>
                   </Text>
                 </DetailValue>
               </Detail>
@@ -56,7 +56,7 @@ const CompanyPage = () => {
                   <Text color="white">Contact email:</Text>
                 </DetailKey>
                 <DetailValue>
-                  <Text color="white">email@acme.com</Text>
+                  <Text color="white">{company.contactEmail || 'N/A'}</Text>
                 </DetailValue>
               </Detail>
               <Detail>
@@ -64,7 +64,7 @@ const CompanyPage = () => {
                   <Text color="white">Phone:</Text>
                 </DetailKey>
                 <DetailValue>
-                  <Text color="white">+447497435112</Text>
+                  <Text color="white">{company.phoneNumber || 'N/A'}</Text>
                 </DetailValue>
               </Detail>
               <Detail>
@@ -73,7 +73,8 @@ const CompanyPage = () => {
                 </DetailKey>
                 <DetailValue>
                   <Text color="white">
-                    Pepper House, 1 Pepper Road Hazel Grove Stockport SK7 5DP
+                    {company.address ||
+                      'Pepper House, 1 Pepper Road Hazel Grove Stockport SK7 5DP'}
                   </Text>
                 </DetailValue>
               </Detail>
@@ -94,6 +95,7 @@ const SaveContactButton = styled.div`
   border-radius: 1000px;
   display: flex;
   align-items: center;
+  background-color: ${(props) => props.theme.colors.black};
   justify-content: center;
   border: 1px solid #999;
   color: white;
@@ -138,18 +140,19 @@ const CardBody = styled.div`
   margin-top: 4rem;
 `;
 
-const Tag = styled.div<{ color: string }>`
-  height: 2.7rem;
+const Category = styled.div<{ color: string }>`
+  height: 2.4rem;
   display: flex;
-  padding: 0 2rem;
-  border: 1px solid ${(props) => props.color};
+  padding: 0 1.4rem;
+  background-color: ${(props) => props.color};
   border-radius: 1000px;
   justify-content: center;
+  color: white;
   margin-right: 1rem;
   align-items: center;
 `;
 
-const Tags = styled.div`
+const Categories = styled.div`
   display: flex;
 `;
 
@@ -167,21 +170,28 @@ const HeaderRight = styled.div`
 `;
 
 const Picture = styled.div`
-  height: 12rem;
-  width: 12rem;
+  min-height: 12rem;
+  min-width: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 2px;
   background-image: linear-gradient(112deg, #eaeaea 0%, #505050 100%);
 `;
 
 const ContactCard = styled.div`
   width: 90rem;
-  height: 56rem;
-  border: 1px solid #999;
+  height: 57rem;
+  background-color: #111;
   flex-direction: column;
+  border: 2px solid #ccc;
   display: flex;
   border-radius: 11px;
   justify-content: space-between;
   padding: 4rem;
+  box-shadow: rgba(255, 255, 255, 0.4) 5px 5px,
+    rgba(239, 239, 239, 0.2) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
+    rgba(38, 172, 221, 0.05) 20px 20px, rgba(204, 30, 141, 0.025) 25px 25px;
 
   ${media.medium`
     width: 100%;
@@ -198,14 +208,21 @@ const Container = styled.div`
   height: calc(100vh - 11rem);
 `;
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({ query: GET_COMPANY_QUERY });
+  console.log('Context query', context.query);
+
+  const where = { id: context.query.id };
+
+  const { data } = await apolloClient.query({
+    query: GET_COMPANY_QUERY,
+    variables: { where },
+  });
 
   return addApolloState(apolloClient, {
-    props: {},
+    props: { data },
   });
-}
+};
 
 export default CompanyPage;

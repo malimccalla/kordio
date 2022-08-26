@@ -36,6 +36,11 @@ export type Company = {
   website?: Maybe<Scalars['String']>;
 };
 
+export type CompanyWhereInput = {
+  id?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
 export type CreateCompanyInput = {
   contactEmail?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
@@ -75,6 +80,11 @@ export type Query = {
   categories: Array<Category>;
   companies?: Maybe<Array<Maybe<Company>>>;
   company?: Maybe<Company>;
+};
+
+
+export type QueryCompanyArgs = {
+  where: CompanyWhereInput;
 };
 
 
@@ -149,6 +159,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Category: ResolverTypeWrapper<Category>;
   Company: ResolverTypeWrapper<Company>;
+  CompanyWhereInput: CompanyWhereInput;
   CreateCompanyInput: CreateCompanyInput;
   CreateCompanyPayload: ResolverTypeWrapper<CreateCompanyPayload>;
   Error: ResolverTypeWrapper<Error>;
@@ -162,6 +173,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Category: Category;
   Company: Company;
+  CompanyWhereInput: CompanyWhereInput;
   CreateCompanyInput: CreateCompanyInput;
   CreateCompanyPayload: CreateCompanyPayload;
   Error: Error;
@@ -211,7 +223,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   categories?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
   companies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
-  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType>;
+  company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, RequireFields<QueryCompanyArgs, 'where'>>;
 };
 
 export type Resolvers<ContextType = Context> = {

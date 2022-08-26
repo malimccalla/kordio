@@ -4,11 +4,25 @@ const resolvers: Resolvers = {
   Query: {
     companies: async (_, __, { prisma }) => {
       const companies = prisma.company.findMany();
+
       return companies;
     },
-    company: (_, __, { prisma }) => {
-      const company = prisma.company.findFirst();
-      return company;
+    company: (_, { where }, { prisma }) => {
+      if (where.id) {
+        const company = prisma.company.findUnique({ where: { id: where.id } });
+
+        return company;
+      }
+
+      if (where.slug) {
+        const company = prisma.company.findUnique({
+          where: { slug: where.slug },
+        });
+
+        return company;
+      }
+
+      return null;
     },
   },
   Mutation: {

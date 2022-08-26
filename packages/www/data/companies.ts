@@ -1,14 +1,18 @@
 import { gql } from '@apollo/client';
 
 export const GET_COMPANY_QUERY = gql`
-  query {
-    company {
+  query Company($where: CompanyWhereInput!) {
+    company(where: $where) {
       id
       name
+      slug
+      contactEmail
       phoneNumber
       website
       categories {
+        id
         name
+        color
       }
     }
   }
