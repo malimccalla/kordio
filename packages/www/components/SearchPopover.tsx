@@ -1,5 +1,6 @@
 import { getEnabledCategories } from 'trace_events';
 
+import { useQuery } from '@apollo/client';
 import {
   FloatingFocusManager,
   FloatingOverlay,
@@ -14,6 +15,8 @@ import {
 import Link from 'next/link';
 import React, { cloneElement, useState } from 'react';
 
+import { GET_COMPANIES_QUERY } from '../data/companies';
+import { useApollo } from '../lib/apolloClient';
 import styled, { css, media, theme } from '../styles';
 import { SearchIcon } from './icons';
 import Text from './Text';
@@ -264,6 +267,10 @@ const SearchPopover = (props: {
   borderRadius?: string;
   boxShadow?: string;
 }) => {
+  const { loading, data, error } = useQuery(GET_COMPANIES_QUERY);
+
+  console.log(loading, data);
+  console.log(error);
   const [searchQuery, setSearchQuery] = React.useState('');
   const [hasSearchQuery, setHasSearchQuery] = React.useState(false);
 
@@ -299,24 +306,22 @@ const SearchPopover = (props: {
           </DialogSearchBox>
           {hasSearchQuery && (
             <Results>
-              {results.map((result) => {
+              {data.companies.map((company: any) => {
                 return (
-                  <Link key={result.id} href={`/company/${result.id}`}>
-                    <ResultContainer featured={!!result.featured}>
+                  <Link key={company.id} href={`/company/${company.id}`}>
+                    <ResultContainer featured={!!company.featured}>
                       <ResultLeft>
-                        <ResultImage src={result.imageUrl}>
+                        <ResultImage src={company.imageUrl}>
                           <Text fontWeight="500" color="#999">
-                            {result.name[
-                              Math.floor(Math.random() * result.name.length)
-                            ].toLocaleUpperCase()}
+                            {company.name[0].toLocaleUpperCase()}
                           </Text>
                         </ResultImage>
                         <TextContainer>
                           <Text fontSize="1.6rem" fontWeight="500">
-                            {result.name}
+                            {company.name}
                           </Text>
                           <Categories>
-                            {result.categories.map((category) => {
+                            {company.categories.map((category: any) => {
                               return (
                                 <Category
                                   color={category.color}

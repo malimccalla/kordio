@@ -1,4 +1,10 @@
-import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  NormalizedCacheObject,
+  from,
+} from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { concatPagination } from '@apollo/client/utilities';
 import merge from 'deepmerge';
@@ -20,7 +26,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: 'https://nextjs-graphql-with-prisma-simple.vercel.app/api', // Server URL (must be absolute)
+  uri: 'http://localhost:4000', // Server URL (must be absolute)
   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 
@@ -41,7 +47,8 @@ function createApolloClient() {
 }
 
 export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient();
+  const _apolloClient: ApolloClient<NormalizedCacheObject> =
+    apolloClient ?? createApolloClient();
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -71,7 +78,10 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function addApolloState(client: any, pageProps: any) {
+export function addApolloState(
+  client: ApolloClient<NormalizedCacheObject>,
+  pageProps: any
+) {
   if (pageProps?.props) {
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
   }

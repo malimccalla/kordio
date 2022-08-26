@@ -1,5 +1,6 @@
 type Company {
   id: String!
+  slug: String
   name: String
   contactEmail: String
   address: String
@@ -11,6 +12,7 @@ type Company {
 
 type Query {
   companies: [Company]
+  company: Company
 }
 
 type Mutation {

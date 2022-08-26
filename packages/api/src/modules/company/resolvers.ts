@@ -6,6 +6,10 @@ const resolvers: Resolvers = {
       const companies = prisma.company.findMany();
       return companies;
     },
+    company: (_, __, { prisma }) => {
+      const company = prisma.company.findFirst();
+      return company;
+    },
   },
   Mutation: {
     createCompany: async (_, { input }, { prisma }) => {

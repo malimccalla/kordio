@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
+import { GET_COMPANY_QUERY } from '../../data/companies';
+import { addApolloState, initializeApollo } from '../../lib/apolloClient';
 import styled, { media } from '../../styles';
 
 const CompanyPage = () => {
@@ -195,5 +197,15 @@ const Container = styled.div`
   justify-content: center;
   height: calc(100vh - 11rem);
 `;
+
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({ query: GET_COMPANY_QUERY });
+
+  return addApolloState(apolloClient, {
+    props: {},
+  });
+}
 
 export default CompanyPage;

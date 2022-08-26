@@ -8,12 +8,16 @@ import schema from './schema';
 
 const port = process.env.PORT || 4000;
 const prisma = new PrismaClient();
+const frontEndHost = 'http://localhost:3000';
 
 const apolloServer = new ApolloServer({
   schema,
   context: { prisma },
   csrfPrevention: true,
   cache: 'bounded',
+  cors: {
+    origin: [frontEndHost],
+  },
   /**
    * What's up with this embed: true option?
    * These are our recommended settings for using AS;
