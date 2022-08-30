@@ -2,13 +2,16 @@ import { PrismaClient } from '@prisma/client';
 
 import { categories } from './data/categories';
 import { categoriesOnCompanies } from './data/categoriesOnCompanies';
-import { companies } from './data/companies';
+import { livePerformanceCompanies } from './data/companies/livePerformance';
 
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.category.createMany({ data: categories, skipDuplicates: true });
-  await prisma.company.createMany({ data: companies, skipDuplicates: true });
+  await prisma.company.createMany({
+    data: livePerformanceCompanies,
+    skipDuplicates: true,
+  });
   await prisma.categoriesOnCompanies.createMany({
     data: categoriesOnCompanies,
   });

@@ -51,7 +51,7 @@ const company48 = 'fcc57aeb-3f09-4c40-b85a-f7194f876464';
 const company49 = '410de141-1181-4e85-a591-296b3d792802';
 const company50 = '6d0aab03-400a-405c-bcc7-1216a33e838d';
 
-export const companies = [
+export const livePerformanceCompanies = [
   {
     id: company1,
     slug: nanoid(6),
