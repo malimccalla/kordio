@@ -39,7 +39,7 @@ const results = [
     name: 'A Featured Contact or Resource',
     url: 'google.com',
     categories: [
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
       { id: 3, name: 'blog', color: theme.colors.secondary },
     ],
@@ -52,7 +52,7 @@ const results = [
     url: 'google.com',
     categories: [
       { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 3, name: 'blog', color: theme.colors.secondary },
     ],
     imageUrl: 'https://picsum.photos/200',
@@ -64,7 +64,7 @@ const results = [
     url: 'google.com',
     categories: [
       { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 3, name: 'blog', color: theme.colors.secondary },
     ],
     imageUrl: 'https://picsum.photos/200',
@@ -77,7 +77,7 @@ const results = [
     categories: [
       { id: 3, name: 'blog', color: theme.colors.secondary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
     ],
     imageUrl: 'https://picsum.photos/200',
     type: 'article',
@@ -89,7 +89,7 @@ const results = [
     categories: [
       { id: 3, name: 'blog', color: theme.colors.secondary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
     ],
     imageUrl: 'https://picsum.photos/200',
     type: 'video',
@@ -99,7 +99,7 @@ const results = [
     name: 'A Relevant Contact or Resource',
     url: 'google.com',
     categories: [
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 3, name: 'blog', color: theme.colors.secondary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
     ],
@@ -111,7 +111,7 @@ const results = [
     name: 'A Relevant Contact or Resource',
     url: 'google.com',
     categories: [
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
       { id: 3, name: 'blog', color: theme.colors.secondary },
     ],
@@ -123,7 +123,7 @@ const results = [
     url: 'google.com',
     categories: [
       { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
     ],
     imageUrl: 'https://picsum.photos/200',
@@ -135,7 +135,7 @@ const results = [
     categories: [
       { id: 1, name: 'marketing', color: theme.colors.pink },
       { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
     ],
     imageUrl: 'https://picsum.photos/200',
   },
@@ -144,7 +144,7 @@ const results = [
     name: 'A Relevant Contact or Resource',
     url: 'google.com',
     categories: [
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 3, name: 'blog', color: theme.colors.secondary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
     ],
@@ -157,7 +157,7 @@ const results = [
     categories: [
       { id: 1, name: 'marketing', color: theme.colors.pink },
       { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
     ],
     imageUrl: 'https://picsum.photos/200',
   },
@@ -168,7 +168,7 @@ const results = [
     categories: [
       { id: 3, name: 'blog', color: theme.colors.secondary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
     ],
     imageUrl: 'https://picsum.photos/200',
   },
@@ -177,7 +177,7 @@ const results = [
     name: 'A Relevant Contact or Resource',
     url: 'google.com',
     categories: [
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 1, name: 'marketing', color: theme.colors.pink },
       { id: 3, name: 'blog', color: theme.colors.secondary },
     ],
@@ -189,7 +189,7 @@ const results = [
     url: 'google.com',
     categories: [
       { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.blue },
+      { id: 2, name: 'article', color: theme.colors.primary },
       { id: 3, name: 'blog', color: theme.colors.secondary },
     ],
     imageUrl: 'https://picsum.photos/200',
@@ -428,15 +428,15 @@ const ResultContainer = styled.div<{ featured: boolean }>`
     props.featured &&
     css`
       /* border-top: 8px solid ${(props) => props.theme.colors.pink}; */
-      background: #43c6ac; /* fallback for old browsers */
+      background: #11fac7; /* fallback for old browsers */
       background: -webkit-linear-gradient(
         to left,
-        #43c6ac,
+        #11fac7,
         #f8ffae
       ); /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(
         to left,
-        #43c6ac,
+        #11fac7,
         #f8ffae
       ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       height: 10rem;
@@ -447,14 +447,14 @@ const ResultContainer = styled.div<{ featured: boolean }>`
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.blue};
+    background-color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
     color: white;
   }
 
   &:hover ${ArrowBox} {
     display: flex;
-    color: ${(props) => props.theme.colors.blue};
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 

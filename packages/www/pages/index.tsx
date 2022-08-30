@@ -21,8 +21,8 @@ const Home: NextPage = () => {
         <Header>
           <Logo>Hypedeck.</Logo>
           <ButtonNav>
-            <SubmitResourceButton>Free artist pack</SubmitResourceButton>
-            <AuthButton>Signup / Login</AuthButton>
+            <SubmitResourceButton>Login</SubmitResourceButton>
+            <AuthButton>Create account</AuthButton>
           </ButtonNav>
         </Header>
         <Main>
@@ -100,15 +100,15 @@ const Home: NextPage = () => {
 const Banner = styled.div`
   height: 1rem;
   background-color: ${(props) => props.theme.colors.pink};
-  background: #43c6ac; /* fallback for old browsers */
+  background: #11fac7; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left,
-    #43c6ac,
+    #11fac7,
     #f8ffae
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to left,
-    #43c6ac,
+    #11fac7,
     #f8ffae
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
@@ -129,15 +129,18 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
 `;
+
 const AllCategoriesButton = styled.button`
-  height: 4.2rem;
-  width: 16rem;
+  height: 4.8rem;
+  width: 18rem;
   margin-top: 2rem;
-  border-radius: 5000px;
-  color: white;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 5px;
+  color: ${(props) => props.theme.colors.black};
 
   transition: all 1s ease;
-  background-color: ${(props) => props.theme.colors.blue};
+  background-color: ${(props) => props.theme.colors.primary};
 
   &:hover {
     cursor: pointer;
@@ -198,7 +201,7 @@ const Card = styled.div`
   }
 
   &:hover ${CardTitle} {
-    color: ${(props) => props.theme.colors.blue};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   &:hover ${CardDescription} {
@@ -219,7 +222,7 @@ const ButtonNav = styled.div`
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.primary};
 
   &:hover {
     text-decoration: underline;
@@ -228,12 +231,14 @@ const Span = styled.span`
 `;
 
 const AuthButton = styled.button`
-  background-color: ${(props) => props.theme.colors.blue};
-  color: white;
-  height: 4.2rem;
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.black};
+  font-weight: 500;
+  height: 4.4rem;
   display: flex;
   align-items: center;
-  border-radius: 5000px;
+  font-size: 1.4rem;
+  border-radius: 5px;
   padding: 0 2rem;
   justify-content: center;
 
@@ -247,12 +252,9 @@ const AuthButton = styled.button`
 
 const SubmitResourceButton = styled.button`
   margin-right: 2rem;
-  height: 4.2rem;
-  border: 1px solid white;
   padding: 0 1.4rem;
   display: flex;
   align-items: center;
-  border-radius: 5000px;
   background: none;
   color: white;
 

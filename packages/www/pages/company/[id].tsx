@@ -108,7 +108,7 @@ const SaveContactButton = styled.div`
 `;
 
 const LinkSpan = styled.span`
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.primary};
 
   &:hover {
     cursor: pointer;
@@ -197,6 +197,7 @@ const ContactCard = styled.div`
     width: 100%;
     border: none;
     height: auto;
+    box-shadow: none;
   `}
 `;
 
