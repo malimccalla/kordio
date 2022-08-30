@@ -141,7 +141,7 @@ const SearchPopover = (props: {
               </IconBox>
               <SearchInput
                 autoFocus={true}
-                placeholder="What are you looking for?"
+                placeholder="Press & PR, Publishing, Management..."
               ></SearchInput>
               <CancelSection>
                 <CloseButton onClick={close}>Cancel</CloseButton>
@@ -333,7 +333,6 @@ const DialogSearchBox = styled.div`
   margin-top: 1rem;
   background-color: white;
   border-radius: 11px;
-  box-shadow: 0 4px 0 0 rgba(197, 197, 197);
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 

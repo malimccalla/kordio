@@ -66,6 +66,14 @@ const GlobalStyles = createGlobalStyle`
   .ais-SearchBox-reset {
     display: none;
   }
+
+  .ais-SearchBox-form {
+    width: 100%;
+  }
+
+  .ais-SearchBox-input {
+    width: 100%;
+  }
 `;
 
 export default GlobalStyles;
