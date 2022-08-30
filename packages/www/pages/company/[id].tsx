@@ -46,9 +46,9 @@ const CompanyPage = ({ data: { company } }: any) => {
                   <Text color="white">Website:</Text>
                 </DetailKey>
                 <DetailValue>
-                  <Text color="white">
+                  <a target="_blank" rel="noreferrer" href={company.website}>
                     <LinkSpan>{company.website}</LinkSpan>
-                  </Text>
+                  </a>
                 </DetailValue>
               </Detail>
               <Detail>
@@ -184,20 +184,19 @@ const ContactCard = styled.div`
   height: 57rem;
   background-color: #111;
   flex-direction: column;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   display: flex;
   border-radius: 11px;
   justify-content: space-between;
   padding: 4rem;
-  box-shadow: rgba(255, 255, 255, 0.4) 5px 5px,
-    rgba(239, 239, 239, 0.2) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
+  box-shadow: rgba(207, 207, 207, 0.301) 5px 5px,
+    rgba(239, 239, 239, 0.3) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
     rgba(38, 172, 221, 0.05) 20px 20px, rgba(204, 30, 141, 0.025) 25px 25px;
 
   ${media.medium`
     width: 100%;
     border: none;
     height: auto;
-    /* height: 100vh; */
   `}
 `;
 
@@ -210,8 +209,6 @@ const Container = styled.div`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const apolloClient = initializeApollo();
-
-  console.log('Context query', context.query);
 
   const where = { id: context.query.id };
 

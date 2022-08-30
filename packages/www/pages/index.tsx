@@ -103,13 +103,13 @@ const Banner = styled.div`
   background: #43c6ac; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left,
-    #f8ffae,
-    #43c6ac
+    #43c6ac,
+    #f8ffae
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to left,
-    #f8ffae,
-    #43c6ac
+    #43c6ac,
+    #f8ffae
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   width: 100%;
