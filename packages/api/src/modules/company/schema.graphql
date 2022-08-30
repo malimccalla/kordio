@@ -6,7 +6,9 @@ type Company {
   address: String
   phoneNumber: String
   website: String
+  note: String
   description: String
+
   categories: [Category!]
 }
 
@@ -30,6 +32,9 @@ input CreateCompanyInput {
   location: String
   website: String
   description: String
+  note: String
+  address: String
+
   primaryCategoryId: String
   secondaryCategoryId: String
   tertiaryCategoryId: String

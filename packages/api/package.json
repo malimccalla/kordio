@@ -1,10 +1,10 @@
 {
-  "name": "@hypedeck/api",
+  "name": "@kordio/api",
   "version": "0.0.1",
   "type": "commonjs",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Hypedeck API",
+  "description": "Kordio API",
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist/src/index.js",

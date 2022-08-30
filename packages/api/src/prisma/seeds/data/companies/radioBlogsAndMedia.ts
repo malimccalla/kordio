@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const company71 = '536a2fc3-8abd-4dfc-acfe-22a649129a1f';
 const company72 = '2677f933-1483-4ff6-bab5-3ace603fa64a';
 const company73 = 'c3e2dfe3-a68f-4727-9edd-5d0b0081dac3';
@@ -9,8 +11,9 @@ const company78 = '3032474b-cecf-4355-a718-47258e7a283e';
 const company79 = 'f26c9e55-46bf-4d46-83d7-971adfe247ee';
 const company80 = '967abbe1-834f-4738-8887-60e44687bc93';
 
-const radioBlogsAndMediaCompanies = [
+export const radioBlogsAndMediaCompanies = [
   {
+    slug: nanoid(6),
     id: company71,
     name: 'BBC Radio London (94.9 FM)',
     website: 'http://www.bbc.com/introducing',
@@ -22,17 +25,18 @@ const radioBlogsAndMediaCompanies = [
     address: 'Broadcasting House\nPortland Pl, London W1A 1AA, UK',
   },
   {
+    slug: nanoid(6),
     id: company72,
     name: 'Capital FM Network',
     website: 'http://www.capitalfm.com/',
     contactEmail: 'info@capitalfm.com',
     phoneNumber: '020 7054 8000',
-    role: 'Radio',
     description:
       'Capital is a hit music radio station. Music submissions and biogs can be sent for consideration via the above email or postal address marked FAO Al Smith, Head of Music.',
     address: '30 Leicester Square, London WC2H 7JZ, UK',
   },
   {
+    slug: nanoid(6),
     id: company73,
     name: 'Get In Her Ears',
     website: 'http://www.getinherears.com/',
@@ -43,6 +47,7 @@ const radioBlogsAndMediaCompanies = [
     address: 'London, UK',
   },
   {
+    slug: nanoid(6),
     id: company74,
     name: 'KISS FM',
     website: 'http://www.kissfmuk.com/',
@@ -53,6 +58,7 @@ const radioBlogsAndMediaCompanies = [
     address: '1 Golden Square, London W1F 9HR, UK',
   },
   {
+    slug: nanoid(6),
     id: company75,
     name: 'Reprezent',
     website: 'http://www.reprezent.org.uk/',
@@ -64,6 +70,7 @@ const radioBlogsAndMediaCompanies = [
       'Pop Brixton\n49 Brixton Station Rd, London SW9 8PQ, United Kingdom',
   },
   {
+    slug: nanoid(6),
     id: company76,
     name: 'Line of Best Fit',
     website: 'https://www.thelineofbestfit.com/',
@@ -74,6 +81,7 @@ const radioBlogsAndMediaCompanies = [
     address: '86-90 Paul St, London, Greater London EC2A 4NE, GB',
   },
   {
+    slug: nanoid(6),
     id: company77,
     name: 'Pop Justice',
     website: 'https://www.popjustice.com/',
@@ -84,6 +92,7 @@ const radioBlogsAndMediaCompanies = [
     address: 'London, England, United Kingdom',
   },
   {
+    slug: nanoid(6),
     id: company78,
     name: 'Ear Milk',
     website: 'https://earmilk.com/',
@@ -94,6 +103,7 @@ const radioBlogsAndMediaCompanies = [
     address: 'San Francisco, CA 94114',
   },
   {
+    slug: nanoid(6),
     id: company79,
     name: 'Pop Matters',
     website: 'https://www.popmatters.com/',
@@ -104,6 +114,7 @@ const radioBlogsAndMediaCompanies = [
     address: 'Chicago, IL',
   },
   {
+    slug: nanoid(6),
     id: company80,
     name: 'Clash Mag',
     website: 'https://www.clashmusic.com/',

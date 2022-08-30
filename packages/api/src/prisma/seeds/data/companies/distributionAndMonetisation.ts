@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const company91 = '92fbf400-0768-4ccd-9678-f60fd5d418b2';
 const company92 = '6565e27c-ed3e-4565-a708-2b2c3bc33aeb';
 const company93 = 'ece2fd50-3a7a-4e5e-9524-075a5f86df9a';
@@ -13,10 +15,11 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company91,
     name: 'CD Baby',
+    slug: nanoid(6),
     website: 'http://welcome.cdbaby.com/succeed-on-your-terms/',
     contactEmail: 'uk@cdbaby.com',
     phoneNumber: '',
-    note: 'Sign up for a free CD Baby account and distribute a free single to digital platforms! Just enter code "HYPEDECK22" at the checkout stage. No subscription fees or recurring costs.',
+    note: 'Sign up for a free CD Baby account and distribute a free single to digital platforms! Just enter code "KORDIO22" at the checkout stage. No subscription fees or recurring costs.',
     description:
       'Proudly working on behalf of over 1 million independent artists worldwide, CD Baby gets independent artists paid in all the ways musicians earn money today, across streaming, download, video monetisation, physical sales, publishing royalties, sync licensing and more.',
     address: 'Tileyard Rd, London N7 9AH, United Kingdom',
@@ -24,6 +27,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company92,
     name: '!K7 Music',
+    slug: nanoid(6),
     website: 'http://www.k7.com/',
     contactEmail: 'http://k7.com/contact/',
     phoneNumber: '+49 (0) 30 469 05 05 – 0',
@@ -36,6 +40,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company93,
     name: 'EPM Music',
+    slug: nanoid(6),
     website: 'http://www.epm-music.com/',
     contactEmail: 'jonas@epm-music.com',
     phoneNumber: '020 8931 5046',
@@ -47,6 +52,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company94,
     name: 'FreshTunes',
+    slug: nanoid(6),
     website: 'http://www.freshtunes.com/',
     contactEmail: 'info@freshtunes.com',
     phoneNumber: '',
@@ -58,6 +64,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company95,
     name: 'Outpost Distribution',
+    slug: nanoid(6),
     website: 'http://www.outpostmedia.co.uk/',
     contactEmail: 'hi@outpostmedia.co.uk',
     phoneNumber: '',
@@ -70,6 +77,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company96,
     name: 'Cargo Records',
+    slug: nanoid(6),
     website: 'http://www.cargorecords.co.uk/',
     contactEmail: 'info@cargorecords.co.uk',
     phoneNumber: '020 7731 5125',
@@ -81,6 +89,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company97,
     name: 'Pressology',
+    slug: nanoid(6),
     website: 'http://www.pressology.net/',
     contactEmail: 'info@pressology.net',
     phoneNumber: '',
@@ -92,6 +101,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company98,
     name: 'Stem',
+    slug: nanoid(6),
     website: 'http://www.stem.is/',
     contactEmail: 'hello@stem.is',
     phoneNumber: '',
@@ -103,6 +113,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company99,
     name: 'Ingrooves',
+    slug: nanoid(6),
     website: 'http://www.ingrooves.com/',
     contactEmail: 'info@ingrooves.com',
     phoneNumber: '020 3540 6290',
@@ -114,6 +125,7 @@ export const distributionAndMonetisationCompanies = [
   {
     id: company100,
     name: 'MN2S',
+    slug: nanoid(6),
     website: 'http://www.mn2s.com/',
     contactEmail: 'chris@mn2s.com',
     phoneNumber: '020 7234 9458',

@@ -31,6 +31,7 @@ export type Company = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+  note?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
@@ -42,10 +43,12 @@ export type CompanyWhereInput = {
 };
 
 export type CreateCompanyInput = {
+  address?: InputMaybe<Scalars['String']>;
   contactEmail?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  note?: InputMaybe<Scalars['String']>;
   primaryCategoryId?: InputMaybe<Scalars['String']>;
   secondaryCategoryId?: InputMaybe<Scalars['String']>;
   tertiaryCategoryId?: InputMaybe<Scalars['String']>;
@@ -197,6 +200,7 @@ export type CompanyResolvers<ContextType = Context, ParentType extends Resolvers
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const company131 = '8347c1fb-59e6-4c7f-8a49-d4626c99a1c8';
 const company132 = '039e181a-687d-4cf0-9be0-18c69886feb4';
 const company133 = '2e1e35a6-7fb9-4d56-977f-a21d092da8bb';
@@ -11,6 +13,7 @@ const company140 = '7f9aef11-d162-4d30-9386-99bbec1fcd1e';
 
 export const merchAndPhysicalCompanies = [
   {
+    slug: nanoid(6),
     id: company131,
     name: 'Terrible',
     website: 'https://terrible.group/',
@@ -19,6 +22,7 @@ export const merchAndPhysicalCompanies = [
       'we’re artists, apparel designers and entrepreneurs making, managing and moving physical products online and in person for the greatest creators on the planet*',
   },
   {
+    slug: nanoid(6),
     id: company132,
     name: 'Teemill',
     website: 'https://teemill.com/',
@@ -27,6 +31,7 @@ export const merchAndPhysicalCompanies = [
       "Teemill contains all the tech necessary to connect up with it and build a business. Big stuff like access to our print-on-demand t-shirt factories and organic materials. And little stuff like online design tools. And er, medium stuff. Like the ability to design your own products and build your own website and online store for free. It's everything you need to start a sustainable brand online in one handy application. And it's free.",
   },
   {
+    slug: nanoid(6),
     id: company133,
     name: 'Teespring',
     website: 'https://teespring.com/',
@@ -35,6 +40,7 @@ export const merchAndPhysicalCompanies = [
       'A simple solution for creating and selling products that engage your fans and help you monetize your content. No cost, no hassle, no risk.',
   },
   {
+    slug: nanoid(6),
     id: company134,
     name: 'Gooten',
     website: 'https://www.gooten.com/',
@@ -43,6 +49,7 @@ export const merchAndPhysicalCompanies = [
       'Gooten is a globally distributed company that operates a smart supply chain for brands that are looking to utilize on-demand manufacturing to transform the way they do business.',
   },
   {
+    slug: nanoid(6),
     id: company135,
     name: 'Printful',
     website: 'https://www.printful.com/',
@@ -51,6 +58,7 @@ export const merchAndPhysicalCompanies = [
       'Printful is a fast-growing on-demand merch company based in Charlotte. And fun fact: Two Story Melody’s own overwhelmingly dope merch is made and sold using Printful (so unsurprisingly, we’re an affiliate with them).',
   },
   {
+    slug: nanoid(6),
     id: company136,
     name: 'Printify',
     website: 'https://printify.com/',
@@ -59,6 +67,7 @@ export const merchAndPhysicalCompanies = [
       'Printify is a transparent print-on-demand network that helps merchants make more money in a simple and easy way.',
   },
   {
+    slug: nanoid(6),
     id: company137,
     name: 'Hello, Merch',
     website: 'https://www.hellomerch.com/',
@@ -67,6 +76,7 @@ export const merchAndPhysicalCompanies = [
       'Started in 2008 as an outlet for bands, musicians, creative artists and businesses to manufacture and sell merchandise anywhere, without giving up their rights.',
   },
   {
+    slug: nanoid(6),
     id: company138,
     name: 'Hello Screen Printing',
     website: 'https://www.helloscreenprinting.com/',
@@ -76,6 +86,7 @@ export const merchAndPhysicalCompanies = [
   },
   {
     id: company139,
+    slug: nanoid(6),
     name: 'Merch & Physical Placeholder #139',
     website: 'https://www.helloscreenprinting.com/',
     contactEmail: 'https://www.hellomerch.com/pages/services',
@@ -83,6 +94,7 @@ export const merchAndPhysicalCompanies = [
       'Hello Merch in-house screen printing team and trusted merchandise partners can create unlimited, affordable custom products in no time! Always fair and no rush fees ever.',
   },
   {
+    slug: nanoid(6),
     id: company140,
     name: 'Merch & Physical Placeholder #140',
     website: 'https://www.helloscreenprinting.com/',

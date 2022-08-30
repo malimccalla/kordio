@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const company51 = '4fab7389-c74f-4eec-aa3a-9aac02c5d858';
 const company52 = '24595446-c5a9-4c21-958b-f9b8457c603e';
 const company53 = 'df555f25-99ac-4ec2-be2e-93dbb902eb39';
@@ -11,6 +13,7 @@ const company60 = 'fadfe11b-2aaf-45c3-a2dd-0c6d5cac5f8d';
 
 export const recordLabelCompanies = [
   {
+    slug: nanoid(6),
     id: company51,
     name: 'Island Records UK',
     website: 'https://www.islandrecords.co.uk/',
@@ -21,6 +24,7 @@ export const recordLabelCompanies = [
       'Island Records has spent the past 6 decades blessing the world with truly great artists and incredible music.',
   },
   {
+    slug: nanoid(6),
     id: company52,
     name: 'AWAL',
     website: 'https://www.awal.com/',
@@ -31,6 +35,7 @@ export const recordLabelCompanies = [
       'AWAL also known as "Artists Without A Label" is a British music distribution company owned by Sony Music Entertainment.',
   },
   {
+    slug: nanoid(6),
     id: company53,
     name: 'Domino Recording Company',
     website: 'https://www.dominomusic.com/uk',
@@ -41,6 +46,7 @@ export const recordLabelCompanies = [
       'Domino Recording Company or simply Domino is a British independent record label based in London.',
   },
   {
+    slug: nanoid(6),
     id: company54,
     name: 'B-unique',
     website: 'https://www.b-uniquerecords.com/',
@@ -51,6 +57,7 @@ export const recordLabelCompanies = [
       'B-Unique Records is a London-based record label, and publishing company founded in 2001 by Mark Lewis and Martin Toher.',
   },
   {
+    slug: nanoid(6),
     id: company55,
     name: 'Decca Records',
     website: 'https://decca.com/',
@@ -61,6 +68,7 @@ export const recordLabelCompanies = [
       'Decca Records is a British record label established in 1929 by Edward Lewis.',
   },
   {
+    slug: nanoid(6),
     id: company56,
     name: 'Dirty Hit',
     website: 'https://dirtyhit.co.uk/',
@@ -71,6 +79,7 @@ export const recordLabelCompanies = [
       'Dirty Hit is a British independent record label founded in December 2009 by Jamie Oborne, Chuck Waite, Brian Smith, and former England footballer, Ugo Ehiogu.',
   },
   {
+    slug: nanoid(6),
     id: company57,
     name: 'Ninja Tune',
     website: 'https://ninjatune.net/home',
@@ -81,6 +90,7 @@ export const recordLabelCompanies = [
       'Ninja Tune is an English independent record label based in London.',
   },
   {
+    slug: nanoid(6),
     id: company58,
     name: 'Defected Records',
     website: 'https://defected.com/',
@@ -91,6 +101,7 @@ export const recordLabelCompanies = [
       'Defected Records is a British independent record label specialising in house music recordings, compilation albums, events, publishing, artist booking and management.',
   },
   {
+    slug: nanoid(6),
     id: company59,
     name: 'Mute Records',
     website: 'https://mute.com/',
@@ -101,10 +112,11 @@ export const recordLabelCompanies = [
       'Mute Records Ltd. is a British independent record label owned and founded in 1978 by Daniel Miller.',
   },
   {
+    slug: nanoid(6),
     id: company60,
     name: 'Akira Records',
     website: 'http://www.akirarecords.com/',
-    Email: 'stevie@akirarecords.com',
+    contactEmail: 'stevie@akirarecords.com',
     address: 'Albion Ave, London, United Kingdom',
     note: '',
     description:

@@ -6,8 +6,9 @@ import { jobsTrainingAndCareersCompanies } from './companies/jobsTrainingAndCare
 import { lawAndBusinessCompanies } from './companies/lawAndBusiness';
 import { livePerformanceCompanies } from './companies/livePerformance';
 import { merchAndPhysicalCompanies } from './companies/merchAndPhysical';
-import { pressAndPRCompanies } from './companies/pressAndPr';
+import { pressAndPRCompanies } from './companies/pressAndPR';
 import { publishingAndSyncCompanies } from './companies/publishingAndSync';
+import { radioBlogsAndMediaCompanies } from './companies/radioBlogsAndMedia';
 import { recordLabelCompanies } from './companies/recordLabels';
 import { studiosAndProductionCompanies } from './companies/studiosAndProduction';
 import { technologyCompanies } from './companies/technology';

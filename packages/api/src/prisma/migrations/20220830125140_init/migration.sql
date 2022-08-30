@@ -6,6 +6,9 @@ CREATE TABLE "companies" (
     "contact_email" TEXT,
     "phone_number" TEXT,
     "website" TEXT,
+    "address" TEXT,
+    "note" TEXT,
+    "description" TEXT,
 
     CONSTRAINT "companies_pkey" PRIMARY KEY ("id")
 );

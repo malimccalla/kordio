@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 export const company61 = '62f38743-e7a1-44ae-ad47-f1b28c11f594';
 export const company62 = '0e423ffe-3dc0-40cf-a8ff-db3b46dcc1ff';
 export const company63 = '5be7f80d-9b31-421e-9f3f-4038523d8673';
@@ -11,6 +13,7 @@ export const company70 = '48952ea9-cb43-4652-936e-c130d7c11202';
 
 export const studiosAndProductionCompanies = [
   {
+    slug: nanoid(6),
     id: company61,
     name: 'Hot Money Studios',
     website: 'https://hotmoneystudios.com/',
@@ -22,6 +25,7 @@ export const studiosAndProductionCompanies = [
       "Record, mix & master with London's No.1 Recording Studio. We've been working with the biggest names in the industry for over 10 years and we're now open for public bookings so whether you're a major label artist or new to the game, we're here to help.",
   },
   {
+    slug: nanoid(6),
     id: company62,
     name: 'The Premises',
     website: 'http://www.premisesstudios.com/',
@@ -33,6 +37,7 @@ export const studiosAndProductionCompanies = [
       "14 studios for recording and rehearsal, including Europe's first solar powered recording studio (Studio A). Vast selection of gear available from vintage outboard to grand pianos, drums, percussion and plug-ins. Engineers available for mixing, production and co-writing.",
   },
   {
+    slug: nanoid(6),
     id: company63,
     name: 'Metropolis Studios',
     website: 'http://www.thisismetropolis.com/',
@@ -44,6 +49,7 @@ export const studiosAndProductionCompanies = [
       'Metropolis houses 4 recording studios and 5 mastering suites, plus long term rental writing and production rooms. Fully equipped with Pro Tools HDX, lots of outboard, synths and backline. Also provide mastering services.',
   },
   {
+    slug: nanoid(6),
     id: company64,
     name: 'Resident Studios',
     website: 'http://www.residentstudios.com/',
@@ -55,6 +61,7 @@ export const studiosAndProductionCompanies = [
       'Purpose built large studio complex with 3 control rooms, multiple live rooms and rehearsal rooms to suit all budgets and projects. Wide range of desks and monitoring including 32 Channel SSL G+ series equipped with PMC monitoring and Yamaha NS10s. Large live room available featuring Yamaha C3 Grand Piano with connections to multiple control rooms. Mac OS X operating system with Pro Tools HD 12 & Logic X available. Specialist voiceover/ADR capabilities available with LA610 Compressor, multiple screens and acoustically treated vocal booth. Discounted rates available for unsigned artists, including the services of a member of their skilled team of engineers and producers. Equipped to work in a variety of styles and genres for both production and engineering-based work. Previous clients include Sony, EMI and BBC. Guitars, synths, samplers and percussion available including vintage Rogers Kit.',
   },
   {
+    slug: nanoid(6),
     id: company65,
     name: 'Soho Sonic Studios',
     website: 'http://www.sohosonic.com/',
@@ -66,6 +73,7 @@ export const studiosAndProductionCompanies = [
       'Lounge and reception area equipped with a sofa, coffee machine and TV. Previous clients include Leona Lewis, Mann, Lethal Bizzle, Usher, Ryan Tedder, So Solid Crew and Idris Elba.',
   },
   {
+    slug: nanoid(6),
     id: company66,
     name: 'Abbey Road Studios',
     website: 'http://www.abbeymusicstudios.co.uk/',
@@ -77,6 +85,7 @@ export const studiosAndProductionCompanies = [
       'Professionally equipped, clean and spacious studios. Large live rooms, large control room, separate drum and vocal booths. All live room PAs have Soundcraft 200b mixers and ASS speakers, as used in the London Astoria and London Palladium. Ample, free on-site parking.',
   },
   {
+    slug: nanoid(6),
     id: company67,
     name: 'Select Recording Studios',
     website: 'http://selectrecordingstudios.co.uk/',
@@ -88,6 +97,7 @@ export const studiosAndProductionCompanies = [
       'Professional recording studio in North London consisting of control room, live room, drum room and vocal booth. Cater for all styles and have previously worked with the likes of Sinitta, Tom Meighan (Kasabian), James McCartney and Rupert Grint.',
   },
   {
+    slug: nanoid(6),
     id: company68,
     name: 'RAK Studios',
     website: 'http://www.rakstudios.co.uk/',
@@ -99,6 +109,7 @@ export const studiosAndProductionCompanies = [
       'RAK houses 3 studios for live bands along with a smaller production studio. Accommodation, parking and catering available.',
   },
   {
+    slug: nanoid(6),
     id: company69,
     name: 'Crown Lane Studio',
     website: 'http://www.crownlanestudio.co.uk/',
@@ -110,6 +121,7 @@ export const studiosAndProductionCompanies = [
       "Whether you're popping in to hire the podcast room, or producing a single, you're likely to meet some of the team, who would love to show you round and make sure you feel at home.",
   },
   {
+    slug: nanoid(6),
     id: company70,
     name: 'The Digital Holdings',
     website: 'http://www.thedigitalholdings.com/',

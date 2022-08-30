@@ -17,7 +17,9 @@ model Company {
   contactEmail String?                 @map("contact_email")
   phoneNumber  String?                 @map("phone_number")
   website      String?
-  address      String
+  address      String?
+  note         String?
+  description  String?
   categories   CategoriesOnCompanies[]
 
   @@map("companies")

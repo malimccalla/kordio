@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const company141 = 'c23a9a0b-0296-492e-b9b6-b9a0ce8526a0';
 const company142 = '3c61280a-2604-4a13-b679-c6a238db5f9f';
 const company143 = 'e3191dab-af28-4a08-97bf-64508ad21f35';
@@ -12,6 +14,7 @@ const company150 = '96b30f59-2f5e-459d-9f73-ff21d2d68edd';
 export const pressAndPRCompanies = [
   {
     id: company141,
+    slug: nanoid(6),
     name: 'The Playground PR',
     website: 'http://www.theplayground.co.uk/',
     contactEmail: 'info@theplayground.co.uk',
@@ -23,6 +26,7 @@ export const pressAndPRCompanies = [
   },
   {
     id: company142,
+    slug: nanoid(6),
     name: 'Copacetic PR',
     website: 'http://www.copaceticpr.com/',
     contactEmail: 'lucius@copaceticpr.com',
@@ -35,6 +39,7 @@ export const pressAndPRCompanies = [
   {
     id: company143,
     name: 'Infectious PR',
+    slug: nanoid(6),
     website: 'https://infectiouspr.com/',
     contactEmail: 'newbiz@infectiouspr.com',
     phoneNumber: '',
@@ -46,6 +51,7 @@ export const pressAndPRCompanies = [
   {
     id: company144,
     name: 'Different Sauce',
+    slug: nanoid(6),
     website: 'https://www.differentsauce.co.uk/',
     contactEmail: 'aidan@differentsauce.co.uk',
     phoneNumber: '+447896614 744',
@@ -57,6 +63,7 @@ export const pressAndPRCompanies = [
   {
     id: company145,
     name: 'Listen Up',
+    slug: nanoid(6),
     website: 'http://www.listen-up.biz/v',
     contactEmail: 'info@listen-up.biz',
     phoneNumber: '020 3588 6200',
@@ -68,6 +75,7 @@ export const pressAndPRCompanies = [
   {
     id: company146,
     name: 'Additive PR',
+    slug: nanoid(6),
     website: 'http://www.additivepr.com/',
     contactEmail: 'greg@additivepr.com',
     phoneNumber: '07701 045592',
@@ -79,6 +87,7 @@ export const pressAndPRCompanies = [
   {
     id: company147,
     name: 'Sliding Doors',
+    slug: nanoid(6),
     website: 'http://www.slidingdoors.biz/',
     contactEmail: 'james@slidingdoors.biz',
     phoneNumber: '07957 690652',
@@ -90,6 +99,7 @@ export const pressAndPRCompanies = [
   {
     id: company148,
     name: 'High Violet PR & plugging',
+    slug: nanoid(6),
     website: 'https://www.highvioletprandplugging.com/',
     contactEmail: 'sean@highvioletprandplugging.com',
     phoneNumber: '+447366 860680',
@@ -101,6 +111,7 @@ export const pressAndPRCompanies = [
   {
     id: company149,
     name: 'Saint In The City PR',
+    slug: nanoid(6),
     website: 'http://www.saintinthecitypr.com/',
     contactEmail: 'info@saintinthecity.com',
     phoneNumber: '',
@@ -113,6 +124,7 @@ export const pressAndPRCompanies = [
   {
     id: company150,
     name: 'Prescription PR',
+    slug: nanoid(6),
     website: 'http://www.prescriptionpr.co.uk/',
     contactEmail: 'https://www.prescriptionmusicpruk.com/general-enquiries/',
     phoneNumber: '+44 (0) 1223 505328',

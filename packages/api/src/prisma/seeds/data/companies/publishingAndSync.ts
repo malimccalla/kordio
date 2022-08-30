@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 const company81 = '44e43acc-f496-48e4-afff-1b2ab30b69d4';
 const company82 = '36c97013-62ec-49c3-8655-94678cd5b7e3';
 const company83 = '975169ed-7b4b-447b-b275-ebad9cc86075';
@@ -13,6 +15,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company81,
     name: 'Notting Hill Music',
+    slug: nanoid(6),
     website: 'http://www.nottinghillmusic.com/',
     contactEmail: 'leo@nottinghillmusic.com',
     phoneNumber: '020 7243 2921',
@@ -23,6 +26,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company82,
     name: 'Sony Music Publishing UK Ltd.',
+    slug: nanoid(6),
     website: 'http://www.sonymusicpub.com/',
     contactEmail: 'sync_marketing.uk@sonymusicpub.com',
     phoneNumber: '+44 (0) 203 059 3059',
@@ -33,6 +37,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company83,
     name: 'Enhanced Music Publishing',
+    slug: nanoid(6),
     website: 'https://enhancedmusicpublishing.com/',
     contactEmail: 'info@enhancedmusicpublishing.com',
     phoneNumber: '+44 207 613 2708',
@@ -43,6 +48,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company84,
     name: 'Universal Music Publishing',
+    slug: nanoid(6),
     website: 'http://www.umusicpub.com/',
     contactEmail: 'holly.boston@umusic.com',
     phoneNumber: '020 3932 6565',
@@ -53,6 +59,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company85,
     name: 'Kobalt Music Group Ltd.',
+    slug: nanoid(6),
     website: 'http://www.kobaltmusic.com/',
     contactEmail: 'info@kobaltmusic.com',
     phoneNumber: '020 7401 5500',
@@ -63,6 +70,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company86,
     name: 'West One Music Group Ltd.',
+    slug: nanoid(6),
     website: 'http://www.westonemusicgroup.com/',
     contactEmail: 'a&r@westonemusic.com',
     phoneNumber: '020 7907 1500',
@@ -73,6 +81,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company87,
     name: 'Beggars Music',
+    slug: nanoid(6),
     website: 'https://beggarsmusic.com/',
     contactEmail: 'info@beggarsmusic.com',
     phoneNumber: '+44 (0) 20 8870 9912',
@@ -83,6 +92,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company88,
     name: 'Bucks Music Group',
+    slug: nanoid(6),
     website: 'http://www.bucksmusicgroup.com/',
     contactEmail: 'info@bucksmusicgroup.co.uk',
     phoneNumber: '020 7221 4275',
@@ -94,6 +104,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company89,
     name: 'RAK Music',
+    slug: nanoid(6),
     website: 'http://www.rakpublishing.com/',
     contactEmail: 'info@rakstudios.co.uk',
     phoneNumber: '+44 (0)20 7586 2012',
@@ -104,6 +115,7 @@ export const publishingAndSyncCompanies = [
   {
     id: company90,
     name: 'Warner Chappell Music Ltd.',
+    slug: nanoid(6),
     website: 'http://www.warnerchappell.com/',
     contactEmail: 'wcsync@warnerchappell.com',
     phoneNumber: '+44 20 7938 0000',
