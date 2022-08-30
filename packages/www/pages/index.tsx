@@ -222,7 +222,7 @@ const ButtonNav = styled.div`
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.blue};
 
   &:hover {
     text-decoration: underline;
