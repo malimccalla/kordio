@@ -58,6 +58,14 @@ const GlobalStyles = createGlobalStyle`
       background: ${theme.colors.pink}; /* Gecko Browsers */
     }
   }
+
+  .ais-SearchBox-submit {
+    display: none;
+  }
+
+  .ais-SearchBox-reset {
+    display: none;
+  }
 `;
 
 export default GlobalStyles;

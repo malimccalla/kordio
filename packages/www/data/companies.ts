@@ -7,6 +7,9 @@ export const GET_COMPANY_QUERY = gql`
       name
       slug
       contactEmail
+      address
+      description
+      note
       phoneNumber
       website
       categories {

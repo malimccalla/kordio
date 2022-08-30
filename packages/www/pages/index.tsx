@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import {
   Configure,
   Highlight,
@@ -15,11 +16,11 @@ import styled from '../styles';
 
 const Home: NextPage = () => {
   return (
-    <Page title="Hypedeck – The #1 Place for music industry contacts and resources">
+    <Page title="Kordio – The #1 Place for music industry contacts and resources">
       <Banner />
       <Container>
         <Header>
-          <Logo>Hypedeck.</Logo>
+          <Logo>Kordio</Logo>
           <ButtonNav>
             <SubmitResourceButton>Login</SubmitResourceButton>
             <AuthButton>Create account</AuthButton>
@@ -131,7 +132,7 @@ const Main = styled.main`
 `;
 
 const AllCategoriesButton = styled.button`
-  height: 4.8rem;
+  height: 5.2rem;
   width: 18rem;
   margin-top: 2rem;
   font-size: 1.4rem;

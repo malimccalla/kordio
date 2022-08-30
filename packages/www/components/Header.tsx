@@ -12,7 +12,7 @@ const Header = () => {
           <Link href="/">
             <Logo>
               <Text fontSize="3.6rem" fontWeight="700" color="white">
-                Hypedeck.
+                Kordio
               </Text>
             </Logo>
           </Link>

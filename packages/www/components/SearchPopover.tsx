@@ -1,5 +1,3 @@
-import { getEnabledCategories } from 'trace_events';
-
 import { useQuery } from '@apollo/client';
 import {
   FloatingFocusManager,
@@ -10,191 +8,22 @@ import {
   useFloating,
   useId,
   useInteractions,
+  useListNavigation,
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import Link from 'next/link';
 import React, { cloneElement, useState } from 'react';
+import {
+  Hits,
+  InstantSearch,
+  RefinementList,
+  SearchBox,
+} from 'react-instantsearch-hooks-web';
 
-import { GET_COMPANIES_QUERY } from '../data/companies';
-import { useApollo } from '../lib/apolloClient';
-import styled, { css, media, theme } from '../styles';
+import { searchClient } from '../lib/searchClient';
+import styled, { media, theme } from '../styles';
 import { SearchIcon } from './icons';
 import Text from './Text';
-
-const icons = [
-  'book',
-  'article',
-  'app',
-  'website',
-  'money',
-  'person',
-  'company',
-  'megaphone',
-];
-
-const results = [
-  {
-    id: 0,
-    featured: true,
-    name: 'A Featured Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-    type: 'person',
-  },
-  {
-    id: 1,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-    type: 'person',
-  },
-  {
-    id: 2,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-    type: 'company',
-  },
-  {
-    id: 3,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.primary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-    type: 'article',
-  },
-  {
-    id: 4,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.primary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-    type: 'video',
-  },
-  {
-    id: 5,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-    type: 'tech',
-  },
-  {
-    id: 6,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 7,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 8,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 2, name: 'article', color: theme.colors.primary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 9,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 10,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 2, name: 'article', color: theme.colors.primary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 11,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.primary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 12,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-  {
-    id: 13,
-    name: 'A Relevant Contact or Resource',
-    url: 'google.com',
-    categories: [
-      { id: 1, name: 'marketing', color: theme.colors.pink },
-      { id: 2, name: 'article', color: theme.colors.primary },
-      { id: 3, name: 'blog', color: theme.colors.secondary },
-    ],
-    imageUrl: 'https://picsum.photos/200',
-  },
-];
 
 interface Props {
   open?: boolean;
@@ -227,6 +56,7 @@ export const Dialog = ({
     useClick(context),
     useRole(context),
     useDismiss(context),
+    useListNavigation(context),
   ]);
 
   return (
@@ -262,112 +92,92 @@ export const Dialog = ({
   );
 };
 
+const Hit = ({ hit }: any) => {
+  return (
+    <Link key={hit.id} href={`/company/${hit.id}`}>
+      <ResultContainer>
+        <ResultLeft>
+          <ResultImage src={hit.imageUrl}>
+            <Text fontWeight="500" fontSize="3rem" color="#999">
+              {hit.name[0].toLocaleUpperCase()}
+            </Text>
+          </ResultImage>
+          <TextContainer>
+            <Categories>
+              {hit.categories.map((category: any) => {
+                return (
+                  <Category color={category.color} key={category.id}>
+                    {category.name}
+                  </Category>
+                );
+              })}
+            </Categories>
+            <Text color={theme.colors.black} fontSize="1.8rem" fontWeight="500">
+              {hit.name}
+            </Text>
+          </TextContainer>
+        </ResultLeft>
+        <ResultRight>
+          <ArrowBox>&rarr;</ArrowBox>
+        </ResultRight>
+      </ResultContainer>
+    </Link>
+  );
+};
+
 const SearchPopover = (props: {
   height?: string;
   borderRadius?: string;
   boxShadow?: string;
 }) => {
-  const { loading, data, error } = useQuery(GET_COMPANIES_QUERY);
-
-  console.log(loading, data);
-  console.log(error);
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [hasSearchQuery, setHasSearchQuery] = React.useState(false);
-
-  const onSearchInputChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    const currentQuery = (e.target as HTMLInputElement).value;
-
-    if (currentQuery !== '') {
-      setHasSearchQuery(true);
-    } else {
-      setHasSearchQuery(false);
-    }
-
-    setSearchQuery(currentQuery);
-  };
-
   return (
-    <Dialog
-      render={({ close }) => (
-        <SearchContainer>
-          <DialogSearchBox hasSearchQuery={hasSearchQuery}>
-            <IconBox>
-              <SearchIcon size="24px" />
-            </IconBox>
-            <SearchInput
-              onChange={onSearchInputChange}
-              value={searchQuery}
-              autoFocus={true}
-              placeholder="What are you looking for?"
-            ></SearchInput>
-            <CancelSection>
-              <CloseButton onClick={close}>Cancel</CloseButton>
-            </CancelSection>
-          </DialogSearchBox>
-          {hasSearchQuery && (
+    <InstantSearch searchClient={searchClient} indexName="dev_companies">
+      <Dialog
+        render={({ close }) => (
+          <SearchContainer>
+            <DialogSearchBox>
+              <IconBox>
+                <SearchIcon size="24px" />
+              </IconBox>
+              <SearchInput
+                autoFocus={true}
+                placeholder="What are you looking for?"
+              ></SearchInput>
+              <CancelSection>
+                <CloseButton onClick={close}>Cancel</CloseButton>
+              </CancelSection>
+            </DialogSearchBox>
             <Results>
-              {data.companies.map((company: any) => {
-                return (
-                  <Link key={company.id} href={`/company/${company.id}`}>
-                    <ResultContainer featured={!!company.featured}>
-                      <ResultLeft>
-                        <ResultImage src={company.imageUrl}>
-                          <Text fontWeight="500" color="#999">
-                            {company.name[0].toLocaleUpperCase()}
-                          </Text>
-                        </ResultImage>
-                        <TextContainer>
-                          <Text fontSize="1.6rem" fontWeight="500">
-                            {company.name}
-                          </Text>
-                          <Categories>
-                            {company.categories.map((category: any) => {
-                              return (
-                                <Category
-                                  color={category.color}
-                                  key={category.id}
-                                >
-                                  {category.name}
-                                </Category>
-                              );
-                            })}
-                          </Categories>
-                        </TextContainer>
-                      </ResultLeft>
-                      <ResultRight>
-                        <ArrowBox>&rarr;</ArrowBox>
-                      </ResultRight>
-                    </ResultContainer>
-                  </Link>
-                );
-              })}
+              <Hits onClick={close} hitComponent={Hit} />
             </Results>
-          )}
-        </SearchContainer>
-      )}
-    >
-      <DummySearchBox
-        boxShadow={props.boxShadow}
-        height={props.height}
-        borderRadius={props.borderRadius}
+          </SearchContainer>
+        )}
       >
-        <IconBox>
-          <SearchIcon size="20px" />
-        </IconBox>
-        <Text paddingLeft="1rem">What are you looking for?</Text>
-      </DummySearchBox>
-    </Dialog>
+        <DummySearchBox
+          boxShadow={props.boxShadow}
+          height={props.height}
+          borderRadius={props.borderRadius}
+        >
+          <IconBox>
+            <SearchIcon size="20px" />
+          </IconBox>
+          <Text paddingLeft="1rem">What are you looking for?</Text>
+        </DummySearchBox>
+      </Dialog>
+    </InstantSearch>
   );
 };
 
 const Categories = styled.div`
   display: flex;
+  padding-bottom: 8px;
 `;
 
 const Category = styled.div<{ color: string }>`
-  background-color: ${(props) => props.color}BB;
-  font-size: 1.3rem;
-  height: 2rem;
+  background-color: ${(props) => props.color};
+  font-size: 1.2rem;
+  color: ${(props) => props.theme.colors.black};
+  height: 1.8rem;
   font-weight: 500;
   padding: 0 1rem;
   display: flex;
@@ -379,7 +189,7 @@ const Category = styled.div<{ color: string }>`
 
 const TextContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: column;
   padding-left: 1rem;
 `;
@@ -401,10 +211,10 @@ const ResultLeft = styled.div`
 const ResultRight = styled.div``;
 
 const ResultImage = styled.div<{ src: string }>`
-  width: 4.4rem;
-  height: 4.4rem;
+  width: 6rem;
+  height: 6rem;
   display: flex;
-  font-size: 2.6rem;
+  font-size: 2rem;
   background-size: cover;
   align-items: center;
   justify-content: center;
@@ -412,9 +222,10 @@ const ResultImage = styled.div<{ src: string }>`
   background-color: #eee;
 `;
 
-const ResultContainer = styled.div<{ featured: boolean }>`
+const ResultContainer = styled.div`
   width: 100%;
-  height: 8rem;
+  height: 10rem;
+  color: white;
   padding: 0 2rem;
   flex-direction: row;
   align-items: center;
@@ -424,37 +235,17 @@ const ResultContainer = styled.div<{ featured: boolean }>`
   border-radius: 7px;
   margin-bottom: 0.6rem;
 
-  ${(props) =>
-    props.featured &&
-    css`
-      /* border-top: 8px solid ${(props) => props.theme.colors.pink}; */
-      background: #11fac7; /* fallback for old browsers */
-      background: -webkit-linear-gradient(
-        to left,
-        #11fac7,
-        #f8ffae
-      ); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(
-        to left,
-        #11fac7,
-        #f8ffae
-      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      height: 10rem;
-      color: white;
-    `}
-
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
     color: white;
   }
 
   &:hover ${ArrowBox} {
     display: flex;
-    color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.blue};
   }
 `;
 
@@ -463,8 +254,6 @@ const Results = styled.div`
   width: 100%;
   max-height: 80vh;
   min-height: 80vh;
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
 
   overflow-x: scroll;
 
@@ -519,7 +308,7 @@ const IconBox = styled.div`
   transition: all 0.3s ease;
 `;
 
-const SearchInput = styled.input`
+const SearchInput = styled(SearchBox)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -533,7 +322,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const DialogSearchBox = styled.div<{ hasSearchQuery: boolean }>`
+const DialogSearchBox = styled.div`
   display: flex;
   height: 7rem;
   width: 104rem;
@@ -545,13 +334,8 @@ const DialogSearchBox = styled.div<{ hasSearchQuery: boolean }>`
   background-color: white;
   border-radius: 11px;
   box-shadow: 0 4px 0 0 rgba(197, 197, 197);
-
-  ${(props) =>
-    props.hasSearchQuery &&
-    css`
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-    `}
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 
   ${media.large`
     width: 100vw;

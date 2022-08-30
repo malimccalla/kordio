@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 
-const algoliaAppId = '7BV4RKWPW3'; //'S6DWQBDLJ7';
-const algoliaSearchOnlyKey = '60dfd39f0dd905e9c4a77fe13f43e3b1'; //'b24d091602a8bedab523b1bca545e699';
+const algoliaAppId = 'K0ET4UIZEL';
+const algoliaSearchOnlyKey = '5d8cdf49f90a50a4839a08fd68c6b98e';
 
 if (!algoliaAppId) {
   throw new Error(

@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
@@ -12,6 +11,13 @@ const CompanyPage = ({ data: { company } }: any) => {
     <Page title="Contact">
       <Container>
         <ContactCard>
+          <Categories>
+            {company.categories.map((category: any) => (
+              <Category color={category.color} key={category.id}>
+                <Text fontSize="1.4rem">{category.name}</Text>
+              </Category>
+            ))}
+          </Categories>
           <CardHeader>
             <Picture>
               <Text fontSize="8rem" fontWeight="700" color="#999">
@@ -21,29 +27,37 @@ const CompanyPage = ({ data: { company } }: any) => {
             <HeaderRight>
               <Text
                 paddingBottom="2rem"
-                fontSize="4.2rem"
+                fontSize="4rem"
                 fontWeight="600"
                 color="white"
               >
                 {company.name}
               </Text>
-              <Categories>
-                {company.categories.map((category: any) => (
-                  <Category color={category.color} key={category.id}>
-                    <Text fontSize="1.4rem">{category.name}</Text>
-                  </Category>
-                ))}
-              </Categories>
+              <CTAButtons>
+                <SaveContactButton>
+                  <Text fontSize="1.8rem">Save</Text>
+                </SaveContactButton>
+              </CTAButtons>
             </HeaderRight>
           </CardHeader>
           <CardBody>
             <Text fontSize="2rem" fontWeight="500" color="white">
               Overview
             </Text>
+            {company.description && (
+              <Text
+                paddingTop="2rem"
+                fontSize="1.5rem"
+                lineHeight="1.4"
+                color="white"
+              >
+                {company.description}
+              </Text>
+            )}
             <Details>
               <Detail>
                 <DetailKey>
-                  <Text color="white">Website:</Text>
+                  <Text>Website:</Text>
                 </DetailKey>
                 <DetailValue>
                   <a target="_blank" rel="noreferrer" href={company.website}>
@@ -53,56 +67,57 @@ const CompanyPage = ({ data: { company } }: any) => {
               </Detail>
               <Detail>
                 <DetailKey>
-                  <Text color="white">Contact email:</Text>
+                  <Text>Contact email:</Text>
                 </DetailKey>
                 <DetailValue>
-                  <Text color="white">{company.contactEmail || 'N/A'}</Text>
+                  <Text>{company.contactEmail || 'N/A'}</Text>
                 </DetailValue>
               </Detail>
               <Detail>
                 <DetailKey>
-                  <Text color="white">Phone:</Text>
+                  <Text>Phone:</Text>
                 </DetailKey>
                 <DetailValue>
-                  <Text color="white">{company.phoneNumber || 'N/A'}</Text>
+                  <Text>{company.phoneNumber || 'N/A'}</Text>
                 </DetailValue>
               </Detail>
               <Detail>
                 <DetailKey>
-                  <Text color="white">Address:</Text>
+                  <Text>Address:</Text>
                 </DetailKey>
                 <DetailValue>
-                  <Text color="white">
-                    {company.address ||
-                      'Pepper House, 1 Pepper Road Hazel Grove Stockport SK7 5DP'}
-                  </Text>
+                  <Text>{company.address || 'N/A'}</Text>
                 </DetailValue>
               </Detail>
             </Details>
           </CardBody>
-          <SaveContactButton>
-            <Text fontSize="1.8rem">Save Contact</Text>
-          </SaveContactButton>
         </ContactCard>
       </Container>
     </Page>
   );
 };
 
-const SaveContactButton = styled.div`
+const Note = styled.div`
   width: 100%;
-  height: 6rem;
+  background-color: red;
+`;
+
+const CTAButtons = styled.div`
+  display: flex;
+`;
+
+const SaveContactButton = styled.div`
+  width: 18rem;
+  height: 4rem;
   border-radius: 1000px;
   display: flex;
   align-items: center;
-  background-color: ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.primary};
   justify-content: center;
-  border: 1px solid #999;
-  color: white;
+  color: ${(props) => props.theme.colors.black};
   transition: all 0.2s ease;
 
   &:hover {
-    border: 1px solid white;
     cursor: pointer;
   }
 `;
@@ -118,14 +133,19 @@ const LinkSpan = styled.span`
 
 const DetailKey = styled.div`
   min-width: 20rem;
+  color: white;
+  font-size: 1.5rem;
   font-weight: 500;
 `;
 
-const DetailValue = styled.div``;
+const DetailValue = styled.div`
+  font-size: 1.5rem;
+  color: white;
+`;
 
 const Detail = styled.div`
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   width: 100%;
 `;
 
@@ -147,13 +167,17 @@ const Category = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
   border-radius: 1000px;
   justify-content: center;
-  color: white;
+  color: ${(props) => props.theme.colors.black};
   margin-right: 1rem;
   align-items: center;
 `;
 
 const Categories = styled.div`
   display: flex;
+  position: absolute;
+  float: left;
+  right: 12px;
+  top: 20px;
 `;
 
 const CardHeader = styled.div`
@@ -163,9 +187,9 @@ const CardHeader = styled.div`
 `;
 
 const HeaderRight = styled.div`
-  display: flex;
   flex-direction: column;
-  margin-left: 4rem;
+  width: 100%;
+  margin-left: 3rem;
   justify-content: space-around;
 `;
 
@@ -180,6 +204,8 @@ const Picture = styled.div`
 `;
 
 const ContactCard = styled.div`
+  position: relative;
+  overflow: scroll;
   width: 90rem;
   height: 57rem;
   background-color: #111;
@@ -187,11 +213,17 @@ const ContactCard = styled.div`
   border: 1px solid #ccc;
   display: flex;
   border-radius: 11px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 4rem;
   box-shadow: rgba(207, 207, 207, 0.301) 5px 5px,
     rgba(239, 239, 239, 0.3) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
     rgba(38, 172, 221, 0.05) 20px 20px, rgba(204, 30, 141, 0.025) 25px 25px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 
   ${media.medium`
     width: 100%;
