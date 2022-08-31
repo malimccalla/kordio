@@ -6,7 +6,6 @@ import Text from '../components/Text';
 import styled from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
-  console.log(me);
   return (
     <Page title="Kordio – The #1 Place for music industry contacts and resources">
       <Banner />
