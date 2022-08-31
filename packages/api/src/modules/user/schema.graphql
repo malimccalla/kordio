@@ -4,4 +4,9 @@ type User {
   familyName: String
   name: String
   email: String
+  picture: String
+}
+
+type Query {
+  me: User
 }

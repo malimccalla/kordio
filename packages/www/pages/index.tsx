@@ -13,7 +13,7 @@ const Home: NextPage = () => {
           <Logo>Kordio</Logo>
           <ButtonNav>
             <SubmitResourceButton>Login</SubmitResourceButton>
-            <AuthButton>Create account</AuthButton>
+            <AuthButton>Sign up</AuthButton>
           </ButtonNav>
         </Header>
         <Main>
@@ -230,7 +230,7 @@ const AuthButton = styled.button`
   align-items: center;
   font-size: 1.4rem;
   border-radius: 5px;
-  padding: 0 2rem;
+  padding: 0 3rem;
   justify-content: center;
 
   transition: all 0.7s ease;

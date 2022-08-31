@@ -26,7 +26,7 @@ const Header = () => {
                 fontWeight="500"
                 color={theme.colors.black}
               >
-                Create account
+                Sign up
               </Text>
             </Link>
           </AuthButton>

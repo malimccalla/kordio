@@ -11,11 +11,14 @@ datasource db {
 }
 
 model User {
-  id         String @id @default(uuid())
-  name       String
-  givenName  String @map("given_name")
-  familyName String @map("family_name")
-  email      String @unique
+  id         String  @id @default(uuid())
+  name       String?
+  givenName  String? @map("given_name")
+  familyName String? @map("family_name")
+  email      String? @unique
+  picture    String?
+
+  @@map("users")
 }
 
 model Company {

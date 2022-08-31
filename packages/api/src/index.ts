@@ -68,7 +68,9 @@ const startServer = async () => {
 
   const apolloServer = new ApolloServer({
     schema,
-    context: { prisma },
+    context: ({ req }) => {
+      return { prisma, session: req.session };
+    },
     csrfPrevention: true,
     cache: 'bounded',
     /**
