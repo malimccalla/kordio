@@ -1,20 +1,36 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
+import Text from '../components/Text';
 import styled from '../styles';
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ me }: any) => {
+  console.log(me);
   return (
     <Page title="Kordio – The #1 Place for music industry contacts and resources">
       <Banner />
       <Container>
         <Header>
           <Logo>Kordio</Logo>
-          <ButtonNav>
-            <SubmitResourceButton>Login</SubmitResourceButton>
-            <AuthButton>Sign up</AuthButton>
-          </ButtonNav>
+          {!me && (
+            <ButtonNav>
+              <SubmitResourceButton>Login</SubmitResourceButton>
+              <AuthButton>Sign up</AuthButton>
+            </ButtonNav>
+          )}
+          {me && (
+            <ButtonNav>
+              <DashboardButton>My Contacts</DashboardButton>
+              {/* <Divider />
+              <UserSection>
+                <Avatar />
+                <Text fontWeight="600" color="white">
+                  {me.name}
+                </Text>
+              </UserSection> */}
+            </ButtonNav>
+          )}
         </Header>
         <Main>
           <Title>The #1 Place for Music Industry Contacts & Resources</Title>
@@ -111,6 +127,14 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.black};
 `;
 
+const Avatar = styled.div`
+  height: 4.4rem;
+  width: 4.4rem;
+  margin-right: 2rem;
+  border-radius: 5000px;
+  background-color: ${(props) => props.theme.colors.secondary};
+`;
+
 const Main = styled.main`
   min-height: 100vh;
   padding: 4rem 0;
@@ -137,6 +161,13 @@ const AllCategoriesButton = styled.button`
     cursor: pointer;
     transform: scale(1.05);
   }
+`;
+
+const Divider = styled.div`
+  height: 4.4rem;
+  width: 1px;
+  background-color: #999;
+  margin: 0 3rem;
 `;
 
 const Title = styled.h1`
@@ -200,6 +231,13 @@ const Card = styled.div`
   }
 `;
 
+const UserSection = styled.div`
+  height: 4.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -222,6 +260,26 @@ const Span = styled.span`
 `;
 
 const AuthButton = styled.button`
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.black};
+  font-weight: 500;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  padding: 0 3rem;
+  justify-content: center;
+
+  transition: all 0.7s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+`;
+
+const DashboardButton = styled.button`
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.black};
   font-weight: 500;

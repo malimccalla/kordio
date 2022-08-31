@@ -15,11 +15,11 @@ const Page = (props: Props) => {
   const { title, meta, children, padding } = props;
 
   // For more information on the open graph protocol visit http://ogp.me/
+  // TODO: Update to Kordio
   const defaultOg = {
-    title:
-      'NEST - Building an artist-first music industry, starting with communities', // og title not page title
+    title: 'Kordio', // og title not page title
     type: 'website',
-    url: 'https://tunebase.com',
+    url: 'https://kordio.co',
     image: {
       url: 'https://storage.googleapis.com/tunebase-static/banner.png',
       height: '630',
