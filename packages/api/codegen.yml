@@ -2,7 +2,7 @@ schema: ./src/schema.ts
 generates:
   ./src/typings/types.ts:
     config:
-      contextType: ./context#Context
+      contextType: ./index#Context
     plugins:
       - '@graphql-codegen/typescript'
       - '@graphql-codegen/typescript-resolvers'

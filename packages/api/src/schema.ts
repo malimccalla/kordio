@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import * as path from 'path';
 
 import { loadFilesSync } from '@graphql-tools/load-files';

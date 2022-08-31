@@ -17,6 +17,7 @@ model User {
   familyName String? @map("family_name")
   email      String? @unique
   picture    String?
+  locale     String?
 
   @@map("users")
 }

@@ -6,7 +6,6 @@ const resolvers: Resolvers = {
       return prisma.category.findMany();
     },
   },
-  Mutation: {},
   Category: {
     companies: async (category, _, { prisma }) => {
       const res = await prisma.categoriesOnCompanies.findMany({

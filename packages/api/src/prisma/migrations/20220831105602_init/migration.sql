@@ -1,4 +1,17 @@
 -- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "name" TEXT,
+    "given_name" TEXT,
+    "family_name" TEXT,
+    "email" TEXT,
+    "picture" TEXT,
+    "locale" TEXT,
+
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "companies" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -29,6 +42,9 @@ CREATE TABLE "categories_on_companies" (
 
     CONSTRAINT "categories_on_companies_pkey" PRIMARY KEY ("company_id","category_id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "companies_slug_key" ON "companies"("slug");

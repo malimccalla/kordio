@@ -10,3 +10,35 @@ type User {
 type Query {
   me: User
 }
+
+type Mutation {
+  signup(input: NewUserInput!): SignupPayload!
+  login(input: LoginUserInput!): LoginUserPayload!
+  logout: Boolean!
+}
+
+input NewUserInput {
+  email: String
+  name: String
+  givenName: String
+  familyName: String
+  locale: String
+  socialId: String
+  socialProfileImageUrl: String
+}
+
+input LoginUserInput {
+  email: String
+}
+
+type SignupPayload {
+  ok: Boolean!
+  errors: [Error!]
+  user: User
+}
+
+type LoginUserPayload {
+  ok: Boolean!
+  errors: [Error!]
+  user: User
+}

@@ -17,6 +17,7 @@ import helmet from 'helmet';
 import { redisSessionPrefix, sessionCookieName } from './constants';
 import schema from './schema';
 import { redis } from './services/redis';
+import { Context } from './typings';
 
 const startServer = async () => {
   const sessionSecret = process.env.SESSION_SECRET;
@@ -47,8 +48,9 @@ const startServer = async () => {
   const httpServer = http.createServer(app);
   const prisma = new PrismaClient();
 
-  const corsOptions = {
+  const corsOptions: cors.CorsOptions = {
     origin: [frontendHost],
+    credentials: true,
   };
 
   const sessionMiddleware = session({
@@ -68,8 +70,8 @@ const startServer = async () => {
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req }) => {
-      return { prisma, session: req.session };
+    context: ({ req }): Context => {
+      return { prisma, session: req.session, redis };
     },
     csrfPrevention: true,
     cache: 'bounded',

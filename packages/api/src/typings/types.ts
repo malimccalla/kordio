@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { Context } from './context';
+import { Context } from './index';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -68,14 +68,48 @@ export type Error = {
   path?: Maybe<Scalars['String']>;
 };
 
+export type LoginUserInput = {
+  email?: InputMaybe<Scalars['String']>;
+};
+
+export type LoginUserPayload = {
+  __typename?: 'LoginUserPayload';
+  errors?: Maybe<Array<Error>>;
+  ok: Scalars['Boolean'];
+  user?: Maybe<User>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createCompany: CreateCompanyPayload;
+  login: LoginUserPayload;
+  logout: Scalars['Boolean'];
+  signup: SignupPayload;
 };
 
 
 export type MutationCreateCompanyArgs = {
   input: CreateCompanyInput;
+};
+
+
+export type MutationLoginArgs = {
+  input: LoginUserInput;
+};
+
+
+export type MutationSignupArgs = {
+  input: NewUserInput;
+};
+
+export type NewUserInput = {
+  email?: InputMaybe<Scalars['String']>;
+  familyName?: InputMaybe<Scalars['String']>;
+  givenName?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  socialId?: InputMaybe<Scalars['String']>;
+  socialProfileImageUrl?: InputMaybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -89,6 +123,13 @@ export type Query = {
 
 export type QueryCompanyArgs = {
   where: CompanyWhereInput;
+};
+
+export type SignupPayload = {
+  __typename?: 'SignupPayload';
+  errors?: Maybe<Array<Error>>;
+  ok: Scalars['Boolean'];
+  user?: Maybe<User>;
 };
 
 export type User = {
@@ -177,8 +218,12 @@ export type ResolversTypes = {
   CreateCompanyInput: CreateCompanyInput;
   CreateCompanyPayload: ResolverTypeWrapper<CreateCompanyPayload>;
   Error: ResolverTypeWrapper<Error>;
+  LoginUserInput: LoginUserInput;
+  LoginUserPayload: ResolverTypeWrapper<LoginUserPayload>;
   Mutation: ResolverTypeWrapper<{}>;
+  NewUserInput: NewUserInput;
   Query: ResolverTypeWrapper<{}>;
+  SignupPayload: ResolverTypeWrapper<SignupPayload>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
 };
@@ -192,8 +237,12 @@ export type ResolversParentTypes = {
   CreateCompanyInput: CreateCompanyInput;
   CreateCompanyPayload: CreateCompanyPayload;
   Error: Error;
+  LoginUserInput: LoginUserInput;
+  LoginUserPayload: LoginUserPayload;
   Mutation: {};
+  NewUserInput: NewUserInput;
   Query: {};
+  SignupPayload: SignupPayload;
   String: Scalars['String'];
   User: User;
 };
@@ -233,8 +282,18 @@ export type ErrorResolvers<ContextType = Context, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type LoginUserPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['LoginUserPayload'] = ResolversParentTypes['LoginUserPayload']> = {
+  errors?: Resolver<Maybe<Array<ResolversTypes['Error']>>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createCompany?: Resolver<ResolversTypes['CreateCompanyPayload'], ParentType, ContextType, RequireFields<MutationCreateCompanyArgs, 'input'>>;
+  login?: Resolver<ResolversTypes['LoginUserPayload'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'input'>>;
+  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  signup?: Resolver<ResolversTypes['SignupPayload'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -242,6 +301,13 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   companies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, RequireFields<QueryCompanyArgs, 'where'>>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+};
+
+export type SignupPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SignupPayload'] = ResolversParentTypes['SignupPayload']> = {
+  errors?: Resolver<Maybe<Array<ResolversTypes['Error']>>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -259,8 +325,10 @@ export type Resolvers<ContextType = Context> = {
   Company?: CompanyResolvers<ContextType>;
   CreateCompanyPayload?: CreateCompanyPayloadResolvers<ContextType>;
   Error?: ErrorResolvers<ContextType>;
+  LoginUserPayload?: LoginUserPayloadResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  SignupPayload?: SignupPayloadResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 
