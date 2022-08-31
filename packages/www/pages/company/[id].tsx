@@ -10,13 +10,6 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
     <Page title="Contact">
       <Container>
         <ContactCard>
-          <Categories>
-            {company.categories.map((category: any) => (
-              <Category color={category.color} key={category.id}>
-                <Text fontSize="1.4rem">{category.name}</Text>
-              </Category>
-            ))}
-          </Categories>
           <CardHeader>
             <Picture>
               <Text fontSize="8rem" fontWeight="700" color="#999">
@@ -36,13 +29,23 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
                 <SaveContactButton>
                   <Text fontSize="1.8rem">Save</Text>
                 </SaveContactButton>
+                {/* <SubmitButton>
+                  <Text fontSize="1.8rem">Submit Music</Text>
+                </SubmitButton> */}
               </CTAButtons>
             </HeaderRight>
           </CardHeader>
           <CardBody>
-            <Text fontSize="2rem" fontWeight="500" color="white">
+            <Text fontSize="2.4rem" fontWeight="500" color="white">
               Overview
             </Text>
+            <Categories>
+              {company.categories.map((category: any) => (
+                <Category color={category.color} key={category.id}>
+                  <Text fontSize="1.3rem">{category.name}</Text>
+                </Category>
+              ))}
+            </Categories>
             {company.description && (
               <Text
                 paddingTop="2rem"
@@ -105,8 +108,8 @@ const CTAButtons = styled.div`
   display: flex;
 `;
 
-const SaveContactButton = styled.div`
-  width: 18rem;
+const SaveContactButton = styled.button`
+  width: 14rem;
   height: 4rem;
   border-radius: 1000px;
   display: flex;
@@ -114,6 +117,25 @@ const SaveContactButton = styled.div`
   background-color: ${(props) => props.theme.colors.primary};
   justify-content: center;
   color: ${(props) => props.theme.colors.black};
+  transition: all 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SubmitButton = styled.button`
+  width: 16rem;
+  height: 4rem;
+  margin-left: 1rem;
+  border-radius: 1000px;
+  display: flex;
+  border: 1px solid ${(props) => props.theme.colors.primary};
+  align-items: center;
+  background-color: black;
+  /* background-color: ${(props) => props.theme.colors.primary}; */
+  justify-content: center;
+  color: white;
   transition: all 0.2s ease;
 
   &:hover {
@@ -156,27 +178,28 @@ const Details = styled.div`
 `;
 
 const CardBody = styled.div`
-  margin-top: 4rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Category = styled.div<{ color: string }>`
   height: 2.4rem;
   display: flex;
   padding: 0 1.4rem;
+  border: 1px solid ${(props) => props.color};
   background-color: ${(props) => props.color};
   border-radius: 1000px;
   justify-content: center;
-  color: ${(props) => props.theme.colors.black};
+  color: white;
   margin-right: 1rem;
   align-items: center;
 `;
 
 const Categories = styled.div`
   display: flex;
-  position: absolute;
+  margin-top: 2rem;
   float: left;
-  right: 12px;
-  top: 20px;
 `;
 
 const CardHeader = styled.div`
@@ -234,6 +257,7 @@ const ContactCard = styled.div`
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: calc(100vh - 11rem);
