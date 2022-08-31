@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
@@ -259,6 +259,7 @@ const SubmitResourceButton = styled.button`
 
 const Refer = styled.p`
   margin: 2.4rem 0;
+  margin-bottom: 4rem;
   font-size: 2rem;
   color: white;
   font-weight: 500;
@@ -287,6 +288,10 @@ const Logo = styled.div`
   color: white;
   font-weight: 700;
   font-size: 3.8rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default Home;

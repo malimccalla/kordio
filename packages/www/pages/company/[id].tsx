@@ -1,12 +1,11 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { GET_COMPANY_QUERY } from '../../data/companies';
-import { addApolloState, initializeApollo } from '../../lib/apolloClient';
 import styled, { media } from '../../styles';
 
-const CompanyPage = ({ data: { company } }: any) => {
+const CompanyPage: NextPage = ({ data: { company } }: any) => {
   return (
     <Page title="Contact">
       <Container>
@@ -240,19 +239,15 @@ const Container = styled.div`
   height: calc(100vh - 11rem);
 `;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const apolloClient = initializeApollo();
-
+CompanyPage.getInitialProps = async (context: any) => {
   const where = { id: context.query.id };
 
-  const { data } = await apolloClient.query({
+  const { data } = await context.apolloClient.query({
     query: GET_COMPANY_QUERY,
     variables: { where },
   });
 
-  return addApolloState(apolloClient, {
-    props: { data },
-  });
+  return { data };
 };
 
 export default CompanyPage;
