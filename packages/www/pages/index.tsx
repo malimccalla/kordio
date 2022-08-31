@@ -1,17 +1,7 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
-import {
-  Configure,
-  Highlight,
-  Hits,
-  Index,
-  InstantSearch,
-  SearchBox,
-} from 'react-instantsearch-dom';
 
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
-import { searchClient } from '../lib/searchClient';
 import styled from '../styles';
 
 const Home: NextPage = () => {
