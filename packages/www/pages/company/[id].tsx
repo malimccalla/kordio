@@ -232,16 +232,17 @@ const ContactCard = styled.div`
   overflow: scroll;
   width: 90rem;
   height: 57rem;
-  background-color: #2a2a2a;
+  /* background-color: #2a2a2a; */
+  background: linear-gradient(112deg, #2a2a2a 30%, #171717 100%);
   flex-direction: column;
   border: 1px solid #444444;
   display: flex;
   border-radius: 11px;
   /* justify-content: space-between; */
   padding: 4rem;
-  box-shadow: rgba(44, 44, 44, 0.301) 5px 5px,
-    rgba(114, 114, 114, 0.3) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
-    rgba(38, 172, 221, 0.05) 20px 20px, rgba(204, 30, 141, 0.025) 25px 25px;
+  box-shadow: rgba(23, 23, 23, 0.301) 5px 5px,
+    rgba(114, 114, 114, 0.3) 10px 10px, rgba(49, 49, 49, 0.1) 15px 15px,
+    rgba(0, 0, 0, 0.094) 20px 20px;
 
   &::-webkit-scrollbar {
     display: none;

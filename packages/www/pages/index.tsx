@@ -53,7 +53,7 @@ const Home: NextPage = ({ me }: any) => {
           )}
         </Header>
         <Main>
-          <Title>The #1 Place for Music Industry Contacts & Resources</Title>
+          <Title>The #1 Place to Build Your Team in the Music Industry</Title>
           {/* <Refer>
             (but{' '}
             <Span onClick={() => alert('TODO: Implement referral system')}>
@@ -64,7 +64,7 @@ const Home: NextPage = ({ me }: any) => {
           <SearchSection>
             <Popover />
             <TrendingSearches>
-              Trending: <TrendingSearch>logic pro tips</TrendingSearch>,{' '}
+              Trending: <TrendingSearch>artist management</TrendingSearch>,{' '}
               <TrendingSearch>radio stations</TrendingSearch>,{' '}
               <TrendingSearch>music blogs</TrendingSearch>
             </TrendingSearches>
@@ -352,9 +352,11 @@ const SearchSection = styled.div`
 const TrendingSearch = styled.span`
   color: #d8d8d8;
 
+  transition: all 300ms ease;
+
   &:hover {
+    color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
-    color: white;
   }
 `;
 
