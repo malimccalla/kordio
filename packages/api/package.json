@@ -31,6 +31,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "glob": "^8.0.3",
+    "googleapis": "^107.0.0",
     "graphql": "^16.6.0",
     "helmet": "^6.0.0",
     "ioredis": "^5.2.3",

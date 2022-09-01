@@ -16,6 +16,10 @@ import helmet from 'helmet';
 
 import { redisSessionPrefix, sessionCookieName } from './constants';
 import schema from './schema';
+import {
+  getGoogleAccountFromCode,
+  getGoogleAuthUrl,
+} from './services/googleAuth';
 import { redis } from './services/redis';
 import { Context } from './typings';
 
@@ -94,6 +98,78 @@ const startServer = async () => {
 
   app.use(cors(corsOptions));
   app.use(sessionMiddleware);
+
+  app.get('/auth/google', (req, res) => {
+    try {
+      const url = getGoogleAuthUrl(req.query.referrer as string);
+
+      res.status(200).json({ authUrl: url, ok: true });
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({
+        ok: false,
+        error: 'Something went wrong',
+      });
+    }
+  });
+
+  app.get('/auth/google/callback', async (req, res) => {
+    if (!req || !req.query || !req.query.code) {
+      res.status(401).send('Unauthorized');
+    }
+
+    const code = req.query.code as string;
+
+    try {
+      const account = await getGoogleAccountFromCode(code);
+
+      if (!account || !account.userInfo || !account.userInfo.email) {
+        res
+          .status(500)
+          .send('Could not get google account from authorization code');
+      }
+
+      const existingUser = await prisma.user.findUnique({
+        where: { email: account.userInfo.email! },
+      });
+
+      console.log('EXISITING USER======', existingUser);
+
+      if (!existingUser) {
+        console.log('====Create user========');
+
+        const user = await prisma.user.create({
+          data: {
+            name: account.userInfo.name,
+            email: account.userInfo.email,
+            locale: account.userInfo.locale,
+            givenName: account.userInfo.given_name,
+            familyName: account.userInfo.family_name,
+            picture: account.userInfo.picture,
+          },
+        });
+
+        // @ts-ignore Logs the user in by setting a cookie
+        req.session.userId = user.id;
+
+        res.status(200).json({ user });
+      } else {
+        console.log('======LOGIN USER======');
+        // @ts-ignore Logs the user in by setting a cookie
+        req.session.userId = existingUser.id;
+
+        console.log('LOGIN SESSION=======', req.session);
+
+        res.status(200).json({ user: existingUser });
+      }
+      // req.session = user?.id;
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).send('error');
+    }
+  });
 
   await apolloServer.start();
 

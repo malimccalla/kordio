@@ -8,6 +8,8 @@ import { deleteAllSessionsByUserId } from '../../util/deleteAllSessionsByUserId'
 const resolvers: Resolvers = {
   Query: {
     me: async (_, __, { prisma, session }) => {
+      console.log('ME SESSION ===', session);
+
       if (!session.userId) return null;
 
       return prisma.user.findUnique({ where: { id: session.userId } });

@@ -1,4 +1,6 @@
+import axios from 'axios';
 import type { NextPage } from 'next';
+import { useEffect, useState } from 'react';
 
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
@@ -6,6 +8,25 @@ import Text from '../components/Text';
 import styled from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
+  const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
+  const [googleAuthError, setGoogleAuthError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getGoogleAuthUrl = async () => {
+      const res = await axios.get(
+        `http://localhost:4000/auth/google?redirect=/`
+      );
+
+      if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
+        setGoogleAuthError(true);
+      } else {
+        setGoogleAuthUrl(res.data.authUrl);
+      }
+    };
+
+    getGoogleAuthUrl();
+  }, []);
+
   return (
     <Page title="Kordio – The #1 Place for music industry contacts and resources">
       <Banner />
@@ -15,7 +36,7 @@ const Home: NextPage = ({ me }: any) => {
           {!me && (
             <ButtonNav>
               <SubmitResourceButton>Login</SubmitResourceButton>
-              <AuthButton>Sign up</AuthButton>
+              <AuthButton href={googleAuthUrl!}>Sign up</AuthButton>
             </ButtonNav>
           )}
           {me && (
@@ -33,14 +54,13 @@ const Home: NextPage = ({ me }: any) => {
         </Header>
         <Main>
           <Title>The #1 Place for Music Industry Contacts & Resources</Title>
-          <Refer>
+          {/* <Refer>
             (but{' '}
             <Span onClick={() => alert('TODO: Implement referral system')}>
               don&apos;t tell anyone &rarr;
             </Span>{' '}
             🤫)
-          </Refer>
-
+          </Refer> */}
           <SearchSection>
             <Popover />
             <TrendingSearches>
@@ -189,6 +209,7 @@ const Grid = styled.div`
 
 const CardTitle = styled.h2`
   font-size: 2.2rem;
+  color: white; //${(props) => props.theme.colors.primary};
 `;
 
 const CardDescription = styled.p`
@@ -258,7 +279,7 @@ const Span = styled.span`
   }
 `;
 
-const AuthButton = styled.button`
+const AuthButton = styled.a`
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.black};
   font-weight: 500;
@@ -324,6 +345,7 @@ const Refer = styled.p`
 
 const SearchSection = styled.div`
   max-width: 64rem;
+  margin-top: 5rem;
   width: 100%;
 `;
 
