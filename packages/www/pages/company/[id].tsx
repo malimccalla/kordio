@@ -1,4 +1,6 @@
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { GetServerSideProps, NextPage } from 'next';
+import { useRef } from 'react';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
@@ -6,10 +8,29 @@ import { GET_COMPANY_QUERY } from '../../data/companies';
 import styled, { media, theme } from '../../styles';
 
 const CompanyPage: NextPage = ({ data: { company } }: any) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const rotateX = useTransform(y, [-200, 200], [60, -60]);
+  const rotateY = useTransform(x, [-200, 200], [-60, 60]);
+
   return (
     <Page title="Contact">
       <Container>
-        <ContactCard>
+        <ContactCard
+          style={{
+            x,
+            y,
+            rotateX,
+            rotateY,
+            z: 10,
+          }}
+          drag={true}
+          dragElastic={0.08}
+          whileHover="dragging"
+          whileTap="dragging"
+          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+        >
           <CardHeader>
             <Picture>
               <Text fontSize="8rem" fontWeight="700" color="#999999">
@@ -29,9 +50,6 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
                 <SaveContactButton>
                   <Text fontSize="1.8rem">Save</Text>
                 </SaveContactButton>
-                {/* <SubmitButton>
-                  <Text fontSize="1.8rem">Submit Music</Text>
-                </SubmitButton> */}
               </CTAButtons>
             </HeaderRight>
           </CardHeader>
@@ -111,11 +129,12 @@ const CTAButtons = styled.div`
 `;
 
 const SaveContactButton = styled.button`
-  width: 14rem;
-  height: 4rem;
+  width: 12rem;
+  height: 3.8rem;
   border-radius: 1000px;
   display: flex;
   align-items: center;
+  border: 3px solid ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.primary};
   justify-content: center;
   color: ${(props) => props.theme.colors.black};
@@ -123,6 +142,8 @@ const SaveContactButton = styled.button`
 
   &:hover {
     cursor: pointer;
+    color: white;
+    background-color: transparent;
   }
 `;
 
@@ -217,7 +238,7 @@ const HeaderRight = styled.div`
   justify-content: space-around;
 `;
 
-const Picture = styled.div`
+const Picture = styled(motion.div)`
   min-height: 12rem;
   min-width: 12rem;
   display: flex;
@@ -227,7 +248,7 @@ const Picture = styled.div`
   background-image: linear-gradient(112deg, #eaeaea 0%, #505050 100%);
 `;
 
-const ContactCard = styled.div`
+const ContactCard = styled(motion.div)`
   position: relative;
   overflow: scroll;
   width: 90rem;
@@ -263,6 +284,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  perspective: 2400;
+  width: 100%;
   height: calc(100vh - 11rem);
 `;
 
