@@ -73,6 +73,8 @@ const GlobalStyles = createGlobalStyle`
 
   .ais-SearchBox-input {
     width: 100%;
+    background-color: ${theme.colors.black};
+    color: white;
   }
 `;
 

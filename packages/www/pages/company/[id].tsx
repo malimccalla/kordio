@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import Page from '../../components/Page';
 import Text from '../../components/Text';
 import { GET_COMPANY_QUERY } from '../../data/companies';
-import styled, { media } from '../../styles';
+import styled, { media, theme } from '../../styles';
 
 const CompanyPage: NextPage = ({ data: { company } }: any) => {
   return (
@@ -12,7 +12,7 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
         <ContactCard>
           <CardHeader>
             <Picture>
-              <Text fontSize="8rem" fontWeight="700" color="#999">
+              <Text fontSize="8rem" fontWeight="700" color="#999999">
                 {company.name[0].toUpperCase()}
               </Text>
             </Picture>
@@ -42,7 +42,9 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
             <Categories>
               {company.categories.map((category: any) => (
                 <Category color={category.color} key={category.id}>
-                  <Text fontSize="1.3rem">{category.name}</Text>
+                  <Text color={theme.colors.black} fontSize="1.3rem">
+                    {category.name}
+                  </Text>
                 </Category>
               ))}
             </Categories>
@@ -230,15 +232,15 @@ const ContactCard = styled.div`
   overflow: scroll;
   width: 90rem;
   height: 57rem;
-  background-color: #111;
+  background-color: #2a2a2a;
   flex-direction: column;
-  border: 1px solid #ccc;
+  border: 1px solid #444444;
   display: flex;
   border-radius: 11px;
   /* justify-content: space-between; */
   padding: 4rem;
-  box-shadow: rgba(207, 207, 207, 0.301) 5px 5px,
-    rgba(239, 239, 239, 0.3) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
+  box-shadow: rgba(44, 44, 44, 0.301) 5px 5px,
+    rgba(114, 114, 114, 0.3) 10px 10px, rgba(219, 219, 219, 0.1) 15px 15px,
     rgba(38, 172, 221, 0.05) 20px 20px, rgba(204, 30, 141, 0.025) 25px 25px;
 
   &::-webkit-scrollbar {

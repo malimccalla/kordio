@@ -14,9 +14,9 @@ import {
 import Link from 'next/link';
 import React, { cloneElement, useState } from 'react';
 import {
+  Configure,
   Hits,
   InstantSearch,
-  RefinementList,
   SearchBox,
 } from 'react-instantsearch-hooks-web';
 
@@ -103,6 +103,9 @@ const Hit = ({ hit }: any) => {
             </Text>
           </ResultImage>
           <TextContainer>
+            <Text fontSize="2rem" fontWeight="500">
+              {hit.name}
+            </Text>
             <Categories>
               {hit.categories.map((category: any) => {
                 return (
@@ -112,9 +115,6 @@ const Hit = ({ hit }: any) => {
                 );
               })}
             </Categories>
-            <Text color={theme.colors.black} fontSize="1.8rem" fontWeight="500">
-              {hit.name}
-            </Text>
           </TextContainer>
         </ResultLeft>
         <ResultRight>
@@ -148,7 +148,10 @@ const SearchPopover = (props: {
               </CancelSection>
             </DialogSearchBox>
             <Results>
-              <Hits onClick={close} hitComponent={Hit} />
+              <HitsContainer>
+                <Configure />
+                <Hits onClick={close} hitComponent={Hit} />
+              </HitsContainer>
             </Results>
           </SearchContainer>
         )}
@@ -168,9 +171,13 @@ const SearchPopover = (props: {
   );
 };
 
+const HitsContainer = styled.div`
+  width: 100%;
+`;
+
 const Categories = styled.div`
   display: flex;
-  padding-bottom: 8px;
+  padding-top: 1rem;
 `;
 
 const Category = styled.div<{ color: string }>`
@@ -189,14 +196,15 @@ const Category = styled.div<{ color: string }>`
 
 const TextContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   flex-direction: column;
-  padding-left: 1rem;
+  padding-left: 2rem;
 `;
 
 const ArrowBox = styled.div`
   height: 3rem;
   width: 3rem;
+  color: ${(props) => props.theme.colors.black};
   border-radius: 3px;
   align-items: center;
   justify-content: center;
@@ -219,7 +227,7 @@ const ResultImage = styled.div<{ src: string }>`
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  background-color: #eee;
+  background: linear-gradient(112deg, #eaeaea 0%, #505050 100%);
 `;
 
 const ResultContainer = styled.div`
@@ -231,53 +239,76 @@ const ResultContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   display: flex;
-  background-color: white;
+  background-color: #2a2a2a;
   border-radius: 7px;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #363636;
 
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   &:hover {
+    background-color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
     color: white;
   }
 
   &:hover ${ArrowBox} {
     display: flex;
-    background-color: ${(props) => props.theme.colors.blue};
+    background-color: white;
+  }
+
+  &:hover ${TextContainer} {
+    display: flex;
+    color: ${(props) => props.theme.colors.black};
+    /* background-color: ${(props) => props.theme.colors.blue}; */
   }
 `;
 
 const Results = styled.div`
-  background-color: rgba(230, 230, 230);
+  background-color: ${(props) => props.theme.colors.black};
   width: 100%;
   max-height: 80vh;
+  border-radius: 11px;
+  display: flex;
+  border: 1px solid #999;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   min-height: 80vh;
+
+  position: relative;
 
   overflow-x: scroll;
 
-  padding: 0.6rem;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  padding: 2rem;
 
   ${media.large`
     max-height: calc(100vh - 7rem);
+    border: none;
   `}
 `;
 
 const SearchContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column; ;
 `;
 
 const CancelSection = styled.div`
-  border-left: 1px solid #dbdbdb;
+  border-left: 1px solid #656565;
   padding-left: 2rem;
 `;
 
 const StyledFloatingOverlay = styled(FloatingOverlay)`
   display: grid;
   padding-top: 5rem;
-  background: rgba(25, 25, 25, 0.6);
+  background: rgba(255, 255, 255, 0.203);
   align-items: flex-start;
   justify-content: center;
 
@@ -289,7 +320,7 @@ const StyledFloatingOverlay = styled(FloatingOverlay)`
 const CloseButton = styled.button`
   background-color: transparent;
   font-size: 1.6rem;
-  color: #999;
+  color: #999999;
   transition: all 0.1s ease;
 
   &:hover {
@@ -325,21 +356,25 @@ const SearchInput = styled(SearchBox)`
 const DialogSearchBox = styled.div`
   display: flex;
   height: 7rem;
-  width: 104rem;
+  width: 94rem;
   align-items: center;
   padding: 0 2rem;
   color: #999999;
   font-size: 1.8rem;
   margin-top: 1rem;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.black};
+  border: 1px solid #999;
+  border-bottom-color: #333;
   border-radius: 11px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 
   ${media.large`
     width: 100vw;
+    border: none;
     margin: 0;
     border-radius: 0px;
+    border-bottom: 1px solid #333;
   `}
 `;
 
@@ -355,15 +390,17 @@ const DummySearchBox = styled.div<{
   align-items: center;
   color: #999999;
   font-size: 1.8rem;
-  background-color: white;
+  border: 1px solid white;
+  background-color: ${(props) => props.theme.colors.black};
   border-radius: ${(props) => props.borderRadius || '11px'};
 
-  box-shadow: ${(props) => props.boxShadow || '0 4px 0 0 rgba(197, 197, 197)'};
+  box-shadow: ${(props) => props.boxShadow || '0 2px 0 0 rgba(197, 197, 197)'};
+
   transition: all 0.3s ease;
 
   &:hover {
     cursor: pointer;
-    background-color: #eaeaea;
+    background-color: #333;
   }
 
   &:hover ${IconBox} {
