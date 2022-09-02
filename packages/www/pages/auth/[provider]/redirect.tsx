@@ -8,11 +8,7 @@ const AuthRedirect = (props: any) => {
   const { account, apolloClient } = props;
 
   useEffect(() => {
-    console.log('USE EFFECT REDIRECT CALL.....');
-
     const googleLoginAndRedirect = async () => {
-      console.log('Running create....');
-
       const { data } = await apolloClient.mutate({
         mutation: LOGIN_MUTATION,
         variables: {
@@ -59,17 +55,13 @@ AuthRedirect.getInitialProps = async (ctx: any) => {
     return { account: null };
   }
 
-  // @ts-ignore: Query does exist on req
   const code = ctx.query.code;
-  // @ts-ignore: Query does exist on req
   const state = ctx.query.state;
 
   try {
     const res = await axios.get(
       `http://localhost:4000/auth/google/callback?code=${code}`
     );
-
-    // console.log('COOKIE====', ctx.req.cookies['ksib']);
 
     if (!res || !res.data || !res.data.account) {
       console.log('No res or data');
