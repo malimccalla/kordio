@@ -5,6 +5,7 @@ type User {
   name: String
   email: String
   picture: String
+  gender: String
 }
 
 type Query {
@@ -25,10 +26,19 @@ input NewUserInput {
   locale: String
   socialId: String
   socialProfileImageUrl: String
+  gender: String
 }
 
 input LoginUserInput {
-  email: String
+  idToken: String
+  email: String!
+  name: String
+  givenName: String
+  familyName: String
+  locale: String
+  socialId: String
+  gender: String
+  socialProfileImageUrl: String
 }
 
 type SignupPayload {

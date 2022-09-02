@@ -69,7 +69,15 @@ export type Error = {
 };
 
 export type LoginUserInput = {
-  email?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
+  familyName?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
+  givenName?: InputMaybe<Scalars['String']>;
+  idToken?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  socialId?: InputMaybe<Scalars['String']>;
+  socialProfileImageUrl?: InputMaybe<Scalars['String']>;
 };
 
 export type LoginUserPayload = {
@@ -105,6 +113,7 @@ export type MutationSignupArgs = {
 export type NewUserInput = {
   email?: InputMaybe<Scalars['String']>;
   familyName?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
   givenName?: InputMaybe<Scalars['String']>;
   locale?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -136,6 +145,7 @@ export type User = {
   __typename?: 'User';
   email?: Maybe<Scalars['String']>;
   familyName?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
   givenName?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
@@ -313,6 +323,7 @@ export type SignupPayloadResolvers<ContextType = Context, ParentType extends Res
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   familyName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   givenName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

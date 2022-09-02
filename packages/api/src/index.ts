@@ -130,39 +130,7 @@ const startServer = async () => {
           .send('Could not get google account from authorization code');
       }
 
-      const existingUser = await prisma.user.findUnique({
-        where: { email: account.userInfo.email! },
-      });
-
-      console.log('EXISITING USER======', existingUser);
-
-      if (!existingUser) {
-        console.log('====Create user========');
-
-        const user = await prisma.user.create({
-          data: {
-            name: account.userInfo.name,
-            email: account.userInfo.email,
-            locale: account.userInfo.locale,
-            givenName: account.userInfo.given_name,
-            familyName: account.userInfo.family_name,
-            picture: account.userInfo.picture,
-          },
-        });
-
-        // @ts-ignore Logs the user in by setting a cookie
-        req.session.userId = user.id;
-
-        res.status(200).json({ user });
-      } else {
-        console.log('======LOGIN USER======');
-        // @ts-ignore Logs the user in by setting a cookie
-        req.session.userId = existingUser.id;
-
-        console.log('LOGIN SESSION=======', req.session);
-
-        res.status(200).json({ user: existingUser });
-      }
+      res.status(200).json({ account });
       // req.session = user?.id;
     } catch (error) {
       console.log(error);

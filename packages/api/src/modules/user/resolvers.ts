@@ -1,15 +1,13 @@
-import { setEngine } from 'crypto';
-
+import { User } from '@prisma/client';
 import { UserInputError } from 'apollo-server-express';
 
+import { verifyGoogleIdToken } from '../../services/googleAuth';
 import { Resolvers } from '../../typings/types';
 import { deleteAllSessionsByUserId } from '../../util/deleteAllSessionsByUserId';
 
 const resolvers: Resolvers = {
   Query: {
     me: async (_, __, { prisma, session }) => {
-      console.log('ME SESSION ===', session);
-
       if (!session.userId) return null;
 
       return prisma.user.findUnique({ where: { id: session.userId } });
@@ -40,8 +38,22 @@ const resolvers: Resolvers = {
       };
     },
     login: async (_, { input }, { session, prisma }) => {
-      if (!input.email) {
-        throw new UserInputError('Must supply email to login');
+      const errorResponse = (path: string, message: string) => ({
+        ok: false,
+        errors: [{ path, message }],
+        user: null,
+        sessionId: null,
+      });
+
+      if (!input.idToken) {
+        return errorResponse('login', 'You must supply the google tokenId');
+      }
+
+      // authenticate google login here....
+      const googleId = await verifyGoogleIdToken(input.idToken);
+
+      if (!googleId) {
+        return errorResponse('login', 'No googleId found from tokenId');
       }
 
       const user = await prisma.user.findUnique({
@@ -49,21 +61,45 @@ const resolvers: Resolvers = {
       });
 
       if (!user) {
+        // User doesn't exist so create one
+        try {
+          const newUser = await prisma.user.create({
+            data: {
+              email: input.email,
+              givenName: input.givenName,
+              name: input.name,
+              familyName: input.familyName,
+              picture: input.socialProfileImageUrl,
+              locale: input.locale,
+              gender: input.gender,
+              userSocial: {
+                create: { provider: 'google', socialId: googleId },
+              },
+            },
+          });
+
+          session.userId = newUser.id;
+        } catch (error) {
+          // Something strnage happens where the prisma create tries to run twice for the same user
+          // This causes it to error out due to the email unique contraint. So we catch it and do nothing..
+          // TODO: Fix auth in general......
+        }
+
         return {
-          ok: false,
-          errors: [{ message: 'No user found with that email', path: 'login' }],
-          user: null,
+          ok: true,
+          errors: null,
+          user,
+        };
+      } else {
+        // Logs the user in by setting a cookie
+        session.userId = user.id;
+
+        return {
+          ok: true,
+          errors: null,
+          user,
         };
       }
-
-      // Logs the user in by setting a cookie
-      session.userId = user.id;
-
-      return {
-        ok: true,
-        errors: null,
-        user,
-      };
     },
     logout: async (_, __, { session, redis }) => {
       const userId = session.userId;
