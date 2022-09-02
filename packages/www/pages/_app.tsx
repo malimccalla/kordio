@@ -40,8 +40,15 @@ class Kordio extends App<Props> {
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <GlobalStyles />
-            {router.pathname !== '/' && <Header />}
-            <Component me={me} {...pageProps}></Component>
+            {router.pathname !== '/' &&
+              router.pathname !== '/auth/[provider]/redirect' && (
+                <Header me={me} />
+              )}
+            <Component
+              me={me}
+              apolloClient={apolloClient}
+              {...pageProps}
+            ></Component>
           </ThemeProvider>
         </ApolloProvider>
       </>

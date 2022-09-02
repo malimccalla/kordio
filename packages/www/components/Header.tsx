@@ -1,10 +1,31 @@
+import axios from 'axios';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import styled, { theme } from '../styles';
 import SearchPopover from './SearchPopover';
 import Text from './Text';
 
-const Header = () => {
+const Header = ({ me }: any) => {
+  const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
+  const [googleAuthError, setGoogleAuthError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getGoogleAuthUrl = async () => {
+      const res = await axios.get(
+        `http://localhost:4000/auth/google?redirect=/`
+      );
+
+      if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
+        setGoogleAuthError(true);
+      } else {
+        setGoogleAuthUrl(res.data.authUrl);
+      }
+    };
+
+    getGoogleAuthUrl();
+  }, []);
+
   return (
     <Container>
       <Main>
@@ -19,17 +40,17 @@ const Header = () => {
           <SearchPopover boxShadow="none" height="5rem" borderRadius="500px" />
         </Left>
         <Right>
-          <AuthButton>
-            <Link href="/register">
-              <Text
-                fontSize="1.4rem"
-                fontWeight="500"
-                color={theme.colors.black}
-              >
-                Sign up
-              </Text>
-            </Link>
-          </AuthButton>
+          {!me && (
+            <ButtonNav>
+              <LoginButton href={googleAuthUrl!}>Login</LoginButton>
+              <AuthButton href={googleAuthUrl!}>Sign up</AuthButton>
+            </ButtonNav>
+          )}
+          {me && (
+            <ButtonNav>
+              <DashboardButton>My Contacts</DashboardButton>
+            </ButtonNav>
+          )}
         </Right>
       </Main>
       <BorderBottom />
@@ -37,17 +58,58 @@ const Header = () => {
   );
 };
 
-const AuthButton = styled.button`
+const ButtonNav = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const AuthButton = styled.a`
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.black};
+  font-weight: 500;
   height: 4.4rem;
   display: flex;
   align-items: center;
+  font-size: 1.4rem;
   border-radius: 5px;
-  padding: 0 2rem;
+  padding: 0 3rem;
   justify-content: center;
 
   transition: all 0.7s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+`;
+
+const DashboardButton = styled.button`
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.black};
+  font-weight: 500;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  padding: 0 3rem;
+  justify-content: center;
+
+  transition: all 0.7s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+`;
+
+const LoginButton = styled.a`
+  margin-right: 2rem;
+  padding: 0 1.4rem;
+  display: flex;
+  align-items: center;
+  background: none;
+  color: white;
 
   &:hover {
     cursor: pointer;

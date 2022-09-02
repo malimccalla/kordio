@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
 import Text from '../components/Text';
+import { getCurrentUser } from '../lib/getCurrentUser';
 import styled from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
@@ -35,7 +36,7 @@ const Home: NextPage = ({ me }: any) => {
           <Logo>Kordio</Logo>
           {!me && (
             <ButtonNav>
-              <SubmitResourceButton>Login</SubmitResourceButton>
+              <LoginButton href={googleAuthUrl!}>Login</LoginButton>
               <AuthButton href={googleAuthUrl!}>Sign up</AuthButton>
             </ButtonNav>
           )}
@@ -251,23 +252,11 @@ const Card = styled.div`
   }
 `;
 
-const UserSection = styled.div`
-  height: 4.4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Header = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 2rem;
   justify-content: space-between;
-`;
-
-const ButtonNav = styled.div`
-  display: flex;
-  flex-direction: row;
 `;
 
 const Span = styled.span`
@@ -277,6 +266,11 @@ const Span = styled.span`
     text-decoration: underline;
     cursor: pointer;
   }
+`;
+
+const ButtonNav = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const AuthButton = styled.a`
@@ -319,15 +313,13 @@ const DashboardButton = styled.button`
   }
 `;
 
-const SubmitResourceButton = styled.button`
+const LoginButton = styled.a`
   margin-right: 2rem;
   padding: 0 1.4rem;
   display: flex;
   align-items: center;
   background: none;
   color: white;
-
-  transition: all 0.7s ease;
 
   &:hover {
     cursor: pointer;

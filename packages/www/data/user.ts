@@ -11,3 +11,18 @@ export const ME_QUERY = gql`
     }
   }
 `;
+
+export const LOGIN_MUTATION = gql`
+  mutation LoginUserViaGoogle($input: LoginUserInput!) {
+    login(input: $input) {
+      ok
+      errors {
+        message
+        path
+      }
+      user {
+        id
+      }
+    }
+  }
+`;
