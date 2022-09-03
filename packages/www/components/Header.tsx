@@ -48,7 +48,7 @@ const Header = ({ me }: any) => {
           )}
           {me && (
             <ButtonNav>
-              <DashboardButton>My Contacts</DashboardButton>
+              <DashboardButton>Dashboard</DashboardButton>
             </ButtonNav>
           )}
         </Right>

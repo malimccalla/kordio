@@ -42,7 +42,7 @@ const Home: NextPage = ({ me }: any) => {
           )}
           {me && (
             <ButtonNav>
-              <DashboardButton>My Contacts</DashboardButton>
+              <DashboardButton>Dashboard</DashboardButton>
               {/* <Divider />
               <UserSection>
                 <Avatar />
