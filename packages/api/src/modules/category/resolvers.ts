@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
         include: { company: true },
       });
 
-      return res.map((data) => data.company);
+      return res.map((data: any) => data.company);
     },
   },
 };

@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import { UserInputError } from 'apollo-server-express';
 
 import { verifyGoogleIdToken } from '../../services/googleAuth';

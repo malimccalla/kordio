@@ -51,7 +51,7 @@ const resolvers: Resolvers = {
         include: { category: true },
       });
 
-      return res.map((data) => data.category);
+      return res.map((data: any) => data.category);
     },
   },
 };

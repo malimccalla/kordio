@@ -12,7 +12,7 @@
     "dev": "nodemon src/index.ts",
     "gen:types": "graphql-codegen",
     "studio": "npx prisma studio",
-    "build": "npx tsc"
+    "build": "rimraf dist && tsc && copyfiles -u 1 src/**/*.graphql dist"
   },
   "prisma": {
     "seed": "ts-node src/prisma/seeds/index.ts",
@@ -51,6 +51,7 @@
     "@types/node": "^18.7.6",
     "@types/uuid": "^8.3.4",
     "concurrently": "^7.3.0",
+    "copyfiles": "^2.4.1",
     "nodemon": "^2.0.19",
     "prisma": "^4.2.1",
     "ts-node": "^10.9.1",

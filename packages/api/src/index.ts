@@ -28,7 +28,6 @@ const startServer = async () => {
   const env = process.env.NODE_ENV;
   const frontendHost = process.env.FRONTEND_HOST;
   const deploymentEnv = process.env.DEPLOY_ENV;
-  // Port is set to 8080 in test environments
   const port = process.env.PORT || '4000';
 
   if (!sessionSecret) {

@@ -1,5 +1,3 @@
-import { Prisma } from '@prisma/client';
-
 import * as categories from './categories';
 import { distributionAndMonetisationCompanies } from './companies/distributionAndMonetisation';
 import { jobsTrainingAndCareersCompanies } from './companies/jobsTrainingAndCareers';
@@ -81,5 +79,4 @@ const dataToinsert = [
   ...pressAndPR,
 ];
 
-export const categoriesOnCompanies: Prisma.Enumerable<Prisma.CategoriesOnCompaniesCreateManyInput> =
-  dataToinsert;
+export const categoriesOnCompanies = dataToinsert;
