@@ -12,10 +12,10 @@ docker build \
   -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA \
   -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest \
   -f ./docker/${PACKAGE}/Dockerfile \
-  --build-arg=API_ENDPOINT=https://api-md7qu4mnwq-nw.a.run.app \
+  --build-arg=API_ENDPOINT=https://api-staging-md7qu4mnwq-nw.a.run.app \
   --platform linux/amd64 .
 
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest
 
-# gcloud run deploy --image=$REGISTRY/$DEPLOY_ENV/$PACKAGE:latest --vpc-connector=$DEPLOY_ENV --max-instances=35 --min-instances=0
+gcloud run deploy www-staging --image $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA --region europe-west2

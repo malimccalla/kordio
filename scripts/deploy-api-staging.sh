@@ -13,4 +13,4 @@ docker build -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA -t $REGISTRY/$DEPLOY_ENV/$PA
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest
 
-# gcloud run deploy --image=$REGISTRY/$DEPLOY_ENV/$PACKAGE:latest --vpc-connector=$DEPLOY_ENV --max-instances=35 --min-instances=0
+gcloud run deploy api --image $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA --region europe-west2
