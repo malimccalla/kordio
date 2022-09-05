@@ -12,6 +12,9 @@ RUN yarn install
 
 COPY ./packages/www/ ./packages/www/
 
+ARG API_ENDPOINT
+ENV NEXT_PUBLIC_API_ENDPOINT=$API_ENDPOINT
+
 RUN yarn --cwd packages/www run build
 
 ## RUN PHASE ##

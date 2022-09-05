@@ -2,6 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { apiEndpoint } from '../lib/constants';
 import styled, { theme } from '../styles';
 import SearchPopover from './SearchPopover';
 import Text from './Text';
@@ -12,9 +13,7 @@ const Header = ({ me }: any) => {
 
   useEffect(() => {
     const getGoogleAuthUrl = async () => {
-      const res = await axios.get(
-        `https://api-md7qu4mnwq-nw.a.run.app/auth/google?redirect=/`
-      );
+      const res = await axios.get(`${apiEndpoint}/auth/google?redirect=/`);
 
       if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
         setGoogleAuthError(true);

@@ -149,9 +149,7 @@ const startServer = async () => {
   });
 
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
-  console.log(
-    `🚀 Server ready at https://api-md7qu4mnwq-nw.a.run.app${apolloServer.graphqlPath}`
-  );
+  console.log(`🚀 Server ready at ${apolloServer.graphqlPath}`);
 };
 
 startServer();

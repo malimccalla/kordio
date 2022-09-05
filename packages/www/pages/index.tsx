@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
 import Text from '../components/Text';
+import { apiEndpoint } from '../lib/constants';
 import { getCurrentUser } from '../lib/getCurrentUser';
 import styled from '../styles';
 
@@ -14,9 +15,7 @@ const Home: NextPage = ({ me }: any) => {
 
   useEffect(() => {
     const getGoogleAuthUrl = async () => {
-      const res = await axios.get(
-        `https://api-md7qu4mnwq-nw.a.run.app/auth/google?redirect=/`
-      );
+      const res = await axios.get(`${apiEndpoint}/auth/google?redirect=/`);
 
       if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
         setGoogleAuthError(true);

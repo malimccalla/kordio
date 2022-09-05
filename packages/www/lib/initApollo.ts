@@ -6,7 +6,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-const apiEndpoint = 'https://api-md7qu4mnwq-nw.a.run.app';
+import { apiEndpoint } from './constants';
+
 // const deploymentEnv = 'development';
 const isBrowser = typeof window !== 'undefined';
 

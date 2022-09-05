@@ -8,7 +8,12 @@ PACKAGE='www'
 DEPLOY_ENV='staging'
 REGISTRY='europe-west2-docker.pkg.dev/kordio'
 
-docker build -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest -f ./docker/${PACKAGE}/Dockerfile --platform linux/amd64 .
+docker build \
+  -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA \
+  -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest \
+  -f ./docker/${PACKAGE}/Dockerfile \
+  --build-arg=API_ENDPOINT=https://api-md7qu4mnwq-nw.a.run.app
+  --platform linux/amd64 .
 
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest
