@@ -12,7 +12,7 @@ docker build \
   -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA \
   -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest \
   -f ./docker/${PACKAGE}/Dockerfile \
-  --build-arg=API_ENDPOINT=https://api-md7qu4mnwq-nw.a.run.app
+  --build-arg=API_ENDPOINT=https://api-md7qu4mnwq-nw.a.run.app \
   --platform linux/amd64 .
 
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA
