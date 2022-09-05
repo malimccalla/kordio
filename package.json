@@ -5,6 +5,8 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "scripts": {
+    "deploy:www:staging": "sh scripts/deploy-www-staging.sh",
+    "deploy:api:staging": "sh scripts/deploy-api-staging.sh",
     "dev": "concurrently \"yarn --cwd ./packages/api dev\" \"yarn --cwd ./packages/www dev\""
   },
   "workspaces": {

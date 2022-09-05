@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
 } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 import connectRedis from 'connect-redis';
@@ -13,6 +14,7 @@ import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import helmet from 'helmet';
+import morgan from 'morgan';
 
 import { redisSessionPrefix, sessionCookieName } from './constants';
 import schema from './schema';
@@ -29,6 +31,7 @@ const prisma = new PrismaClient();
 const startServer = async () => {
   const sessionSecret = process.env.SESSION_SECRET;
   const env = process.env.NODE_ENV;
+  const basePath = env === 'development' ? '/' : '/api/';
   const frontendHost = process.env.FRONTEND_HOST;
   const deploymentEnv = process.env.DEPLOY_ENV;
   const port = process.env.PORT || '4000';
@@ -66,7 +69,6 @@ const startServer = async () => {
     secret: sessionSecret,
     saveUninitialized: false,
     cookie: {
-      domain: frontendHost,
       path: '/',
       httpOnly: true,
       secure: deploymentEnv === 'production' || deploymentEnv === 'staging',
@@ -74,13 +76,21 @@ const startServer = async () => {
     },
   });
 
+  const landingPagePlugin =
+    deploymentEnv === 'production' || deploymentEnv === 'staging'
+      ? ApolloServerPluginLandingPageProductionDefault({ embed: false })
+      : ApolloServerPluginLandingPageLocalDefault({
+          embed: true,
+        });
+
   const apolloServer = new ApolloServer({
     schema,
     context: ({ req }): Context => {
       return { prisma, session: req.session, redis };
     },
-    csrfPrevention: true,
+    csrfPrevention: false, // TODO: Change back to true
     cache: 'bounded',
+    introspection: env === 'development',
     /**
      * What's up with this embed: true option?
      * These are our recommended settings for using AS;
@@ -90,7 +100,7 @@ const startServer = async () => {
      **/
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
-      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+      landingPagePlugin,
     ],
   });
 
@@ -100,8 +110,9 @@ const startServer = async () => {
 
   app.use(cors(corsOptions));
   app.use(sessionMiddleware);
+  app.use(morgan('common'));
 
-  app.get('/auth/google', (req, res) => {
+  app.get(`${basePath}auth/google`, (req, res) => {
     try {
       const url = getGoogleAuthUrl(req.query.referrer as string);
 
@@ -116,7 +127,11 @@ const startServer = async () => {
     }
   });
 
-  app.get('/auth/google/callback', async (req, res) => {
+  app.get(`${basePath}deploy-test`, (req, res) => {
+    res.status(200).send('ok');
+  });
+
+  app.get(`${basePath}auth/google/callback`, async (req, res) => {
     if (!req || !req.query || !req.query.code) {
       res.status(401).send('Unauthorized');
     }
@@ -145,11 +160,12 @@ const startServer = async () => {
 
   apolloServer.applyMiddleware({
     app,
-    path: '/',
+    path: basePath,
     cors: corsOptions,
   });
 
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
+
   console.log(`🚀 Server ready at ${apolloServer.graphqlPath}`);
 };
 

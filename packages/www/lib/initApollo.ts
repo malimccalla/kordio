@@ -6,9 +6,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import { apiEndpoint } from './constants';
+import { apiEndpoint, deploymentEnv } from './constants';
 
-// const deploymentEnv = 'development';
 const isBrowser = typeof window !== 'undefined';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
@@ -29,14 +28,14 @@ function create(
     );
   }
 
-  // const credentials =
-  //   deploymentEnv === 'production' || deploymentEnv === 'staging'
-  //     ? 'same-origin'
-  //     : 'include';
+  const credentials =
+    deploymentEnv === 'production' || deploymentEnv === 'staging'
+      ? 'same-origin'
+      : 'include';
 
   const httpLink = createHttpLink({
     uri: apiEndpoint,
-    credentials: 'include',
+    credentials,
   });
 
   const authLink = setContext((_, { headers }) => {

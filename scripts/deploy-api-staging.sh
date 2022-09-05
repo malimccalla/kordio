@@ -13,4 +13,4 @@ docker build -t $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA -t $REGISTRY/$DEPLOY_ENV/$PA
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA
 docker push $REGISTRY/$DEPLOY_ENV/$PACKAGE:latest
 
-gcloud run deploy api --image $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA --region europe-west2
+gcloud run deploy api-staging --image $REGISTRY/$DEPLOY_ENV/$PACKAGE:$SHA --region europe-west2
