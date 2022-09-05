@@ -14,6 +14,7 @@ async function main() {
   });
   await prisma.categoriesOnCompanies.createMany({
     data: categoriesOnCompanies,
+    skipDuplicates: true,
   });
 }
 
