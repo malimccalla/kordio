@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-const apiEndpoint = 'http://localhost:4000';
+const apiEndpoint = 'https://api-md7qu4mnwq-nw.a.run.app';
 // const deploymentEnv = 'development';
 const isBrowser = typeof window !== 'undefined';
 

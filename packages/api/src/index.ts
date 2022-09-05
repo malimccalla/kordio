@@ -23,6 +23,9 @@ import {
 import { redis } from './services/redis';
 import { Context } from './typings';
 
+// https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#prismaclient-in-serverless-environments
+const prisma = new PrismaClient();
+
 const startServer = async () => {
   const sessionSecret = process.env.SESSION_SECRET;
   const env = process.env.NODE_ENV;
@@ -49,7 +52,6 @@ const startServer = async () => {
   });
 
   const httpServer = http.createServer(app);
-  const prisma = new PrismaClient();
 
   const corsOptions: cors.CorsOptions = {
     origin: [frontendHost],
@@ -148,7 +150,7 @@ const startServer = async () => {
 
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
   console.log(
-    `🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`
+    `🚀 Server ready at https://api-md7qu4mnwq-nw.a.run.app${apolloServer.graphqlPath}`
   );
 };
 

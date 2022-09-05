@@ -29,14 +29,16 @@ COPY --from=builder /app/packages/api/package.json ./packages/api/
 
 RUN yarn install --production
 
-COPY --from=builder /app/packages/api/dist ./packages/api/dist
+COPY --from=builder /app/packages/api/dist ./packages/api/src
 
-# ormconfig.json needs to be in the root of the project to register correctly
-# COPY --from=builder /app/packages/api/dist/ormconfig.json ./ormconfig.json
+# Prisma needs to be here to run migraitons. For whatever reason src doesnt exist in dist
+# COPY --from=builder /app/packages/api/src/prisma ./packages/api/dist/src/prisma
 
 ENV NODE_ENV production
 EXPOSE 4000
 
-# europe-west2-docker.pkg.dev/kordio/staging/api
+WORKDIR /app/packages/api
 
-CMD ["node", "packages/api/dist/index.js"]
+RUN echo $(ls -1 packages/api)
+
+CMD ["yarn", "run", "migrate:start:prod"]

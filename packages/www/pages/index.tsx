@@ -15,7 +15,7 @@ const Home: NextPage = ({ me }: any) => {
   useEffect(() => {
     const getGoogleAuthUrl = async () => {
       const res = await axios.get(
-        `http://localhost:4000/auth/google?redirect=/`
+        `https://api-md7qu4mnwq-nw.a.run.app/auth/google?redirect=/`
       );
 
       if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
