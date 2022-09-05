@@ -66,6 +66,7 @@ const startServer = async () => {
     secret: sessionSecret,
     saveUninitialized: false,
     cookie: {
+      domain: frontendHost,
       path: '/',
       httpOnly: true,
       secure: deploymentEnv === 'production' || deploymentEnv === 'staging',
