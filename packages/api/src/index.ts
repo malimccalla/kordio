@@ -31,7 +31,6 @@ const prisma = new PrismaClient();
 const startServer = async () => {
   const sessionSecret = process.env.SESSION_SECRET;
   const env = process.env.NODE_ENV;
-  const basePath = env === 'development' ? '/' : '/api/';
   const frontendHost = process.env.FRONTEND_HOST;
   const deploymentEnv = process.env.DEPLOY_ENV;
   const port = process.env.PORT || '4000';
@@ -47,6 +46,7 @@ const startServer = async () => {
   }
 
   const app = express();
+  const router = express.Router();
   const RedisStore = connectRedis(session);
 
   const store = new RedisStore({
@@ -112,7 +112,7 @@ const startServer = async () => {
   app.use(sessionMiddleware);
   app.use(morgan('common'));
 
-  app.get(`${basePath}auth/google`, (req, res) => {
+  router.get('/auth/google', (req, res) => {
     try {
       const url = getGoogleAuthUrl(req.query.referrer as string);
 
@@ -127,11 +127,11 @@ const startServer = async () => {
     }
   });
 
-  app.get(`${basePath}deploy-test`, (req, res) => {
+  router.get('/deploy-test', (req, res) => {
     res.status(200).send('ok');
   });
 
-  app.get(`${basePath}auth/google/callback`, async (req, res) => {
+  router.get('/auth/google/callback', async (req, res) => {
     if (!req || !req.query || !req.query.code) {
       res.status(401).send('Unauthorized');
     }
@@ -156,11 +156,15 @@ const startServer = async () => {
     }
   });
 
+  if (env !== 'development') {
+    app.use('/api', router);
+  }
+
   await apolloServer.start();
 
   apolloServer.applyMiddleware({
     app,
-    path: basePath,
+    path: '/',
     cors: corsOptions,
   });
 

@@ -15,7 +15,7 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
   const rotateY = useTransform(x, [-200, 200], [-60, 60]);
 
   return (
-    <Page title="Contact">
+    <Page title={company.name}>
       <Container>
         <ContactCard
           style={{

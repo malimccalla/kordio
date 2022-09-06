@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
-import Text from '../components/Text';
 import { apiEndpoint } from '../lib/constants';
-import { getCurrentUser } from '../lib/getCurrentUser';
 import styled from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
@@ -28,7 +26,7 @@ const Home: NextPage = ({ me }: any) => {
   }, []);
 
   return (
-    <Page title="Kordio – The #1 Place for music industry contacts and resources">
+    <Page title="Kordio – the #1 place to build your team in the music industry">
       <Banner />
       <Container>
         <Header>
