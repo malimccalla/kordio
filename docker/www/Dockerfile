@@ -34,7 +34,7 @@ RUN yarn install --production
 COPY --from=builder /app/packages/www/.next /app/packages/www/.next
 
 # Copy over the public folder
-# COPY --from=builder /app/packages/www/public /app/packages/www/public
+COPY --from=builder /app/packages/www/public /app/packages/www/public
 
 WORKDIR /app/packages/www
 
