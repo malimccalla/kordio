@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client';
+import axios from 'axios';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { NextPage } from 'next';
+import { useEffect, useState } from 'react';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
@@ -10,9 +12,27 @@ import {
   SAVE_COMPANY_MUTATION,
 } from '../../data/companies';
 import { ME_QUERY } from '../../data/user';
+import { apiEndpoint } from '../../lib/constants';
 import styled, { media, theme } from '../../styles';
 
-const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
+const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
+  const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
+  const [googleAuthError, setGoogleAuthError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getGoogleAuthUrl = async () => {
+      const res = await axios.get(`${apiEndpoint}/auth/google?redirect=/`);
+
+      if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
+        setGoogleAuthError(true);
+      } else {
+        setGoogleAuthUrl(res.data.authUrl);
+      }
+    };
+
+    getGoogleAuthUrl();
+  }, []);
+
   const { data, loading } = useQuery(IS_COMPANY_SAVED_BY_USER_QUERY, {
     variables: { where: { id: company.id } },
   });
@@ -77,25 +97,34 @@ const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
                 {company.name}
               </Text>
               <CTAButtons>
-                {loading && initIsSaved && (
+                {!me && (
+                  <a target="_blank" rel="noreferrer" href={googleAuthUrl!}>
+                    <SaveButton onClick={() => null}>
+                      <Text fontSize="1.8rem">Save</Text>
+                    </SaveButton>
+                  </a>
+                )}
+                {me && loading && initIsSaved && (
                   <UnsaveButton onClick={() => console.log('unsave')}>
                     <Text fontSize="1.8rem">Saved</Text>
                   </UnsaveButton>
                 )}
-                {loading && !initIsSaved && (
+                {me && loading && !initIsSaved && (
                   <SaveButton onClick={onSaveCompany}>
                     <Text fontSize="1.8rem">Save</Text>
                   </SaveButton>
                 )}
-                {!data || !data.isCompanySavedByUser ? (
-                  <SaveButton onClick={onSaveCompany}>
-                    <Text fontSize="1.8rem">Save</Text>
-                  </SaveButton>
-                ) : (
-                  <UnsaveButton onClick={() => console.log('unsave')}>
-                    <Text fontSize="1.8rem">Saved</Text>
-                  </UnsaveButton>
-                )}
+                {me ? (
+                  !data || !data.isCompanySavedByUser ? (
+                    <SaveButton onClick={onSaveCompany}>
+                      <Text fontSize="1.8rem">Save</Text>
+                    </SaveButton>
+                  ) : (
+                    <UnsaveButton onClick={() => console.log('unsave')}>
+                      <Text fontSize="1.8rem">Saved</Text>
+                    </UnsaveButton>
+                  )
+                ) : null}
               </CTAButtons>
             </HeaderRight>
           </CardHeader>
