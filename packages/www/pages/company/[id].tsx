@@ -1,6 +1,5 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { GetServerSideProps, NextPage } from 'next';
-import { useRef } from 'react';
+import { NextPage } from 'next';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
@@ -14,22 +13,19 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
   const rotateX = useTransform(y, [-200, 200], [60, -60]);
   const rotateY = useTransform(x, [-200, 200], [-60, 60]);
 
+  const contactCardStyle = { x, y, rotateX, rotateY, z: 10 };
+  const dragConstraints = { top: 0, bottom: 0, left: 0, right: 0 };
+
   return (
     <Page title={company.name}>
       <Container>
         <ContactCard
-          style={{
-            x,
-            y,
-            rotateX,
-            rotateY,
-            z: 10,
-          }}
+          style={contactCardStyle}
           drag={true}
           dragElastic={0.08}
           whileHover="dragging"
           whileTap="dragging"
-          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          dragConstraints={dragConstraints}
         >
           <CardHeader>
             <Picture>
@@ -47,9 +43,9 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
                 {company.name}
               </Text>
               <CTAButtons>
-                <SaveContactButton>
+                <SaveButton>
                   <Text fontSize="1.8rem">Save</Text>
-                </SaveContactButton>
+                </SaveButton>
               </CTAButtons>
             </HeaderRight>
           </CardHeader>
@@ -128,7 +124,7 @@ const CTAButtons = styled.div`
   display: flex;
 `;
 
-const SaveContactButton = styled.button`
+const SaveButton = styled.button`
   width: 12rem;
   height: 3.8rem;
   border-radius: 1000px;

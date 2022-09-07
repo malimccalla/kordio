@@ -133,6 +133,7 @@ export type Query = {
   categories: Array<Category>;
   companies?: Maybe<Array<Maybe<Company>>>;
   company?: Maybe<Company>;
+  isCompanySavedByUser: Scalars['Boolean'];
   me?: Maybe<User>;
 };
 
@@ -141,8 +142,12 @@ export type QueryCompanyArgs = {
   where: CompanyWhereInput;
 };
 
+
+export type QueryIsCompanySavedByUserArgs = {
+  where: CompanyWhereInput;
+};
+
 export type SaveCompanyInput = {
-  __typename?: 'SaveCompanyInput';
   companyId: Scalars['String'];
 };
 
@@ -252,7 +257,7 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   NewUserInput: NewUserInput;
   Query: ResolverTypeWrapper<{}>;
-  SaveCompanyInput: ResolverTypeWrapper<SaveCompanyInput>;
+  SaveCompanyInput: SaveCompanyInput;
   SaveCompanyPayload: ResolverTypeWrapper<SaveCompanyPayload>;
   SignupPayload: ResolverTypeWrapper<SignupPayload>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -335,12 +340,8 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   categories?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
   companies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, RequireFields<QueryCompanyArgs, 'where'>>;
+  isCompanySavedByUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<QueryIsCompanySavedByUserArgs, 'where'>>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-};
-
-export type SaveCompanyInputResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SaveCompanyInput'] = ResolversParentTypes['SaveCompanyInput']> = {
-  companyId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SaveCompanyPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SaveCompanyPayload'] = ResolversParentTypes['SaveCompanyPayload']> = {
@@ -376,7 +377,6 @@ export type Resolvers<ContextType = Context> = {
   LoginUserPayload?: LoginUserPayloadResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  SaveCompanyInput?: SaveCompanyInputResolvers<ContextType>;
   SaveCompanyPayload?: SaveCompanyPayloadResolvers<ContextType>;
   SignupPayload?: SignupPayloadResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

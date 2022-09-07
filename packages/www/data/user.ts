@@ -26,3 +26,15 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+export const SAVE_COMPANY_MUTATION = gql`
+  mutation ($input: SaveCompanyInput!) {
+    saveCompany(input: $input) {
+      ok
+      errors {
+        message
+        path
+      }
+    }
+  }
+`;

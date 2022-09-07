@@ -24,6 +24,17 @@ const resolvers: Resolvers = {
 
       return null;
     },
+    isCompanySavedByUser: async (_, { where }, { prisma, session }) => {
+      if (!session.userId || !where.id) return false;
+
+      const isSaved = await prisma.usersSavedCompanies.findUnique({
+        where: {
+          companyId_userId: { companyId: where.id, userId: session.userId },
+        },
+      });
+
+      return !!isSaved;
+    },
   },
   Mutation: {
     createCompany: async (_, { input }, { prisma }) => {

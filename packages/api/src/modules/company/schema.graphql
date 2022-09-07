@@ -16,6 +16,7 @@ type Company {
 type Query {
   companies: [Company]
   company(where: CompanyWhereInput!): Company
+  isCompanySavedByUser(where: CompanyWhereInput!): Boolean!
 }
 
 type Mutation {
