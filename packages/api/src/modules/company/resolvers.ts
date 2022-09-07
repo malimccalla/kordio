@@ -46,12 +46,18 @@ const resolvers: Resolvers = {
   },
   Company: {
     categories: async (company, _, { prisma }) => {
-      const res = await prisma.categoriesOnCompanies.findMany({
-        where: { companyId: company.id },
-        include: { category: true },
+      const categories = await prisma.category.findMany({
+        where: { companies: { some: { companyId: company.id } } },
       });
 
-      return res.map((data: any) => data.category);
+      return categories;
+    },
+    savedByUsers: async (company, _, { prisma }) => {
+      const users = await prisma.user.findMany({
+        where: { savedCompanies: { some: { companyId: company.id } } },
+      });
+
+      return users;
     },
   },
 };

@@ -111,6 +111,64 @@ const resolvers: Resolvers = {
 
       return false;
     },
+    saveCompany: async (_, { input }, { session, prisma }) => {
+      const errorRes = (message: string) => ({
+        errors: [{ message, path: 'saveCompany' }],
+        ok: false,
+      });
+
+      if (!session.userId) {
+        return errorRes('You must be logged in to save a company');
+      }
+
+      if (!input.companyId) {
+        return errorRes('companyId required');
+      }
+
+      const company = await prisma.company.findUnique({
+        where: { id: input.companyId },
+      });
+
+      if (!company) {
+        return errorRes(`Could not find company with ID: ${input.companyId}`);
+      }
+
+      const alreadySaved = await prisma.usersSavedCompanies.findUnique({
+        where: {
+          companyId_userId: { companyId: company.id, userId: session.userId },
+        },
+      });
+
+      if (alreadySaved) {
+        return errorRes('You have already saved this company');
+      }
+
+      try {
+        await prisma.usersSavedCompanies.create({
+          data: {
+            userId: session.userId,
+            companyId: company.id,
+          },
+        });
+
+        return {
+          ok: true,
+        };
+      } catch (error) {
+        console.log(error);
+
+        return errorRes('Unable to save company');
+      }
+    },
+  },
+  User: {
+    savedCompanies: async (user, __, { prisma }) => {
+      const companies = await prisma.company.findMany({
+        where: { savedByUsers: { some: { userId: user.id } } },
+      });
+
+      return companies;
+    },
   },
 };
 

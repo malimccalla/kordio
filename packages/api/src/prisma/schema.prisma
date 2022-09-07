@@ -71,10 +71,11 @@ model CategoriesOnCompanies {
 }
 
 model UsersSavedCompanies {
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId String  @map("company_id") // relation scalar field (used in the `@relation` attribute above)
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String  @map("user_id") // relation scalar field (used in the `@relation` attribute above)
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String   @map("company_id") // relation scalar field (used in the `@relation` attribute above)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @map("user_id") // relation scalar field (used in the `@relation` attribute above)
+  savedAt   DateTime @default(now())
 
   @@id([companyId, userId])
   @@map("users_saved_companies")

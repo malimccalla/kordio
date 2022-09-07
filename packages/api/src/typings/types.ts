@@ -33,6 +33,7 @@ export type Company = {
   name?: Maybe<Scalars['String']>;
   note?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
+  savedByUsers?: Maybe<Array<Maybe<User>>>;
   slug?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
 };
@@ -92,6 +93,7 @@ export type Mutation = {
   createCompany: CreateCompanyPayload;
   login: LoginUserPayload;
   logout: Scalars['Boolean'];
+  saveCompany: SaveCompanyPayload;
   signup: SignupPayload;
 };
 
@@ -103,6 +105,11 @@ export type MutationCreateCompanyArgs = {
 
 export type MutationLoginArgs = {
   input: LoginUserInput;
+};
+
+
+export type MutationSaveCompanyArgs = {
+  input: SaveCompanyInput;
 };
 
 
@@ -134,6 +141,17 @@ export type QueryCompanyArgs = {
   where: CompanyWhereInput;
 };
 
+export type SaveCompanyInput = {
+  __typename?: 'SaveCompanyInput';
+  companyId: Scalars['String'];
+};
+
+export type SaveCompanyPayload = {
+  __typename?: 'SaveCompanyPayload';
+  errors?: Maybe<Array<Error>>;
+  ok: Scalars['Boolean'];
+};
+
 export type SignupPayload = {
   __typename?: 'SignupPayload';
   errors?: Maybe<Array<Error>>;
@@ -150,6 +168,7 @@ export type User = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
+  savedCompanies?: Maybe<Array<Maybe<Company>>>;
 };
 
 
@@ -233,6 +252,8 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   NewUserInput: NewUserInput;
   Query: ResolverTypeWrapper<{}>;
+  SaveCompanyInput: ResolverTypeWrapper<SaveCompanyInput>;
+  SaveCompanyPayload: ResolverTypeWrapper<SaveCompanyPayload>;
   SignupPayload: ResolverTypeWrapper<SignupPayload>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
@@ -252,6 +273,8 @@ export type ResolversParentTypes = {
   Mutation: {};
   NewUserInput: NewUserInput;
   Query: {};
+  SaveCompanyInput: SaveCompanyInput;
+  SaveCompanyPayload: SaveCompanyPayload;
   SignupPayload: SignupPayload;
   String: Scalars['String'];
   User: User;
@@ -274,6 +297,7 @@ export type CompanyResolvers<ContextType = Context, ParentType extends Resolvers
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  savedByUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -303,6 +327,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createCompany?: Resolver<ResolversTypes['CreateCompanyPayload'], ParentType, ContextType, RequireFields<MutationCreateCompanyArgs, 'input'>>;
   login?: Resolver<ResolversTypes['LoginUserPayload'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'input'>>;
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  saveCompany?: Resolver<ResolversTypes['SaveCompanyPayload'], ParentType, ContextType, RequireFields<MutationSaveCompanyArgs, 'input'>>;
   signup?: Resolver<ResolversTypes['SignupPayload'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'input'>>;
 };
 
@@ -311,6 +336,17 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   companies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, RequireFields<QueryCompanyArgs, 'where'>>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+};
+
+export type SaveCompanyInputResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SaveCompanyInput'] = ResolversParentTypes['SaveCompanyInput']> = {
+  companyId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SaveCompanyPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SaveCompanyPayload'] = ResolversParentTypes['SaveCompanyPayload']> = {
+  errors?: Resolver<Maybe<Array<ResolversTypes['Error']>>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SignupPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SignupPayload'] = ResolversParentTypes['SignupPayload']> = {
@@ -328,6 +364,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  savedCompanies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Company']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -339,6 +376,8 @@ export type Resolvers<ContextType = Context> = {
   LoginUserPayload?: LoginUserPayloadResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  SaveCompanyInput?: SaveCompanyInputResolvers<ContextType>;
+  SaveCompanyPayload?: SaveCompanyPayloadResolvers<ContextType>;
   SignupPayload?: SignupPayloadResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

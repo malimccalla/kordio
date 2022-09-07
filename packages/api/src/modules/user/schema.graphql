@@ -6,6 +6,7 @@ type User {
   email: String
   picture: String
   gender: String
+  savedCompanies: [Company]
 }
 
 type Query {
@@ -16,6 +17,7 @@ type Mutation {
   signup(input: NewUserInput!): SignupPayload!
   login(input: LoginUserInput!): LoginUserPayload!
   logout: Boolean!
+  saveCompany(input: SaveCompanyInput!): SaveCompanyPayload!
 }
 
 input NewUserInput {
@@ -41,10 +43,19 @@ input LoginUserInput {
   socialProfileImageUrl: String
 }
 
+input SaveCompanyInput {
+  companyId: String!
+}
+
 type SignupPayload {
   ok: Boolean!
   errors: [Error!]
   user: User
+}
+
+type SaveCompanyPayload {
+  ok: Boolean!
+  errors: [Error!]
 }
 
 type LoginUserPayload {

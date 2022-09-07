@@ -156,8 +156,12 @@ const startServer = async () => {
     }
   });
 
+  // In prod we need to prefix requests with /api
+  // {@see} {@link} https://stackoverflow.com/q/73614898/6392640
   if (env !== 'development') {
     app.use('/api', router);
+  } else {
+    app.use('/', router);
   }
 
   await apolloServer.start();
