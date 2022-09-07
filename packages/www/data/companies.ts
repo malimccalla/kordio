@@ -36,3 +36,21 @@ export const GET_COMPANIES_QUERY = gql`
     }
   }
 `;
+
+export const SAVE_COMPANY_MUTATION = gql`
+  mutation ($input: SaveCompanyInput!) {
+    saveCompany(input: $input) {
+      ok
+      errors {
+        message
+        path
+      }
+    }
+  }
+`;
+
+export const IS_COMPANY_SAVED_BY_USER_QUERY = gql`
+  query IsCompanySavedByUser($where: CompanyWhereInput!) {
+    isCompanySavedByUser(where: $where)
+  }
+`;

@@ -1,12 +1,43 @@
+import { useMutation, useQuery } from '@apollo/client';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { NextPage } from 'next';
 
 import Page from '../../components/Page';
 import Text from '../../components/Text';
-import { GET_COMPANY_QUERY } from '../../data/companies';
+import {
+  GET_COMPANY_QUERY,
+  IS_COMPANY_SAVED_BY_USER_QUERY,
+  SAVE_COMPANY_MUTATION,
+} from '../../data/companies';
 import styled, { media, theme } from '../../styles';
 
-const CompanyPage: NextPage = ({ data: { company } }: any) => {
+const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
+  console.log('INIT IS SAVED', initIsSaved);
+
+  const { data, loading } = useQuery(IS_COMPANY_SAVED_BY_USER_QUERY, {
+    variables: { where: { id: company.id } },
+  });
+
+  console.log('DDDDD', data);
+
+  const [saveCompanyMutation] = useMutation(SAVE_COMPANY_MUTATION, {
+    variables: { input: { companyId: company.id } },
+    optimisticResponse: {
+      saveCompany: {
+        __typename: 'SaveCompanyPayload',
+        ok: true,
+        errors: null,
+      },
+    },
+    update: (cache) => {
+      cache.writeQuery({
+        query: IS_COMPANY_SAVED_BY_USER_QUERY,
+        variables: { where: { id: company.id } },
+        data: { isCompanySavedByUser: true },
+      });
+    },
+  });
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -15,6 +46,13 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
 
   const contactCardStyle = { x, y, rotateX, rotateY, z: 10 };
   const dragConstraints = { top: 0, bottom: 0, left: 0, right: 0 };
+
+  const onSaveCompany = async () => {
+    console.log('Save company');
+    const res = await saveCompanyMutation();
+
+    console.log('RES', res);
+  };
 
   return (
     <Page title={company.name}>
@@ -43,9 +81,25 @@ const CompanyPage: NextPage = ({ data: { company } }: any) => {
                 {company.name}
               </Text>
               <CTAButtons>
-                <SaveButton>
-                  <Text fontSize="1.8rem">Save</Text>
-                </SaveButton>
+                {loading && initIsSaved && (
+                  <UnsaveButton onClick={() => console.log('unsave')}>
+                    <Text fontSize="1.8rem">Saved</Text>
+                  </UnsaveButton>
+                )}
+                {loading && !initIsSaved && (
+                  <SaveButton onClick={onSaveCompany}>
+                    <Text fontSize="1.8rem">Save</Text>
+                  </SaveButton>
+                )}
+                {!data || !data.isCompanySavedByUser ? (
+                  <SaveButton onClick={onSaveCompany}>
+                    <Text fontSize="1.8rem">Save</Text>
+                  </SaveButton>
+                ) : (
+                  <UnsaveButton onClick={() => console.log('unsave')}>
+                    <Text fontSize="1.8rem">Saved</Text>
+                  </UnsaveButton>
+                )}
               </CTAButtons>
             </HeaderRight>
           </CardHeader>
@@ -140,6 +194,25 @@ const SaveButton = styled.button`
     cursor: pointer;
     color: white;
     background-color: transparent;
+  }
+`;
+
+const UnsaveButton = styled.button`
+  width: 12rem;
+  height: 3.8rem;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  border: 3px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
+  justify-content: center;
+  color: ${(props) => props.theme.colors.black};
+  transition: all 0.2s ease;
+  color: white;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -293,7 +366,17 @@ CompanyPage.getInitialProps = async (context: any) => {
     variables: { where },
   });
 
-  return { data };
+  const res = await context.apolloClient.query({
+    query: IS_COMPANY_SAVED_BY_USER_QUERY,
+    variables: { where },
+  });
+
+  return {
+    data: {
+      company: data.company,
+      initIsSaved: res.data.isCompanySavedByUser,
+    },
+  };
 };
 
 export default CompanyPage;
