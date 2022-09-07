@@ -10,6 +10,7 @@ import {
   GET_COMPANY_QUERY,
   IS_COMPANY_SAVED_BY_USER_QUERY,
   SAVE_COMPANY_MUTATION,
+  UNSAVE_COMPANY_MUTATION,
 } from '../../data/companies';
 import { ME_QUERY } from '../../data/user';
 import { apiEndpoint } from '../../lib/constants';
@@ -57,6 +58,26 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
     },
   });
 
+  const [unsaveCompanyMutation] = useMutation(UNSAVE_COMPANY_MUTATION, {
+    variables: { input: { companyId: company.id } },
+    optimisticResponse: {
+      saveCompany: {
+        __typename: 'SaveCompanyPayload',
+        ok: true,
+        errors: null,
+      },
+    },
+    refetchQueries: [{ query: ME_QUERY }],
+    awaitRefetchQueries: true,
+    update: (cache) => {
+      cache.writeQuery({
+        query: IS_COMPANY_SAVED_BY_USER_QUERY,
+        variables: { where: { id: company.id } },
+        data: { isCompanySavedByUser: false },
+      });
+    },
+  });
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -68,6 +89,10 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
 
   const onSaveCompany = async () => {
     await saveCompanyMutation();
+  };
+
+  const onUnsaveCompany = async () => {
+    await unsaveCompanyMutation();
   };
 
   return (
@@ -105,7 +130,7 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
                   </a>
                 )}
                 {me && loading && initIsSaved && (
-                  <UnsaveButton onClick={() => console.log('unsave')}>
+                  <UnsaveButton onClick={onUnsaveCompany}>
                     <Text fontSize="1.8rem">Saved</Text>
                   </UnsaveButton>
                 )}
@@ -120,7 +145,7 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
                       <Text fontSize="1.8rem">Save</Text>
                     </SaveButton>
                   ) : (
-                    <UnsaveButton onClick={() => console.log('unsave')}>
+                    <UnsaveButton onClick={onUnsaveCompany}>
                       <Text fontSize="1.8rem">Saved</Text>
                     </UnsaveButton>
                   )
@@ -217,8 +242,6 @@ const SaveButton = styled.button`
 
   &:hover {
     cursor: pointer;
-    color: white;
-    background-color: transparent;
   }
 `;
 
