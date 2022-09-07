@@ -95,6 +95,7 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   saveCompany: SaveCompanyPayload;
   signup: SignupPayload;
+  unsaveCompany: SaveCompanyPayload;
 };
 
 
@@ -115,6 +116,11 @@ export type MutationSaveCompanyArgs = {
 
 export type MutationSignupArgs = {
   input: NewUserInput;
+};
+
+
+export type MutationUnsaveCompanyArgs = {
+  input: SaveCompanyInput;
 };
 
 export type NewUserInput = {
@@ -334,6 +340,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   saveCompany?: Resolver<ResolversTypes['SaveCompanyPayload'], ParentType, ContextType, RequireFields<MutationSaveCompanyArgs, 'input'>>;
   signup?: Resolver<ResolversTypes['SignupPayload'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'input'>>;
+  unsaveCompany?: Resolver<ResolversTypes['SaveCompanyPayload'], ParentType, ContextType, RequireFields<MutationUnsaveCompanyArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

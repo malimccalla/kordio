@@ -1,3 +1,5 @@
+import { userInfo } from 'os';
+
 import { UserInputError } from 'apollo-server-express';
 
 import { verifyGoogleIdToken } from '../../services/googleAuth';
@@ -158,6 +160,54 @@ const resolvers: Resolvers = {
         console.log(error);
 
         return errorRes('Unable to save company');
+      }
+    },
+    unsaveCompany: async (_, { input }, { session, prisma }) => {
+      const errorRes = (message: string) => ({
+        errors: [{ message, path: 'unsaveCompany' }],
+        ok: false,
+      });
+
+      if (!session.userId) {
+        return errorRes('You must be logged in to unsave a company');
+      }
+
+      if (!input.companyId) {
+        return errorRes('companyId required');
+      }
+
+      const company = await prisma.company.findUnique({
+        where: { id: input.companyId },
+      });
+
+      if (!company) {
+        return errorRes(`Could not find company with ID: ${input.companyId}`);
+      }
+
+      const alreadySaved = await prisma.usersSavedCompanies.findUnique({
+        where: {
+          companyId_userId: { companyId: company.id, userId: session.userId },
+        },
+      });
+
+      if (!alreadySaved) {
+        return errorRes('This company is not saved');
+      }
+
+      try {
+        await prisma.usersSavedCompanies.delete({
+          where: {
+            companyId_userId: { companyId: company.id, userId: session.userId },
+          },
+        });
+
+        return {
+          ok: true,
+        };
+      } catch (error) {
+        console.log(error);
+
+        return errorRes('Unable to unsave company');
       }
     },
   },

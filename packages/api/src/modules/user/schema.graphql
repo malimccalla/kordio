@@ -18,6 +18,7 @@ type Mutation {
   login(input: LoginUserInput!): LoginUserPayload!
   logout: Boolean!
   saveCompany(input: SaveCompanyInput!): SaveCompanyPayload!
+  unsaveCompany(input: SaveCompanyInput!): SaveCompanyPayload!
 }
 
 input NewUserInput {
