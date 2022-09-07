@@ -66,8 +66,8 @@ const Home: NextPage = ({ me }: any) => {
             <Popover />
             <TrendingSearches>
               Trending: <TrendingSearch>artist management</TrendingSearch>,{' '}
-              <TrendingSearch>radio stations</TrendingSearch>,{' '}
-              <TrendingSearch>music blogs</TrendingSearch>
+              <TrendingSearch>music blogs</TrendingSearch>,{' '}
+              <TrendingSearch>record labels</TrendingSearch>
             </TrendingSearches>
           </SearchSection>
 

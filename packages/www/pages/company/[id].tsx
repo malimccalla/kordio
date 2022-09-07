@@ -13,13 +13,9 @@ import { ME_QUERY } from '../../data/user';
 import styled, { media, theme } from '../../styles';
 
 const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
-  console.log('INIT IS SAVED', initIsSaved);
-
   const { data, loading } = useQuery(IS_COMPANY_SAVED_BY_USER_QUERY, {
     variables: { where: { id: company.id } },
   });
-
-  console.log('DDDDD', data);
 
   const [saveCompanyMutation] = useMutation(SAVE_COMPANY_MUTATION, {
     variables: { input: { companyId: company.id } },
@@ -51,10 +47,7 @@ const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
   const dragConstraints = { top: 0, bottom: 0, left: 0, right: 0 };
 
   const onSaveCompany = async () => {
-    console.log('Save company');
-    const res = await saveCompanyMutation();
-
-    console.log('RES', res);
+    await saveCompanyMutation();
   };
 
   return (
