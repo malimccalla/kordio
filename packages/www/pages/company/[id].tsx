@@ -9,6 +9,7 @@ import {
   IS_COMPANY_SAVED_BY_USER_QUERY,
   SAVE_COMPANY_MUTATION,
 } from '../../data/companies';
+import { ME_QUERY } from '../../data/user';
 import styled, { media, theme } from '../../styles';
 
 const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
@@ -29,6 +30,8 @@ const CompanyPage: NextPage = ({ data: { company, initIsSaved } }: any) => {
         errors: null,
       },
     },
+    refetchQueries: [{ query: ME_QUERY }],
+    awaitRefetchQueries: true,
     update: (cache) => {
       cache.writeQuery({
         query: IS_COMPANY_SAVED_BY_USER_QUERY,
@@ -351,9 +354,11 @@ const ContactCard = styled(motion.div)`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   align-items: center;
   justify-content: center;
   perspective: 2400;
+  z-index: 30; // Greater than header, less than modal
   width: 100%;
   height: calc(100vh - 11rem);
 `;

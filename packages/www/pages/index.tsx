@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import Page from '../components/Page';
@@ -39,7 +40,9 @@ const Home: NextPage = ({ me }: any) => {
           )}
           {me && (
             <ButtonNav>
-              <DashboardButton>Dashboard</DashboardButton>
+              <Link href="/dashboard">
+                <DashboardButton>Dashboard</DashboardButton>
+              </Link>
               {/* <Divider />
               <UserSection>
                 <Avatar />

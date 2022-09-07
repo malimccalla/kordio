@@ -310,6 +310,7 @@ const StyledFloatingOverlay = styled(FloatingOverlay)`
   padding-top: 5rem;
   background: rgba(255, 255, 255, 0.203);
   align-items: flex-start;
+  z-index: 50;
   justify-content: center;
 
   ${media.large`

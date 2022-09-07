@@ -8,6 +8,15 @@ export const ME_QUERY = gql`
       givenName
       familyName
       picture
+      savedCompanies {
+        id
+        name
+        categories {
+          id
+          name
+          color
+        }
+      }
     }
   }
 `;
@@ -22,18 +31,6 @@ export const LOGIN_MUTATION = gql`
       }
       user {
         id
-      }
-    }
-  }
-`;
-
-export const SAVE_COMPANY_MUTATION = gql`
-  mutation ($input: SaveCompanyInput!) {
-    saveCompany(input: $input) {
-      ok
-      errors {
-        message
-        path
       }
     }
   }

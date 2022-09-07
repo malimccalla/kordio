@@ -26,36 +26,55 @@ const Header = ({ me }: any) => {
   }, []);
 
   return (
-    <Container>
-      <Main>
-        <Left>
-          <Link href="/">
-            <Logo>
-              <Text fontSize="3.6rem" fontWeight="700" color="white">
-                Kordio
-              </Text>
-            </Logo>
-          </Link>
-          <SearchPopover boxShadow="none" height="5rem" borderRadius="500px" />
-        </Left>
-        <Right>
-          {!me && (
-            <ButtonNav>
-              <LoginButton href={googleAuthUrl!}>Login</LoginButton>
-              <AuthButton href={googleAuthUrl!}>Sign up</AuthButton>
-            </ButtonNav>
-          )}
-          {me && (
-            <ButtonNav>
-              <DashboardButton>Dashboard</DashboardButton>
-            </ButtonNav>
-          )}
-        </Right>
-      </Main>
-      <BorderBottom />
-    </Container>
+    <>
+      <Container>
+        <Main>
+          <Left>
+            <Link href="/">
+              <Logo>
+                <Text fontSize="3.6rem" fontWeight="700" color="white">
+                  Kordio
+                </Text>
+              </Logo>
+            </Link>
+            <SearchPopover
+              boxShadow="none"
+              height="5rem"
+              borderRadius="500px"
+            />
+          </Left>
+          <Right>
+            {!me && (
+              <ButtonNav>
+                <LoginButton href={googleAuthUrl!}>Login</LoginButton>
+                <AuthButton href={googleAuthUrl!}>Sign up</AuthButton>
+              </ButtonNav>
+            )}
+            {me && (
+              <ButtonNav>
+                <Link href="/dashboard">
+                  <DashboardButton>Dashboard</DashboardButton>
+                </Link>
+              </ButtonNav>
+            )}
+          </Right>
+        </Main>
+        <BorderBottom />
+      </Container>
+      <Spacer />
+    </>
   );
 };
+
+const Spacer = styled.div`
+  width: 100%;
+  height: 10rem;
+`;
+
+// const Fixed = styled.div`
+//   width: 100%;
+//   display: fixed;
+// `;
 
 const ButtonNav = styled.div`
   display: flex;
@@ -174,8 +193,10 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.black};
   flex-direction: column;
   height: 10rem;
-  width: 100%;
   display: flex;
+  z-index: 25;
+  width: 100%;
+  position: fixed;
 `;
 
 const Main = styled.div`

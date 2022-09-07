@@ -73,6 +73,7 @@ const Page = (props: Props) => {
 
 const Main = styled.div<{ padding?: string }>`
   padding: ${(props) => props.padding || '0'};
+
   // margin-bottom: 8rem; /* clear player */
 
   ${media.xsmall`
