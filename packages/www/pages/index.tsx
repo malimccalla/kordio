@@ -9,7 +9,7 @@ import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
 import Text from '../components/Text';
 import { apiEndpoint } from '../lib/constants';
-import styled, { media } from '../styles';
+import styled, { media, theme } from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
   const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
@@ -57,6 +57,14 @@ const Home: NextPage = ({ me }: any) => {
           )}
         </Header>
         <Main>
+          {/* <New>
+            <Text fontSize="1.4rem" textAlign="center" color="white">
+              <span style={{ fontWeight: 500, color: theme.colors.primary }}>
+                New:
+              </span>{' '}
+              Free resource pack
+            </Text>
+          </New> */}
           <Title>The #1 Place to Build Your Team in the Music Industry</Title>
           {/* <Refer>
             (but{' '}
@@ -198,6 +206,13 @@ const Home: NextPage = ({ me }: any) => {
   );
 };
 
+const New = styled.div`
+  padding: 1rem 2rem;
+  border-radius: 5000px;
+  border: 1px solid #666;
+  margin-bottom: 2rem;
+`;
+
 const Logos = styled.div`
   display: flex;
   width: 100%;
@@ -279,6 +294,10 @@ const Banner = styled.div`
 
 const Container = styled.div`
   padding: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: ${(props) => props.theme.colors.black};
 `;
 
@@ -293,7 +312,8 @@ const Avatar = styled.div`
 const Main = styled.main`
   min-height: 100vh;
   padding: 4rem 0;
-  flex: 1;
+  /* flex: 1; */
+  max-width: 108rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -389,6 +409,7 @@ const Card = styled.div`
 
 const Header = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   margin-bottom: 2rem;
   justify-content: space-between;
