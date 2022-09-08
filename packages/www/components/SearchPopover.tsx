@@ -17,6 +17,7 @@ import {
   Configure,
   Hits,
   InstantSearch,
+  RefinementList,
   SearchBox,
 } from 'react-instantsearch-hooks-web';
 
@@ -129,6 +130,8 @@ const SearchPopover = (props: {
   height?: string;
   borderRadius?: string;
   boxShadow?: string;
+  triggerComponent: any;
+  initialValue?: string;
 }) => {
   return (
     <InstantSearch searchClient={searchClient} indexName="dev_companies">
@@ -156,16 +159,7 @@ const SearchPopover = (props: {
           </SearchContainer>
         )}
       >
-        <DummySearchBox
-          boxShadow={props.boxShadow}
-          height={props.height}
-          borderRadius={props.borderRadius}
-        >
-          <IconBox>
-            <SearchIcon size="20px" />
-          </IconBox>
-          <Text paddingLeft="1rem">What are you looking for?</Text>
-        </DummySearchBox>
+        <div>{props.triggerComponent}</div>
       </Dialog>
     </InstantSearch>
   );

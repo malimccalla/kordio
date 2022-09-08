@@ -1,12 +1,15 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { SearchIcon } from '../components/icons';
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
+import Text from '../components/Text';
 import { apiEndpoint } from '../lib/constants';
-import styled from '../styles';
+import styled, { media } from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
   const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
@@ -63,7 +66,16 @@ const Home: NextPage = ({ me }: any) => {
             🤫)
           </Refer> */}
           <SearchSection>
-            <Popover />
+            <Popover
+              triggerComponent={
+                <DummySearchBox>
+                  <IconBox>
+                    <SearchIcon size="20px" />
+                  </IconBox>
+                  <Text paddingLeft="1rem">What are you looking for?</Text>
+                </DummySearchBox>
+              }
+            ></Popover>
             <TrendingSearches>
               Trending: <TrendingSearch>artist management</TrendingSearch>,{' '}
               <TrendingSearch>music blogs</TrendingSearch>,{' '}
@@ -71,51 +83,113 @@ const Home: NextPage = ({ me }: any) => {
             </TrendingSearches>
           </SearchSection>
 
+          <WhoWeWorkWith>
+            <Logos>
+              <Image
+                width="160px"
+                height="60px"
+                alt="bbc"
+                src="/1Xtra.png"
+              ></Image>
+              {/* <Image
+                width="120px"
+                height="60px"
+                alt="bbc"
+                src="/atlantic.svg.png"
+              ></Image> */}
+              <Image width="100px" height="60px" alt="bbc" src="/K.png"></Image>
+              <Image
+                width="200px"
+                height="60px"
+                alt="bbc"
+                src="/warner.png"
+              ></Image>
+              <Image
+                width="160px"
+                height="60px"
+                alt="bbc"
+                src="/decade.png"
+              ></Image>
+            </Logos>
+          </WhoWeWorkWith>
+
           <Grid>
-            <Card>
-              <CardTitle>Radio, Blogs, & Media &rarr;</CardTitle>
-              <CardDescription>
-                Submit your music to tastemakers and brands accross Radio, Blogs
-                & Media.
-              </CardDescription>
-            </Card>
+            <Popover
+              initialValue="Radio, Blogs, & Media"
+              triggerComponent={
+                <Card>
+                  <CardTitle>Radio, Blogs, & Media &rarr;</CardTitle>
+                  <CardDescription>
+                    Submit your music to tastemakers and brands accross Radio,
+                    Blogs & Media.
+                  </CardDescription>
+                </Card>
+              }
+            ></Popover>
 
-            <Card>
-              <CardTitle>Networking & Events &rarr;</CardTitle>
-              <CardDescription>
-                Mingle with industry folk at upcoming events hosted in your area
-              </CardDescription>
-            </Card>
+            <Popover
+              initialValue="Networking & Events"
+              triggerComponent={
+                <Card>
+                  <CardTitle>Networking & Events &rarr;</CardTitle>
+                  <CardDescription>
+                    Mingle with industry folk at upcoming events hosted in your
+                    area
+                  </CardDescription>
+                </Card>
+              }
+            ></Popover>
 
-            <Card>
-              <CardTitle>Fan Engagement &rarr;</CardTitle>
-              <CardDescription>
-                Growth and engagement tips for nurturing a sustainable fanbase
-              </CardDescription>
-            </Card>
+            <Popover
+              initialValue="Fan Engagement"
+              triggerComponent={
+                <Card>
+                  <CardTitle>Fan Engagement &rarr;</CardTitle>
+                  <CardDescription>
+                    Growth and engagement tips for nurturing a sustainable
+                    fanbase
+                  </CardDescription>
+                </Card>
+              }
+            ></Popover>
 
-            <Card>
-              <CardTitle>Record Labels &rarr;</CardTitle>
-              <CardDescription>
-                Contact record label execs and get your music heard by A&Rs!
-              </CardDescription>
-            </Card>
+            <Popover
+              initialValue="Record Labels"
+              triggerComponent={
+                <Card>
+                  <CardTitle>Record Labels &rarr;</CardTitle>
+                  <CardDescription>
+                    Contact record label execs and get your music heard by A&Rs!
+                  </CardDescription>
+                </Card>
+              }
+            ></Popover>
 
-            <Card>
-              <CardTitle>Tools & Technology &rarr;</CardTitle>
-              <CardDescription>
-                Leverage the latest technology to keep up to date with industry
-                trends
-              </CardDescription>
-            </Card>
+            <Popover
+              initialValue="Tools & Technology"
+              triggerComponent={
+                <Card>
+                  <CardTitle>Tools & Technology &rarr;</CardTitle>
+                  <CardDescription>
+                    Leverage the latest technology to keep up to date with
+                    industry trends
+                  </CardDescription>
+                </Card>
+              }
+            ></Popover>
 
-            <Card>
-              <CardTitle>Law & Business &rarr;</CardTitle>
-              <CardDescription>
-                Tips and contacts to help make sense of the legal side of the
-                industry
-              </CardDescription>
-            </Card>
+            <Popover
+              initialValue="Law & Business"
+              triggerComponent={
+                <Card>
+                  <CardTitle>Law & Business &rarr;</CardTitle>
+                  <CardDescription>
+                    Tips and contacts to help make sense of the legal side of
+                    the industry
+                  </CardDescription>
+                </Card>
+              }
+            ></Popover>
           </Grid>
           <AllCategoriesButton>More Categories</AllCategoriesButton>
         </Main>
@@ -123,6 +197,67 @@ const Home: NextPage = ({ me }: any) => {
     </Page>
   );
 };
+
+const Logos = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+`;
+
+const WhoWeWorkWith = styled.div`
+  margin-top: 8rem;
+  width: 100%;
+  display: flex;
+  opacity: 0.7;
+  width: 108rem;
+  flex-direction: column;
+  align-items: center;
+
+  ${media.large`
+    display: none;
+  `}
+`;
+
+const IconBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+
+  transition: all 0.3s ease;
+`;
+
+const DummySearchBox = styled.div<{
+  height?: string;
+  borderRadius?: string;
+  boxShadow?: string;
+}>`
+  height: ${(props) => props.height || '6rem'};
+  display: flex;
+  padding-left: 2rem;
+  width: 100%;
+  align-items: center;
+  color: #999999;
+  font-size: 1.8rem;
+  border: 1px solid white;
+  background-color: ${(props) => props.theme.colors.black};
+  border-radius: ${(props) => props.borderRadius || '11px'};
+
+  box-shadow: ${(props) => props.boxShadow || '0 2px 0 0 rgba(197, 197, 197)'};
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #333;
+  }
+
+  &:hover ${IconBox} {
+    /* transform: rotate(20deg); */
+    transform: scale(1.1);
+  }
+`;
 
 const Banner = styled.div`
   height: 1rem;

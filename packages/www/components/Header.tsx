@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { apiEndpoint } from '../lib/constants';
 import styled, { theme } from '../styles';
+import { SearchIcon } from './icons';
 import SearchPopover from './SearchPopover';
 import Text from './Text';
 
@@ -38,10 +39,15 @@ const Header = ({ me }: any) => {
               </Logo>
             </Link>
             <SearchPopover
-              boxShadow="none"
-              height="5rem"
-              borderRadius="500px"
-            />
+              triggerComponent={
+                <DummySearchBox>
+                  <IconBox>
+                    <SearchIcon size="20px" />
+                  </IconBox>
+                  <Text paddingLeft="1rem">What are you looking for?</Text>
+                </DummySearchBox>
+              }
+            ></SearchPopover>
           </Left>
           <Right>
             {!me && (
@@ -98,6 +104,41 @@ const AuthButton = styled.a`
   &:hover {
     cursor: pointer;
     transform: scale(1.01);
+  }
+`;
+
+const IconBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+
+  transition: all 0.3s ease;
+`;
+
+const DummySearchBox = styled.div`
+  height: 5rem;
+  display: flex;
+  padding-left: 2rem;
+  width: 42rem;
+  align-items: center;
+  color: #999999;
+  font-size: 1.8rem;
+  border: 1px solid white;
+  background-color: ${(props) => props.theme.colors.black};
+  border-radius: 5000px;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #333;
+  }
+
+  &:hover ${IconBox} {
+    /* transform: rotate(20deg); */
+    transform: scale(1.1);
   }
 `;
 
