@@ -96,27 +96,26 @@ const Home: NextPage = ({ me }: any) => {
               <Image
                 width="160px"
                 height="60px"
-                alt="bbc"
+                alt="BBC Radio 1Xtra"
                 src="/1Xtra.png"
               ></Image>
-              {/* <Image
-                width="120px"
-                height="60px"
-                alt="bbc"
-                src="/atlantic.svg.png"
-              ></Image> */}
-              <Image width="100px" height="60px" alt="bbc" src="/K.png"></Image>
               <Image
-                width="200px"
+                width="100px"
                 height="60px"
-                alt="bbc"
+                alt="Kobalt"
+                src="/K.png"
+              ></Image>
+              <Image
+                width="170px"
+                height="60px"
+                alt="Warner Music Group"
                 src="/warner.png"
               ></Image>
               <Image
-                width="160px"
+                width="200px"
                 height="60px"
-                alt="bbc"
-                src="/decade.png"
+                alt="Live Nation"
+                src="/live-nation.png"
               ></Image>
             </Logos>
           </WhoWeWorkWith>
@@ -136,26 +135,25 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Networking & Events"
+              initialValue="Merch & Physical"
               triggerComponent={
                 <Card>
-                  <CardTitle>Networking & Events &rarr;</CardTitle>
+                  <CardTitle>Merch & Physical &rarr;</CardTitle>
                   <CardDescription>
-                    Mingle with industry folk at upcoming events hosted in your
-                    area
+                    Need band T-shirts to sell? Looking to press some vinyl?
                   </CardDescription>
                 </Card>
               }
             ></Popover>
 
             <Popover
-              initialValue="Fan Engagement"
+              initialValue="Press & PR"
               triggerComponent={
                 <Card>
-                  <CardTitle>Fan Engagement &rarr;</CardTitle>
+                  <CardTitle>Press & PR &rarr;</CardTitle>
                   <CardDescription>
-                    Growth and engagement tips for nurturing a sustainable
-                    fanbase
+                    Get expert growth and marketing tips from leading industry
+                    experts
                   </CardDescription>
                 </Card>
               }
@@ -174,7 +172,7 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Tools & Technology"
+              initialValue="Technology"
               triggerComponent={
                 <Card>
                   <CardTitle>Tools & Technology &rarr;</CardTitle>
@@ -199,12 +197,30 @@ const Home: NextPage = ({ me }: any) => {
               }
             ></Popover>
           </Grid>
-          <AllCategoriesButton>More Categories</AllCategoriesButton>
+          <Section>
+            <Text
+              textAlign="center"
+              fontSize="2.2rem"
+              fontWeight="600"
+              color="white"
+            >
+              Get instant and direct access to thousands of music industry
+              contacts and resources.
+            </Text>
+            <AllCategoriesButton>Sign up</AllCategoriesButton>
+          </Section>
         </Main>
       </Container>
     </Page>
   );
 };
+
+const Section = styled.div`
+  display: flex;
+  margin-top: 5rem;
+  align-items: center;
+  flex-direction: column;
+`;
 
 const New = styled.div`
   padding: 1rem 2rem;
@@ -223,7 +239,7 @@ const WhoWeWorkWith = styled.div`
   margin-top: 8rem;
   width: 100%;
   display: flex;
-  opacity: 0.7;
+  opacity: 0.6;
   width: 108rem;
   flex-direction: column;
   align-items: center;
@@ -322,8 +338,8 @@ const Main = styled.main`
 
 const AllCategoriesButton = styled.button`
   height: 5.2rem;
-  width: 18rem;
-  margin-top: 2rem;
+  width: 14rem;
+  margin-top: 3rem;
   font-size: 1.4rem;
   font-weight: 500;
   border-radius: 5px;
@@ -416,7 +432,7 @@ const Header = styled.div`
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.primary};
 
   &:hover {
     text-decoration: underline;

@@ -12,13 +12,14 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import Link from 'next/link';
-import React, { cloneElement, useState } from 'react';
+import React, { cloneElement, useEffect, useState } from 'react';
 import {
   Configure,
   Hits,
   InstantSearch,
   RefinementList,
   SearchBox,
+  useInstantSearch,
 } from 'react-instantsearch-hooks-web';
 
 import { searchClient } from '../lib/searchClient';
@@ -34,14 +35,21 @@ interface Props {
     descriptionId: string;
   }) => React.ReactNode;
   children: JSX.Element;
+  initialValue?: string;
 }
 
 export const Dialog = ({
   render,
   open: passedOpen = false,
+  initialValue,
   children,
 }: Props) => {
   const [open, setOpen] = useState(passedOpen);
+  const { setIndexUiState } = useInstantSearch();
+
+  useEffect(() => {
+    setIndexUiState({ query: initialValue });
+  }, [initialValue, open, children, render, setIndexUiState]);
 
   const { reference, floating, context } = useFloating({
     open,
@@ -136,6 +144,7 @@ const SearchPopover = (props: {
   return (
     <InstantSearch searchClient={searchClient} indexName="dev_companies">
       <Dialog
+        initialValue={props.initialValue}
         render={({ close }) => (
           <SearchContainer>
             <DialogSearchBox>
