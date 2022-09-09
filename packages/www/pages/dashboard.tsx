@@ -21,6 +21,14 @@ const Dashboard = ({ me }: any) => {
 
   return (
     <Page title="Dashboard">
+      {/* <SideNav>
+        <SideHeader>
+          <Text fontSize="2.4rem" fontWeight="500" color="#999">
+            Dashboard
+          </Text>
+        </SideHeader>
+        <SideContent></SideContent>
+      </SideNav> */}
       <Container>
         <Content>
           <Text fontSize="2rem" color="#999">
@@ -81,6 +89,38 @@ const Dashboard = ({ me }: any) => {
   );
 };
 
+const SideContent = styled.div`
+  width: 100%;
+`;
+
+const SideHeader = styled.div`
+  height: 8rem;
+  padding: 2rem;
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #2e2e2e;
+  align-items: center;
+`;
+
+const SideNav = styled.div`
+  height: calc(100vh - 10rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* margin-top: 40rem; */
+  background-color: #1b1b1b;
+  width: 26rem;
+  position: fixed;
+  left: 0;
+`;
+
+const CTAButton = styled.button`
+  height: 7rem;
+  border: 2px solid ${(props) => props.theme.colors.primary};
+  background: none;
+  width: 100%;
+`;
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -105,6 +145,7 @@ const Divider = styled.div`
 const Content = styled.div`
   width: 108rem;
   margin-top: 5rem;
+  /* margin-left: 26rem; */ //enable for side nav
 `;
 
 const Container = styled.div`
