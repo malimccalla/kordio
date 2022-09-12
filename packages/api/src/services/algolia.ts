@@ -16,8 +16,6 @@ if (!algoliaSecretKey) {
 
 const algoliaClient = algoliasearch(algoliaAppId, algoliaSecretKey);
 
-const usersIndex = algoliaClient.initIndex(`${deploymentEnv}_users`);
-
-const releasesIndex = algoliaClient.initIndex(`${deploymentEnv}_releases`);
-
-export { usersIndex, releasesIndex, algoliaClient };
+export const companiesIndex = algoliaClient.initIndex(
+  `${deploymentEnv}_companies`
+);

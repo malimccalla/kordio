@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import slugify from 'slugify';
 
+import { companiesIndex } from '../../services/algolia';
 import { CreateCompanyInput, Resolvers } from '../../typings/types';
 
 const resolvers: Resolvers = {
@@ -64,6 +65,36 @@ const resolvers: Resolvers = {
       };
 
       const company = await prisma.company.create({ data });
+
+      let companyCategoryData = [];
+
+      if (input.primaryCategoryId) {
+        companyCategoryData.push({
+          companyId: company.id,
+          categoryId: input.primaryCategoryId,
+        });
+      }
+
+      if (input.secondaryCategoryId) {
+        companyCategoryData.push({
+          companyId: company.id,
+          categoryId: input.secondaryCategoryId,
+        });
+      }
+
+      if (input.tertiaryCategoryId) {
+        companyCategoryData.push({
+          companyId: company.id,
+          categoryId: input.tertiaryCategoryId,
+        });
+      }
+
+      await Promise.all([
+        prisma.categoriesOnCompanies.createMany({
+          data: companyCategoryData,
+        }),
+        companiesIndex.saveObject(company),
+      ]);
 
       return { ok: true, errors: null, company };
     },
