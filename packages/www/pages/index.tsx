@@ -94,13 +94,13 @@ const Home: NextPage = ({ me }: any) => {
           <WhoWeWorkWith>
             <Logos>
               <Image
-                width="160px"
+                width="150px"
                 height="60px"
                 alt="BBC Radio 1Xtra"
                 src="/1Xtra.png"
               ></Image>
               <Image
-                width="100px"
+                width="90px"
                 height="60px"
                 alt="Kobalt"
                 src="/K.png"
