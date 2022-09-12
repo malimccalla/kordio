@@ -1,4 +1,7 @@
-import { Resolvers } from '../../typings/types';
+import { nanoid } from 'nanoid';
+import slugify from 'slugify';
+
+import { CreateCompanyInput, Resolvers } from '../../typings/types';
 
 const resolvers: Resolvers = {
   Query: {
@@ -47,10 +50,20 @@ const resolvers: Resolvers = {
         };
       }
 
-      const company = await prisma.company.create({
-        // @ts-ignore
-        data: input,
-      });
+      const slug = `${slugify(input.name)}-${nanoid(6)}`;
+
+      const data = {
+        name: input.name,
+        address: input.address,
+        description: input.description,
+        location: input.location,
+        note: input.note,
+        website: input.website,
+        contactEmail: input.website,
+        slug,
+      };
+
+      const company = await prisma.company.create({ data });
 
       return { ok: true, errors: null, company };
     },

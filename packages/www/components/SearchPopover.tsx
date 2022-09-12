@@ -142,7 +142,10 @@ const SearchPopover = (props: {
   initialValue?: string;
 }) => {
   return (
-    <InstantSearch searchClient={searchClient} indexName="dev_companies">
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="development_companies"
+    >
       <Dialog
         initialValue={props.initialValue}
         render={({ close }) => (
