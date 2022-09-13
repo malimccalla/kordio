@@ -172,11 +172,11 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
                 Reviews
               </Text>
             </NavItem>
-            <NavItem active={false}>
+            {/* <NavItem active={false}>
               <Text fontSize="1.6rem" fontWeight="500">
                 Premium Contact
               </Text>
-            </NavItem>
+            </NavItem> */}
           </Nav>
           <CardBody>
             <Categories>

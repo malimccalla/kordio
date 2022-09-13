@@ -21,14 +21,14 @@ const Dashboard = ({ me }: any) => {
 
   return (
     <Page title="Dashboard">
-      {/* <SideNav>
+      <SideNav>
         <SideHeader>
           <Text fontSize="2.4rem" fontWeight="500" color="#999">
             Dashboard
           </Text>
         </SideHeader>
         <SideContent></SideContent>
-      </SideNav> */}
+      </SideNav>
       <Container>
         <Content>
           <Text fontSize="2rem" color="#999">
@@ -145,7 +145,7 @@ const Divider = styled.div`
 const Content = styled.div`
   width: 108rem;
   margin-top: 5rem;
-  /* margin-left: 26rem; */ //enable for side nav
+  margin-left: 26rem; //enable for side nav
 `;
 
 const Container = styled.div`
