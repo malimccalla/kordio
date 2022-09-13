@@ -37,6 +37,8 @@ model Company {
   description  String?
   categories   CategoriesOnCompanies[]
   savedByUsers UsersSavedCompanies[]
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime?
 
   @@map("companies")
 }

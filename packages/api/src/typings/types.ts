@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Context } from './index';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
 };
 
 export type Category = {
@@ -28,6 +29,7 @@ export type Company = {
   address?: Maybe<Scalars['String']>;
   categories?: Maybe<Array<Category>>;
   contactEmail?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
@@ -35,6 +37,7 @@ export type Company = {
   phoneNumber?: Maybe<Scalars['String']>;
   savedByUsers?: Maybe<Array<Maybe<User>>>;
   slug?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['Date']>;
   website?: Maybe<Scalars['String']>;
 };
 
@@ -257,6 +260,7 @@ export type ResolversTypes = {
   CompanyWhereInput: CompanyWhereInput;
   CreateCompanyInput: CreateCompanyInput;
   CreateCompanyPayload: ResolverTypeWrapper<CreateCompanyPayload>;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   Error: ResolverTypeWrapper<Error>;
   LoginUserInput: LoginUserInput;
   LoginUserPayload: ResolverTypeWrapper<LoginUserPayload>;
@@ -278,6 +282,7 @@ export type ResolversParentTypes = {
   CompanyWhereInput: CompanyWhereInput;
   CreateCompanyInput: CreateCompanyInput;
   CreateCompanyPayload: CreateCompanyPayload;
+  Date: Scalars['Date'];
   Error: Error;
   LoginUserInput: LoginUserInput;
   LoginUserPayload: LoginUserPayload;
@@ -303,6 +308,7 @@ export type CompanyResolvers<ContextType = Context, ParentType extends Resolvers
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   categories?: Resolver<Maybe<Array<ResolversTypes['Category']>>, ParentType, ContextType>;
   contactEmail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -310,6 +316,7 @@ export type CompanyResolvers<ContextType = Context, ParentType extends Resolvers
   phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   savedByUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -320,6 +327,10 @@ export type CreateCompanyPayloadResolvers<ContextType = Context, ParentType exte
   ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+  name: 'Date';
+}
 
 export type ErrorResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Error'] = ResolversParentTypes['Error']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -380,6 +391,7 @@ export type Resolvers<ContextType = Context> = {
   Category?: CategoryResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   CreateCompanyPayload?: CreateCompanyPayloadResolvers<ContextType>;
+  Date?: GraphQLScalarType;
   Error?: ErrorResolvers<ContextType>;
   LoginUserPayload?: LoginUserPayloadResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;

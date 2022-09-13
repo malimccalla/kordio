@@ -8,6 +8,8 @@ type Company {
   website: String
   note: String
   description: String
+  createdAt: Date
+  updatedAt: Date
 
   categories: [Category!]
   savedByUsers: [User]
@@ -52,3 +54,5 @@ type Error {
   path: String
   message: String
 }
+
+scalar Date

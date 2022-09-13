@@ -1,4 +1,5 @@
 schema: ./src/schema.ts
+require: 'dotenv/config'
 generates:
   ./src/typings/types.ts:
     config:
