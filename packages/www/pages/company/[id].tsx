@@ -14,11 +14,12 @@ import {
 } from '../../data/companies';
 import { ME_QUERY } from '../../data/user';
 import { apiEndpoint } from '../../lib/constants';
-import styled, { media, theme } from '../../styles';
+import styled, { css, media, theme } from '../../styles';
 
 const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
   const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
   const [googleAuthError, setGoogleAuthError] = useState<boolean>(false);
+  // const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     const getGoogleAuthUrl = async () => {
@@ -107,10 +108,12 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
           dragConstraints={dragConstraints}
         >
           <CardHeader>
-            <Picture>
-              <Text fontSize="8rem" fontWeight="700" color="#999999">
-                {company.name[0].toUpperCase()}
-              </Text>
+            <Picture imageUrl={company.picture}>
+              {!company.picture && (
+                <Text fontSize="8rem" fontWeight="700" color="#999999">
+                  {company.name[0].toUpperCase()}
+                </Text>
+              )}
             </Picture>
             <HeaderRight>
               <Text
@@ -153,10 +156,29 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
               </CTAButtons>
             </HeaderRight>
           </CardHeader>
+          <Nav>
+            <NavItem active={true}>
+              <Text fontSize="1.6rem" fontWeight="500">
+                Overview
+              </Text>
+            </NavItem>
+            <NavItem active={false}>
+              <Text fontSize="1.6rem" fontWeight="500">
+                People
+              </Text>
+            </NavItem>
+            <NavItem active={false}>
+              <Text fontSize="1.6rem" fontWeight="500">
+                Reviews
+              </Text>
+            </NavItem>
+            <NavItem active={false}>
+              <Text fontSize="1.6rem" fontWeight="500">
+                Premium Contact
+              </Text>
+            </NavItem>
+          </Nav>
           <CardBody>
-            <Text fontSize="2.4rem" fontWeight="500" color="white">
-              Overview
-            </Text>
             <Categories>
               {company.categories.map((category: any) => (
                 <Category color={category.color} key={category.id}>
@@ -213,11 +235,38 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
               </Detail>
             </Details>
           </CardBody>
+          {/* {activeTab === 'people' && (
+            <CardBody>
+              <People>
+                <Text color="white">
+                  There is noone currently workign at {company.name}
+                </Text>
+              </People>
+            </CardBody>
+          )} */}
         </ContactCard>
       </Container>
     </Page>
   );
 };
+
+const People = styled.div`
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #464646;
+`;
+
+const Nav = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  height: 6rem;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const Note = styled.div`
   width: 100%;
@@ -318,8 +367,8 @@ const Details = styled.div`
 `;
 
 const CardBody = styled.div`
-  margin-top: 3rem;
   display: flex;
+  margin-top: 3rem;
   flex-direction: column;
 `;
 
@@ -338,7 +387,6 @@ const Category = styled.div<{ color: string }>`
 
 const Categories = styled.div`
   display: flex;
-  margin-top: 2rem;
   float: left;
 `;
 
@@ -355,21 +403,30 @@ const HeaderRight = styled.div`
   justify-content: space-around;
 `;
 
-const Picture = styled(motion.div)`
+const Picture = styled.div<{ imageUrl?: string }>`
   min-height: 12rem;
   min-width: 12rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 2px;
-  background-image: linear-gradient(112deg, #eaeaea 0%, #505050 100%);
+
+  ${(props) =>
+    props.imageUrl
+      ? css`
+          background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAY1BMVEUAAAD5Ox38PB3/PR5xGw3CLhfrOBzPMRiiJhP1Oh33Ox0+DwcrCgU1DAY8DgfFLxcmCQQxDAZDEAhhFwvWMxkJAgEkCQTiNRqcJRKnKBNYFQroNxsdBwM3DQZFEAi5LBYXBQOk0JWEAAACHklEQVR4nO3b3VLCMBBA4TQFtChUFP9QxPd/Sul42ySbNNPuMue7z0zOJIE2DM4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADEvBzvxvXBIX1gxODYv844eZFV60e1m+CQTWDIMKo7zDh3mVXbjPKRQj8+5Dqoe5xx6kI1C1UG1iz03duMExerV+i7pxnnLVetUOcWdfUK1QbWKlR6Bgd1CvWuYKVCzYFVCrV+iv6rUKg7sEKh6i3qKhRqD5xcqHyLusmF+gMnFqrfom5ioYXASYUGtqibVGhiBacUGgksL7QSWFxo4wwOCgvNrGBpoaHAskI7W9SVFbaWAosKDW1RV1T4ru+3iZhQYdN93I/7PC095zzBwqYNaZ6XnnSWcGGQt5VYUHhNfFh62hlKChvvDSUGCzfhH0JtbdTgt8XXd3cbiZHvw8M2mrhfeupCsW/8Q3QVvZFVjD7T7OIb1cbHTfyp7XwDiYnn0hs4i6kn7/hZtLCKyXeL+Fnc6k9Mvz1Z/7gRvB8aP4uSN2Dbqyh6xzd9FmW3GJY3qvCexnCi9CbK7lkU37UlEvWuovw2MbFRz0vMXiLjvjTxAKd1FXNuhG2exaw778TLlM5VzLvVt3gWM3+3MPiJmvvLTHyjanyAy/7PzK4L/2XGt/5n1tlLnPr1uEtoxD40YtCvf2ecPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMOcPygQaZTTqa3cAAAAASUVORK5CYII=');
+          background-position: center;
+        `
+      : css`
+          background-image: linear-gradient(112deg, #eaeaea 0%, #505050 100%);
+        `}
 `;
 
 const ContactCard = styled(motion.div)`
   position: relative;
   overflow: scroll;
-  width: 90rem;
-  height: 57rem;
+  width: 100rem;
+  height: 73vh;
   /* background-color: #2a2a2a; */
   background: linear-gradient(112deg, #2a2a2a 30%, #171717 100%);
   flex-direction: column;
@@ -406,6 +463,34 @@ const Container = styled.div`
   z-index: 30; // Greater than header, less than modal
   width: 100%;
   height: calc(100vh - 11rem);
+`;
+
+const NavItem = styled.div<{ active: boolean }>`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 6rem;
+  color: #a2a2a2;
+  border-bottom: 2px solid #3c3c3c;
+  ${(props) =>
+    props.active &&
+    css`
+      border-bottom: 2px solid ${(props) => props.theme.colors.primary};
+      color: white;
+    `}
+  justify-content: center;
+
+  transition: 100ms all ease;
+
+  /* &:hover {
+    cursor: pointer;
+    color: white;
+    ${(props) =>
+    !props.active &&
+    css`
+      border-bottom: 2px solid #646464;
+    `}
+  } */
 `;
 
 CompanyPage.getInitialProps = async (context: any) => {
