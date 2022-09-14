@@ -13,7 +13,7 @@ import {
   UNSAVE_COMPANY_MUTATION,
 } from '../../data/companies';
 import { ME_QUERY } from '../../data/user';
-import { apiEndpoint } from '../../lib/constants';
+import { API_ENDPOINT } from '../../lib/constants';
 import styled, { css, media, theme } from '../../styles';
 
 const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
@@ -23,7 +23,7 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
 
   useEffect(() => {
     const getGoogleAuthUrl = async () => {
-      const res = await axios.get(`${apiEndpoint}/auth/google?redirect=/`);
+      const res = await axios.get(`${API_ENDPOINT}/auth/google?redirect=/`);
 
       if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
         setGoogleAuthError(true);
@@ -108,6 +108,7 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
           dragConstraints={dragConstraints}
         >
           <CardHeader>
+            <CompanyStatus></CompanyStatus>
             <Picture imageUrl={company.picture}>
               {!company.picture && (
                 <Text fontSize="8rem" fontWeight="700" color="#999999">
@@ -249,6 +250,10 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
     </Page>
   );
 };
+
+const CompanyStatus = styled.div`
+  display: flex;
+`;
 
 const People = styled.div`
   width: 100%;
@@ -394,6 +399,7 @@ const CardHeader = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
+  position: relative;
 `;
 
 const HeaderRight = styled.div`

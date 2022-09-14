@@ -64,39 +64,39 @@ const resolvers: Resolvers = {
         slug,
       };
 
-      const company = await prisma.company.create({ data });
+      const company = await prisma.company.create({
+        data: {
+          categories: { create: [{ categoryId: input.primaryCategoryId! }] },
+          ...data,
+        },
+        include: {
+          categories: {
+            include: {
+              category: { select: { name: true, id: true, color: true } },
+            },
+          },
+        },
+      });
 
-      let companyCategoryData = [];
+      const categories = company.categories.map((cat) => cat.category);
 
-      if (input.primaryCategoryId) {
-        companyCategoryData.push({
-          companyId: company.id,
-          categoryId: input.primaryCategoryId,
-        });
-      }
+      const algoliaData = {
+        id: company.id,
+        name: company.name,
+        website: company.website,
+        phoneNumber: company.phoneNumber,
+        description: company.description,
+        primaryCategory: company.categories[0].category.name,
+        updatedAt: company.updatedAt,
+        createdAt: company.createdAt,
+        categories,
+      };
 
-      if (input.secondaryCategoryId) {
-        companyCategoryData.push({
-          companyId: company.id,
-          categoryId: input.secondaryCategoryId,
-        });
-      }
+      await companiesIndex.saveObject(algoliaData, {
+        autoGenerateObjectIDIfNotExist: true,
+      });
 
-      if (input.tertiaryCategoryId) {
-        companyCategoryData.push({
-          companyId: company.id,
-          categoryId: input.tertiaryCategoryId,
-        });
-      }
-
-      await Promise.all([
-        prisma.categoriesOnCompanies.createMany({
-          data: companyCategoryData,
-        }),
-        companiesIndex.saveObject(company),
-      ]);
-
-      return { ok: true, errors: null, company };
+      return { ok: true, errors: null };
     },
   },
   Company: {

@@ -22,6 +22,7 @@ import {
   useInstantSearch,
 } from 'react-instantsearch-hooks-web';
 
+import { DEPLOY_ENV } from '../lib/constants';
 import { searchClient } from '../lib/searchClient';
 import styled, { media, theme } from '../styles';
 import { SearchIcon } from './icons';
@@ -144,7 +145,7 @@ const SearchPopover = (props: {
   return (
     <InstantSearch
       searchClient={searchClient}
-      indexName="development_companies"
+      indexName={`${DEPLOY_ENV}_companies`}
     >
       <Dialog
         initialValue={props.initialValue}

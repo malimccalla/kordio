@@ -8,7 +8,7 @@ import { SearchIcon } from '../components/icons';
 import Page from '../components/Page';
 import Popover from '../components/SearchPopover';
 import Text from '../components/Text';
-import { apiEndpoint } from '../lib/constants';
+import { API_ENDPOINT } from '../lib/constants';
 import styled, { media, theme } from '../styles';
 
 const Home: NextPage = ({ me }: any) => {
@@ -17,7 +17,7 @@ const Home: NextPage = ({ me }: any) => {
 
   useEffect(() => {
     const getGoogleAuthUrl = async () => {
-      const res = await axios.get(`${apiEndpoint}/auth/google?redirect=/`);
+      const res = await axios.get(`${API_ENDPOINT}/auth/google?redirect=/`);
 
       if (!res || !res.data || !res.data.ok || !res.data.authUrl) {
         setGoogleAuthError(true);
