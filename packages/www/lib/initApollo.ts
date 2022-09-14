@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import { apiEndpoint, deploymentEnv } from './constants';
+import { API_ENDPOINT, DEPLOY_ENV } from './constants';
 
 const isBrowser = typeof window !== 'undefined';
 
@@ -22,19 +22,19 @@ function create(
   initialState: NormalizedCacheObject,
   { getToken }: { getToken(): unknown }
 ) {
-  if (!apiEndpoint) {
+  if (!API_ENDPOINT) {
     throw new Error(
       'You must set the api endpoint in the environment variables'
     );
   }
 
   const credentials =
-    deploymentEnv === 'production' || deploymentEnv === 'staging'
+    DEPLOY_ENV === 'production' || DEPLOY_ENV === 'staging'
       ? 'same-origin'
       : 'include';
 
   const httpLink = createHttpLink({
-    uri: apiEndpoint,
+    uri: API_ENDPOINT,
     credentials,
   });
 
