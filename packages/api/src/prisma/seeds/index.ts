@@ -1,13 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 
-import { categories } from './data/categories';
+import { parentCategories, subCategories } from './data/categories';
 import { categoriesOnCompanies } from './data/categoriesOnCompanies';
 import { companies } from './data/companies';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.category.createMany({ data: categories, skipDuplicates: true });
+  await prisma.category.createMany({
+    data: [...parentCategories, ...subCategories],
+    skipDuplicates: true,
+  });
   await prisma.company.createMany({
     data: companies,
     skipDuplicates: true,

@@ -65,7 +65,7 @@ const Home: NextPage = ({ me }: any) => {
               Free resource pack
             </Text>
           </New> */}
-          <Title>The #1 Place to Build Your Team in the Music Industry</Title>
+          <Title>The #1 Place to Level Up in the Music Industry</Title>
           {/* <Refer>
             (but{' '}
             <Span onClick={() => alert('TODO: Implement referral system')}>
@@ -367,7 +367,7 @@ const Title = styled.h1`
   color: white;
   max-width: 108rem;
   text-align: center;
-  font-size: 7.4rem;
+  font-size: 8.4rem;
 `;
 
 const Grid = styled.div`
@@ -508,7 +508,7 @@ const Refer = styled.p`
 `;
 
 const SearchSection = styled.div`
-  max-width: 64rem;
+  max-width: 68rem;
   margin-top: 5rem;
   width: 100%;
 `;

@@ -58,6 +58,9 @@ model Category {
   name      String
   color     String?
   companies CategoriesOnCompanies[]
+  parent    Category?               @relation(name: "SubToParent", fields: [parentId], references: [id])
+  parentId  String?
+  children  Category[]              @relation(name: "SubToParent")
 
   @@map("categories")
 }

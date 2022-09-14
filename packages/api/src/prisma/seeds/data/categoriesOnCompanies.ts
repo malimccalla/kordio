@@ -43,8 +43,6 @@ const jobsTrainingAndCareers = jobsTrainingAndCareersCompanies.map(
   }
 );
 
-// TODO: Video, Design, & Photography (categories.c8)
-
 const lawAndBusiness = lawAndBusinessCompanies.map((company, i) => {
   return { categoryId: categories.c9, companyId: company.id };
 });
@@ -57,13 +55,9 @@ const merchAndPhysical = merchAndPhysicalCompanies.map((company, i) => {
   return { categoryId: categories.c11, companyId: company.id };
 });
 
-// TODO: Funding & Grants (categories.c12)
-
 const pressAndPR = pressAndPRCompanies.map((company, i) => {
   return { categoryId: categories.c13, companyId: company.id };
 });
-
-// TODO: Commnunity & Engagement (categories.c14)
 
 const dataToinsert = [
   ...livePerformance,

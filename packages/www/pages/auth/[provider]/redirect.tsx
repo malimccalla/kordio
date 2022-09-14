@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 import { LOGIN_MUTATION } from '../../../data/user';
-import { apiEndpoint } from '../../../lib/constants';
+import { API_ENDPOINT } from '../../../lib/constants';
 import { redirect } from '../../../lib/redirect';
 
 const AuthRedirect = (props: any) => {
@@ -61,7 +61,7 @@ AuthRedirect.getInitialProps = async (ctx: any) => {
 
   try {
     const res = await axios.get(
-      `${apiEndpoint}/auth/google/callback?code=${code}`
+      `${API_ENDPOINT}/auth/google/callback?code=${code}`
     );
 
     if (!res || !res.data || !res.data.account) {
