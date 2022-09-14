@@ -78,7 +78,7 @@ const resolvers: Resolvers = {
         },
       });
 
-      const categories = company.categories.map((cat) => cat.category);
+      const categories = company.categories.map((cat: any) => cat.category);
 
       const algoliaData = {
         id: company.id,
