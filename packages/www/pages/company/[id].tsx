@@ -171,16 +171,16 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
                 People
               </Text>
             </NavItem>
-            <NavItem active={false}>
+            {/* <NavItem active={false}>
               <Text fontSize="1.6rem" fontWeight="500">
                 Reviews
               </Text>
-            </NavItem>
-            {/* <NavItem active={false}>
-              <Text fontSize="1.6rem" fontWeight="500">
-                Premium Contact
-              </Text>
             </NavItem> */}
+            <NavItem active={false}>
+              <Text fontSize="1.6rem" fontWeight="500">
+                Contact & Submissions
+              </Text>
+            </NavItem>
           </Nav>
           <CardBody>
             <Categories>
@@ -281,9 +281,9 @@ const CTAButtons = styled.div`
 `;
 
 const SaveButton = styled.button`
-  width: 13rem;
-  height: 4rem;
-  border-radius: 8px;
+  width: 12rem;
+  height: 4.2rem;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   border: 3px solid ${(props) => props.theme.colors.primary};
@@ -298,9 +298,9 @@ const SaveButton = styled.button`
 `;
 
 const UnsaveButton = styled.button`
-  width: 13rem;
-  height: 4rem;
-  border-radius: 8px;
+  width: 12rem;
+  height: 4.2rem;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   border: 2px solid ${(props) => props.theme.colors.primary};

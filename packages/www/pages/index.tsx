@@ -122,7 +122,7 @@ const Home: NextPage = ({ me }: any) => {
 
           <Grid>
             <Popover
-              initialValue="Radio, Blogs, & Media"
+              initialValue="Radio"
               triggerComponent={
                 <Card>
                   <CardTitle>Radio, Blogs, & Media &rarr;</CardTitle>
@@ -135,7 +135,7 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Merch & Physical"
+              initialValue="Merchandise"
               triggerComponent={
                 <Card>
                   <CardTitle>Merch & Physical &rarr;</CardTitle>
@@ -147,13 +147,12 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Press & PR"
+              initialValue="Merchandise"
               triggerComponent={
                 <Card>
-                  <CardTitle>Press & PR &rarr;</CardTitle>
+                  <CardTitle>Merch & Physical &rarr;</CardTitle>
                   <CardDescription>
-                    Get expert growth and marketing tips from leading industry
-                    experts
+                    Need band T-shirts to sell? Looking to press some vinyl?
                   </CardDescription>
                 </Card>
               }
@@ -185,7 +184,7 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Law & Business"
+              initialValue="Laywers & Legal advice"
               triggerComponent={
                 <Card>
                   <CardTitle>Law & Business &rarr;</CardTitle>
@@ -524,7 +523,8 @@ const TrendingSearch = styled.span`
   }
 `;
 
-const TrendingSearches = styled.p`
+const TrendingSearches = styled.div`
+  display: inline-block;
   color: white;
   margin-top: 1.4rem;
 `;
