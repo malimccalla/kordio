@@ -2,20 +2,20 @@ import { PrismaClient } from '@prisma/client';
 
 import { companiesIndex } from '../../services/algolia';
 import { parentCategories, subCategories } from './data/categories';
-import { categoriesOnCompanies } from './data/categoriesOnCompanies';
 import { companies as companiesData } from './data/companies';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.category.deleteMany();
+  await prisma.usersSavedCompanies.deleteMany({});
+  await prisma.categoriesOnCompanies.deleteMany({});
+  await prisma.company.deleteMany({});
+
   await prisma.category.createMany({
     data: [...parentCategories, ...subCategories],
     skipDuplicates: true,
   });
-
-  await prisma.usersSavedCompanies.deleteMany({});
-  await prisma.categoriesOnCompanies.deleteMany({});
-  await prisma.company.deleteMany({});
 
   companiesData.forEach(async (company: any) => {
     await prisma.company.create({ data: company });
