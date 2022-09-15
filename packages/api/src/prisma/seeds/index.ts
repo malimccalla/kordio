@@ -7,10 +7,10 @@ import { companies as companiesData } from './data/companies';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.category.deleteMany();
   await prisma.usersSavedCompanies.deleteMany({});
   await prisma.categoriesOnCompanies.deleteMany({});
   await prisma.company.deleteMany({});
+  await prisma.category.deleteMany();
 
   await prisma.category.createMany({
     data: [...parentCategories, ...subCategories],
