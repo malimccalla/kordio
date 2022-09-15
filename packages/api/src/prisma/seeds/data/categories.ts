@@ -17,7 +17,6 @@ export const c13 = '41c30f73-4577-44f6-b919-5a0ac4441d83';
 export const c14 = '114c75f5-d478-4077-909c-51e43704d56e';
 export const c15 = '2cb67d21-6e5f-4e39-9764-c9ca8da2380b';
 export const c16 = '9e29ade4-c791-4e73-be8f-b3a403d8583d';
-export const c17 = '376b3c6f-bb80-4858-a687-61769e4584a8';
 export const c18 = '6653bc30-f1a0-4349-ae1e-507d46d3bd51';
 export const c19 = '19329ae2-c95a-473b-9942-82380406c9b9';
 export const c20 = 'f063b0ea-92d6-4fb5-a300-472607d6d82e';
@@ -57,14 +56,20 @@ export const c53 = '1a22d0a4-3051-4217-bee6-88d91e06319e';
 export const c54 = '2500a979-42dc-46f1-9625-4154d8dee6f9';
 export const c55 = '6e73fdd3-fe73-4c83-becf-cb9921b147b3';
 export const c56 = '34334625-5a48-4d07-b45e-cc76120a17c6';
-
 export const c57 = '651ad31e-6fd0-4ec3-9ec1-e325009c4bea';
 export const c58 = '53d9d2f4-6dd7-43e7-b5f3-21e735ba7e1f';
-export const c59 = '';
-export const c60 = '';
-export const c61 = '';
-export const c62 = '';
-export const c63 = '';
+export const c59 = '81eaf257-2d29-4abd-9f0b-2e9136015270';
+export const c60 = 'cc507a7a-78fa-4acb-9330-ef1babeb5b29';
+export const c61 = 'c1db0b6c-026f-437d-bd04-a3661dec2557';
+export const c62 = '7787d434-f9d9-4249-b273-4ec651389281';
+export const c63 = '2bfec9a2-cd38-4445-905d-c87f5d6da67e';
+export const c65 = '';
+export const c66 = '';
+
+export const c67 = '';
+export const c68 = '';
+export const c69 = 'artist development';
+export const c70 = 'ticketing and events';
 
 export const parentCategories = [
   { id: c1, name: 'Creative & Branding', color: '#82FF9A' },
@@ -80,19 +85,20 @@ export const parentCategories = [
   { id: c11, name: 'Recording & Production', color: '#FF7373' },
   { id: c12, name: 'Networking & Social', color: '#A5FBFF' },
   { id: c13, name: 'Web3 & Blockchain', color: '#D194C7' },
+  { id: c68, name: 'Charities, Unions & Not-for-profits', color: '#D194C7' }, // TODO: COLOR
 ];
 
 export const subCategories = [
   // Creative & Branding
   { id: c14, name: 'Artwork & Design', parentId: c1 },
-  { id: c15, name: 'Merchandise', parentId: c1 },
+  { id: c15, name: 'Merchandise & Printers', parentId: c1 },
   { id: c16, name: 'Music Photography', parentId: c1 },
-  { id: c17, name: 'Printers', parentId: c1 },
   { id: c18, name: 'Video & Production', parentId: c1 },
   { id: c19, name: 'Branding Services', parentId: c1 },
   // Artist Management
   { id: c20, name: 'Artist Managers', parentId: c2 },
   { id: c21, name: 'Management Tools', parentId: c2 },
+  { id: c69, name: 'Artist Development', parentId: c2 },
   // Finance, Law & Business
   { id: c22, name: 'Insurance Services', parentId: c3 },
   { id: c23, name: 'Music & Business Advice', parentId: c3 },
@@ -104,23 +110,24 @@ export const subCategories = [
   { id: c28, name: 'Marketing Services', parentId: c4 },
   { id: c29, name: 'Growth & Engagement', parentId: c4 },
   // Live Performance
-  { id: c30, name: 'Booking agents', parentId: c5 },
+  { id: c30, name: 'Booking & Live agents', parentId: c5 },
   { id: c31, name: 'Equipment hire', parentId: c5 },
   { id: c32, name: 'Promoters', parentId: c5 },
   { id: c33, name: 'Rehearsal studios', parentId: c5 },
   { id: c34, name: 'Tour services', parentId: c5 },
   { id: c62, name: 'Festivals', parentId: c5 },
+  { id: c65, name: 'Venues', parentId: c5 },
+  { id: c70, name: 'Ticketing & Events', prentId: c5 },
   // Radio, Blogs, & Media
   { id: c35, name: 'Press & Magazines', parentId: c6 },
   { id: c36, name: 'Online Blogs', parentId: c6 },
   { id: c37, name: 'Student Media', parentId: c6 },
-  { id: c38, name: 'Rehearsal studios', parentId: c6 },
+  { id: c38, name: 'Radio Stations', parentId: c6 },
   { id: c39, name: 'Industry News & Commentary', parentId: c6 },
-  // Charities, Training & Careers
+  // Training & Careers
   { id: c40, name: 'Careers & Job Websites', parentId: c7 },
   { id: c41, name: 'Training & Tuition', parentId: c7 },
-  { id: c59, name: 'Schools & Education' },
-  { id: c63, name: 'Charities & not-for-profit ' },
+  { id: c59, name: 'Schools & Education', parentId: c7 },
   // Streaming & Distribution
   { id: c42, name: 'Streaming & DSPs', parentId: c8 },
   { id: c43, name: 'Online Music Stores', parentId: c8 },
@@ -146,4 +153,8 @@ export const subCategories = [
   { id: c53, name: 'Audio NFTs', parentId: c13 },
   { id: c54, name: 'Rights & Royalties', parentId: c13 },
   { id: c55, name: 'Metaverse Music', parentId: c13 },
+  // Social Good
+  { id: c63, name: 'Charities', parentId: c68 },
+  { id: c66, name: 'Diversity & Inclusion', parentId: c68 },
+  { id: c67, name: 'Not-for-profits & Unions', parentId: c68 },
 ];
