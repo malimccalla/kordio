@@ -8,7 +8,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "node src/index.js",
-    "migrate:start:prod": "yarn run prisma:generate && yarn run migrate:prod && yarn run start",
+    "migrate:start:prod": "yarn run prisma:generate && yarn run migrate:prod && yarn run seed && yarn run start",
     "prisma:generate": "npx prisma generate",
     "seed": "npx prisma db seed",
     "migrate:prod": "npx prisma migrate deploy",

@@ -13,6 +13,10 @@ async function main() {
     skipDuplicates: true,
   });
 
+  await prisma.usersSavedCompanies.deleteMany({});
+  await prisma.categoriesOnCompanies.deleteMany({});
+  await prisma.company.deleteMany({});
+
   companiesData.forEach(async (company: any) => {
     await prisma.company.create({ data: company });
   });
