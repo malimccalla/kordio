@@ -187,8 +187,8 @@ const TextContainer = styled.div`
 `;
 
 const ArrowBox = styled.div`
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   color: ${(props) => props.theme.colors.black};
   border-radius: 3px;
   align-items: center;
@@ -235,6 +235,13 @@ const ResultContainer = styled.div`
     background-color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
     color: white;
+  }
+
+  &:hover ${ArrowBox} {
+    display: flex;
+    color: ${(props) => props.theme.colors.primary};
+    font-weight: 600;
+    background-color: #333;
   }
 
   &:hover ${TextContainer} {

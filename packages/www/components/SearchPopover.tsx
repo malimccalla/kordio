@@ -203,8 +203,8 @@ const Category = styled.div`
   margin-right: 6px;
 `;
 const ArrowBox = styled.div`
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   color: ${(props) => props.theme.colors.black};
   border-radius: 3px;
   align-items: center;
@@ -256,12 +256,15 @@ const ResultContainer = styled.div`
 
   &:hover ${ArrowBox} {
     display: flex;
-    background-color: white;
+    color: ${(props) => props.theme.colors.primary};
+    font-weight: 600;
+    background-color: #333;
   }
 
   &:hover ${TextContainer} {
     display: flex;
-    color: ${(props) => props.theme.colors.black};
+    /* font-weight: 700; */
+    color: #333; // ${(props) => props.theme.colors.black};
     /* background-color: ${(props) => props.theme.colors.blue}; */
   }
 
@@ -364,7 +367,7 @@ const SearchInput = styled(SearchBox)`
 const DialogSearchBox = styled.div`
   display: flex;
   height: 7rem;
-  width: 94rem;
+  width: 104rem;
   align-items: center;
   padding: 0 2rem;
   color: #999999;

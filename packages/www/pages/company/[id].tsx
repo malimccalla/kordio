@@ -281,9 +281,9 @@ const CTAButtons = styled.div`
 `;
 
 const SaveButton = styled.button`
-  width: 12rem;
-  height: 3.8rem;
-  border-radius: 1000px;
+  width: 13rem;
+  height: 4rem;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   border: 3px solid ${(props) => props.theme.colors.primary};
@@ -298,12 +298,12 @@ const SaveButton = styled.button`
 `;
 
 const UnsaveButton = styled.button`
-  width: 12rem;
-  height: 3.8rem;
-  border-radius: 1000px;
+  width: 13rem;
+  height: 4rem;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  border: 3px solid ${(props) => props.theme.colors.primary};
+  border: 2px solid ${(props) => props.theme.colors.primary};
   background-color: ${(props) => props.theme.colors.primary};
   justify-content: center;
   color: ${(props) => props.theme.colors.black};
