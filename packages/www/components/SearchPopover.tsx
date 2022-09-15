@@ -108,7 +108,7 @@ const Hit = ({ hit }: any) => {
       <ResultContainer>
         <ResultLeft>
           <ResultImage src={hit.imageUrl}>
-            <Text fontWeight="500" fontSize="3rem" color="#999">
+            <Text fontWeight="500" fontSize="4rem" color="#999">
               {hit.name[0].toLocaleUpperCase()}
             </Text>
           </ResultImage>
@@ -118,11 +118,7 @@ const Hit = ({ hit }: any) => {
             </Text>
             <Categories>
               {hit.categories.map((category: any) => {
-                return (
-                  <Category color={category.color} key={category.id}>
-                    {category.name}
-                  </Category>
-                );
+                return <Category key={category.id}>{category.name}</Category>;
               })}
             </Categories>
           </TextContainer>
@@ -187,11 +183,17 @@ const Categories = styled.div`
   padding-top: 1rem;
 `;
 
-const Category = styled.div<{ color: string }>`
-  background-color: ${(props) => props.color};
+const TextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 2rem;
+`;
+
+const Category = styled.div`
   font-size: 1.2rem;
-  color: ${(props) => props.theme.colors.black};
-  height: 1.8rem;
+  border: 1px solid ${(props) => props.theme.colors.primary}60;
+  height: 2.2rem;
   font-weight: 500;
   padding: 0 1rem;
   display: flex;
@@ -200,14 +202,6 @@ const Category = styled.div<{ color: string }>`
   border-radius: 5000px;
   margin-right: 6px;
 `;
-
-const TextContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding-left: 2rem;
-`;
-
 const ArrowBox = styled.div`
   height: 3rem;
   width: 3rem;
@@ -226,8 +220,8 @@ const ResultLeft = styled.div`
 const ResultRight = styled.div``;
 
 const ResultImage = styled.div<{ src: string }>`
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   display: flex;
   font-size: 2rem;
   background-size: cover;
@@ -239,7 +233,7 @@ const ResultImage = styled.div<{ src: string }>`
 
 const ResultContainer = styled.div`
   width: 100%;
-  height: 10rem;
+  height: 11rem;
   color: white;
   padding: 0 2rem;
   flex-direction: row;
@@ -269,6 +263,12 @@ const ResultContainer = styled.div`
     display: flex;
     color: ${(props) => props.theme.colors.black};
     /* background-color: ${(props) => props.theme.colors.blue}; */
+  }
+
+  &:hover ${Category} {
+    border: 1px solid black;
+    background-color: #333;
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 

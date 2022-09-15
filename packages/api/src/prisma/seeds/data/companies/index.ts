@@ -1200,6 +1200,9 @@ export const companies = [
   {
     slug: nanoid(6),
     id: v4(),
+    categories: {
+      create: [{ categoryId: categories.c50 }],
+    },
     name: 'Select Recording Studios',
     website: 'http://selectrecordingstudios.co.uk/',
     contactEmail: 'info@selectrecordingstudios.co.uk',

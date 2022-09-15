@@ -63,13 +63,13 @@ export const c60 = 'cc507a7a-78fa-4acb-9330-ef1babeb5b29';
 export const c61 = 'c1db0b6c-026f-437d-bd04-a3661dec2557';
 export const c62 = '7787d434-f9d9-4249-b273-4ec651389281';
 export const c63 = '2bfec9a2-cd38-4445-905d-c87f5d6da67e';
-export const c65 = '';
-export const c66 = '';
+export const c65 = '5fdbb724-fcec-4a03-9ea0-422ce23d7e4a';
+export const c66 = '3ae61db1-8eba-4d3c-b0fc-745673b1b388';
 
-export const c67 = '';
-export const c68 = '';
-export const c69 = 'artist development';
-export const c70 = 'ticketing and events';
+export const c67 = '0538c108-6094-4e32-946c-93d6c57faaa5';
+export const c68 = '4bc5f34c-385d-4809-b8f2-0d6408253750';
+export const c69 = '05208fde-f102-4417-b281-abd43fcddc28';
+export const c70 = '37a6b8f0-473f-42ba-8c13-0591b22ecb79';
 
 export const parentCategories = [
   { id: c1, name: 'Creative & Branding', color: '#82FF9A' },
@@ -117,7 +117,7 @@ export const subCategories = [
   { id: c34, name: 'Tour services', parentId: c5 },
   { id: c62, name: 'Festivals', parentId: c5 },
   { id: c65, name: 'Venues', parentId: c5 },
-  { id: c70, name: 'Ticketing & Events', prentId: c5 },
+  { id: c70, name: 'Ticketing & Events', parentId: c5 },
   // Radio, Blogs, & Media
   { id: c35, name: 'Press & Magazines', parentId: c6 },
   { id: c36, name: 'Online Blogs', parentId: c6 },

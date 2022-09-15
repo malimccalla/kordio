@@ -117,14 +117,17 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
               )}
             </Picture>
             <HeaderRight>
-              <Text
-                paddingBottom="2rem"
-                fontSize="4rem"
-                fontWeight="600"
-                color="white"
-              >
-                {company.name}
-              </Text>
+              <div>
+                <Text
+                  fontSize="4.2rem"
+                  paddingBottom="2rem"
+                  fontWeight="600"
+                  color="white"
+                >
+                  {company.name}
+                </Text>
+              </div>
+
               <CTAButtons>
                 {!me && (
                   <a target="_blank" rel="noreferrer" href={googleAuthUrl!}>
@@ -183,19 +186,14 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
             <Categories>
               {company.categories.map((category: any) => (
                 <Category color={category.color} key={category.id}>
-                  <Text color={theme.colors.black} fontSize="1.3rem">
+                  <Text color="white" fontSize="1.3rem">
                     {category.name}
                   </Text>
                 </Category>
               ))}
             </Categories>
             {company.description && (
-              <Text
-                paddingTop="2rem"
-                fontSize="1.5rem"
-                lineHeight="1.4"
-                color="white"
-              >
+              <Text fontSize="1.5rem" lineHeight="1.4" color="white">
                 {company.description}
               </Text>
             )}
@@ -378,10 +376,10 @@ const CardBody = styled.div`
 `;
 
 const Category = styled.div<{ color: string }>`
-  height: 2.4rem;
+  height: 2.8rem;
   display: flex;
-  padding: 0 1.4rem;
-  border: 1px solid ${(props) => props.color};
+  padding: 0 2rem;
+  border: 1px solid ${(props) => props.theme.colors.primary}90;
   background-color: ${(props) => props.color};
   border-radius: 1000px;
   justify-content: center;
@@ -393,6 +391,10 @@ const Category = styled.div<{ color: string }>`
 const Categories = styled.div`
   display: flex;
   float: left;
+  margin-bottom: 2rem;
+  /* position: absolute;
+  right: 0;
+  top: 0; */
 `;
 
 const CardHeader = styled.div`
@@ -405,8 +407,11 @@ const CardHeader = styled.div`
 const HeaderRight = styled.div`
   flex-direction: column;
   width: 100%;
+  height: 12rem;
+  display: flex;
+  justify-content: center;
   margin-left: 3rem;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 `;
 
 const Picture = styled.div<{ imageUrl?: string }>`

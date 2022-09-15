@@ -21,14 +21,14 @@ const Dashboard = ({ me }: any) => {
 
   return (
     <Page title="Dashboard">
-      <SideNav>
+      {/* <SideNav>
         <SideHeader>
           <Text fontSize="2.4rem" fontWeight="500" color="#999">
             Dashboard
           </Text>
         </SideHeader>
         <SideContent></SideContent>
-      </SideNav>
+      </SideNav> */}
       <Container>
         <Content>
           <Text fontSize="2rem" color="#999">
@@ -123,15 +123,15 @@ const CTAButton = styled.button`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 2rem;
   width: 100%;
   padding-bottom: 5rem;
 
-  ${media.large`
+  /* ${media.large`
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
-  `}
+  `} */
 `;
 
 const Divider = styled.div`
@@ -145,7 +145,7 @@ const Divider = styled.div`
 const Content = styled.div`
   width: 108rem;
   margin-top: 5rem;
-  margin-left: 26rem; //enable for side nav
+  /* margin-left: 26rem; //enable for side nav */
 `;
 
 const Container = styled.div`
@@ -166,8 +166,10 @@ const Categories = styled.div`
 const Category = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
   font-size: 1.2rem;
-  color: ${(props) => props.theme.colors.black};
-  height: 1.8rem;
+  /* color: ${(props) => props.theme.colors.black}; */
+
+  border: 1px solid ${(props) => props.theme.colors.primary}60;
+  height: 2.2rem;
   font-weight: 500;
   padding: 0 1rem;
   display: flex;
@@ -202,8 +204,8 @@ const ResultLeft = styled.div`
 const ResultRight = styled.div``;
 
 const ResultImage = styled.div<{ src: string }>`
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   display: flex;
   font-size: 2rem;
   background-size: cover;
@@ -215,7 +217,7 @@ const ResultImage = styled.div<{ src: string }>`
 
 const ResultContainer = styled.div`
   width: 100%;
-  height: 10rem;
+  height: 12rem;
   color: white;
   padding: 0 2rem;
   flex-direction: row;
@@ -235,15 +237,16 @@ const ResultContainer = styled.div`
     color: white;
   }
 
-  &:hover ${ArrowBox} {
-    display: flex;
-    background-color: white;
-  }
-
   &:hover ${TextContainer} {
     display: flex;
     color: ${(props) => props.theme.colors.black};
     /* background-color: ${(props) => props.theme.colors.blue}; */
+  }
+
+  &:hover ${Category} {
+    border: 1px solid black;
+    background-color: #333;
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 
