@@ -19,7 +19,6 @@ import styled, { css, media, theme } from '../../styles';
 const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
   const [googleAuthUrl, setGoogleAuthUrl] = useState<string | null>(null);
   const [googleAuthError, setGoogleAuthError] = useState<boolean>(false);
-  // const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     const getGoogleAuthUrl = async () => {

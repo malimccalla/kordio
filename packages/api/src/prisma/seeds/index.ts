@@ -2,50 +2,48 @@ import { PrismaClient } from '@prisma/client';
 
 import { companiesIndex } from '../../services/algolia';
 import { parentCategories, subCategories } from './data/categories';
-import { companies as companiesData } from './data/companies';
+import categoriesOnCompaniesData from './data/json/categoriesOnCompanies';
+import companies from './data/json/companies';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.usersSavedCompanies.deleteMany({});
   await prisma.categoriesOnCompanies.deleteMany({});
   await prisma.company.deleteMany({});
-  await prisma.category.deleteMany();
+  await prisma.category.deleteMany({});
 
   await prisma.category.createMany({
     data: [...parentCategories, ...subCategories],
     skipDuplicates: true,
   });
 
-  companiesData.forEach(async (company: any) => {
-    await prisma.company.create({ data: company });
+  await prisma.company.createMany({ data: companies, skipDuplicates: true });
+
+  await prisma.categoriesOnCompanies.createMany({
+    data: categoriesOnCompaniesData,
+    skipDuplicates: true,
   });
 
-  const companies = await prisma.company.findMany({
-    include: { categories: { include: { category: true } } },
+  // Uncomment to replace algolia data when running seeds
+
+  const companiesWithCatgories = await prisma.company.findMany({
+    include: {
+      categories: {
+        include: { category: { include: { parent: true } } },
+      },
+    },
   });
 
-  // console.log('INCLUDED', companies);
-
-  const algoliaData = companies.map((company: any) => {
+  const algoliaData = companiesWithCatgories.map((company) => {
     return {
       ...company,
-      categories: company.categories.map((c: any) => c.category),
+      categories: company.categories.map((c) => c.category),
     };
   });
 
   await companiesIndex.replaceAllObjects(algoliaData, {
     autoGenerateObjectIDIfNotExist: true,
   });
-
-  // await prisma.company.createMany({
-  //   data: companies,
-  //   skipDuplicates: true,
-  // });
-  // await prisma.categoriesOnCompanies.createMany({
-  //   data: categoriesOnCompanies,
-  //   skipDuplicates: true,
-  // });
 }
 
 main()

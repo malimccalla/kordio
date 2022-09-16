@@ -379,7 +379,7 @@ const Grid = styled.div`
 `;
 
 const CardTitle = styled.h2`
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: white; //${(props) => props.theme.colors.primary};
 `;
 
