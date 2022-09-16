@@ -30,7 +30,7 @@ const Home: NextPage = ({ me }: any) => {
   }, []);
 
   return (
-    <Page title="Kordio – the #1 place to build your team in the music industry">
+    <Page title="Kordio – The #1 Place to Level Up in the Music Industry">
       <Banner />
       <Container>
         <Header>

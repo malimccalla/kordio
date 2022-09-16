@@ -26,7 +26,7 @@ const Page = (props: Props) => {
       width: '1200',
     },
     description:
-      'Kordio is the #1 place to build your team in the music industry. Connect with industry professionals, submit music to record labels, or discover resources to help you develop your craft.',
+      'Kordio is the #1 place to level up in the music industry. Connect with industry professionals, submit music to record labels, or discover resources to help you develop your career.',
   };
 
   const og = meta || defaultOg;
