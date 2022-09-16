@@ -8,9 +8,10 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "node src/index.js",
-    "migrate:start:prod": "yarn run prisma:generate && yarn run migrate:prod && yarn run seed && yarn run start",
+    "migrate:start:prod": "yarn run prisma:generate && yarn run migrate:prod && yarn run start",
     "prisma:generate": "npx prisma generate",
     "seed": "npx prisma db seed",
+    "seed:prod": "node src/prisma/seeds/index.js",
     "migrate:prod": "npx prisma migrate deploy",
     "dev": "nodemon src/index.ts",
     "gen:types": "graphql-codegen",
@@ -18,7 +19,7 @@
     "build": "rimraf dist && tsc && copyfiles -u 1 src/**/*.graphql dist && copyfiles -u 1 src/prisma/migrations/**/** dist && copyfiles -u 1 src/prisma/schema.prisma dist"
   },
   "prisma": {
-    "seed": "node src/prisma/seeds/index.js",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/prisma/seeds/index.ts",
     "schema": "src/prisma/schema.prisma"
   },
   "dependencies": {
