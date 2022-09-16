@@ -131,28 +131,28 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
                 {!me && (
                   <a target="_blank" rel="noreferrer" href={googleAuthUrl!}>
                     <SaveButton onClick={() => null}>
-                      <Text fontSize="1.8rem">Save</Text>
+                      <Text fontSize="1.6rem">Save</Text>
                     </SaveButton>
                   </a>
                 )}
                 {me && loading && initIsSaved && (
                   <UnsaveButton onClick={onUnsaveCompany}>
-                    <Text fontSize="1.8rem">Saved</Text>
+                    <Text fontSize="1.6rem">Saved</Text>
                   </UnsaveButton>
                 )}
                 {me && loading && !initIsSaved && (
                   <SaveButton onClick={onSaveCompany}>
-                    <Text fontSize="1.8rem">Save</Text>
+                    <Text fontSize="1.6rem">Save</Text>
                   </SaveButton>
                 )}
                 {me ? (
                   !data || !data.isCompanySavedByUser ? (
                     <SaveButton onClick={onSaveCompany}>
-                      <Text fontSize="1.8rem">Save</Text>
+                      <Text fontSize="1.6rem">Save</Text>
                     </SaveButton>
                   ) : (
                     <UnsaveButton onClick={onUnsaveCompany}>
-                      <Text fontSize="1.8rem">Saved</Text>
+                      <Text fontSize="1.6rem">Saved</Text>
                     </UnsaveButton>
                   )
                 ) : null}
@@ -280,7 +280,7 @@ const CTAButtons = styled.div`
 `;
 
 const SaveButton = styled.button`
-  width: 12rem;
+  width: 10rem;
   height: 4.2rem;
   border-radius: 6px;
   display: flex;
@@ -297,7 +297,7 @@ const SaveButton = styled.button`
 `;
 
 const UnsaveButton = styled.button`
-  width: 12rem;
+  width: 10rem;
   height: 4.2rem;
   border-radius: 6px;
   display: flex;
