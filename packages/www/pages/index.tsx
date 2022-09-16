@@ -135,24 +135,25 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Merchandise"
+              initialValue="Creative & Branding"
               triggerComponent={
                 <Card>
-                  <CardTitle>Merch & Physical &rarr;</CardTitle>
+                  <CardTitle>Creative & Branding &rarr;</CardTitle>
                   <CardDescription>
-                    Need band T-shirts to sell? Looking to press some vinyl?
+                    Creative agencies to help you with photos, videos &
+                    merchandising.
                   </CardDescription>
                 </Card>
               }
             ></Popover>
 
             <Popover
-              initialValue="Merchandise"
+              initialValue="PR & Marketing"
               triggerComponent={
                 <Card>
-                  <CardTitle>Merch & Physical &rarr;</CardTitle>
+                  <CardTitle>PR & Marketing &rarr;</CardTitle>
                   <CardDescription>
-                    Need band T-shirts to sell? Looking to press some vinyl?
+                    Grow your fanbase and engage new audeinces worldwide.
                   </CardDescription>
                 </Card>
               }
@@ -171,13 +172,13 @@ const Home: NextPage = ({ me }: any) => {
             ></Popover>
 
             <Popover
-              initialValue="Technology"
+              initialValue="Recording & Production"
               triggerComponent={
                 <Card>
                   <CardTitle>Tools & Technology &rarr;</CardTitle>
                   <CardDescription>
                     Leverage the latest technology to keep up to date with
-                    industry trends
+                    industry trends.
                   </CardDescription>
                 </Card>
               }
@@ -190,7 +191,7 @@ const Home: NextPage = ({ me }: any) => {
                   <CardTitle>Law & Business &rarr;</CardTitle>
                   <CardDescription>
                     Tips and contacts to help make sense of the legal side of
-                    the industry
+                    the industry.
                   </CardDescription>
                 </Card>
               }
@@ -385,6 +386,7 @@ const CardTitle = styled.h2`
 
 const CardDescription = styled.p`
   margin-top: 1rem;
+  line-height: 1.4;
   color: #d8d8d8;
 `;
 

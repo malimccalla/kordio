@@ -9,6 +9,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   await prisma.categoriesOnCompanies.deleteMany({});
+  await prisma.usersSavedCompanies.deleteMany({});
   await prisma.company.deleteMany({});
   await prisma.category.deleteMany({});
 
@@ -34,16 +35,16 @@ async function main() {
     },
   });
 
-  const algoliaData = companiesWithCatgories.map((company) => {
-    return {
-      ...company,
-      categories: company.categories.map((c) => c.category),
-    };
-  });
+  // const algoliaData = companiesWithCatgories.map((company: any) => {
+  //   return {
+  //     ...company,
+  //     categories: company.categories.map((c: any) => c.category),
+  //   };
+  // });
 
-  await companiesIndex.replaceAllObjects(algoliaData, {
-    autoGenerateObjectIDIfNotExist: true,
-  });
+  // await companiesIndex.replaceAllObjects(algoliaData, {
+  //   autoGenerateObjectIDIfNotExist: true,
+  // });
 }
 
 main()
