@@ -7,6 +7,8 @@
   "scripts": {
     "deploy:www:staging": "sh scripts/deploy-www-staging.sh",
     "deploy:api:staging": "sh scripts/deploy-api-staging.sh",
+    "deploy:www:prod": "sh scripts/deploy-www-production.sh",
+    "deploy:api:prod": "sh scripts/deploy-api-production.sh",
     "dev": "concurrently \"yarn --cwd ./packages/api dev\" \"yarn --cwd ./packages/www dev\""
   },
   "workspaces": {
