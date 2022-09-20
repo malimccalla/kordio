@@ -204,8 +204,9 @@ const Home: NextPage = ({ me }: any) => {
               fontWeight="600"
               color="white"
             >
-              Get instant and direct access to thousands of music industry
-              contacts and resources.
+              {
+                'Get instant and direct access to thousands of music industry contacts and resources for free!'
+              }
             </Text>
             <AllCategoriesButton>Sign up</AllCategoriesButton>
           </Section>

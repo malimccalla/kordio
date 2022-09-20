@@ -27,13 +27,13 @@ async function main() {
 
   // Uncomment to replace algolia data when running seeds
 
-  const companiesWithCatgories = await prisma.company.findMany({
-    include: {
-      categories: {
-        include: { category: { include: { parent: true } } },
-      },
-    },
-  });
+  // const companiesWithCatgories = await prisma.company.findMany({
+  //   include: {
+  //     categories: {
+  //       include: { category: { include: { parent: true } } },
+  //     },
+  //   },
+  // });
 
   // const algoliaData = companiesWithCatgories.map((company: any) => {
   //   return {
