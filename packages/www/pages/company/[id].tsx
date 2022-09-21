@@ -209,7 +209,7 @@ const CompanyPage: NextPage = ({ me, data: { company, initIsSaved } }: any) => {
               </Detail>
               <Detail>
                 <DetailKey>
-                  <Text>Contact email:</Text>
+                  <Text>Contact:</Text>
                 </DetailKey>
                 <DetailValue>
                   <Text>{company.contactEmail || 'N/A'}</Text>

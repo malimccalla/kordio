@@ -316,6 +316,10 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.black};
+
+  ${media.large`
+    padding: 2rem;
+  `}
 `;
 
 const Avatar = styled.div`
@@ -369,6 +373,10 @@ const Title = styled.h1`
   max-width: 108rem;
   text-align: center;
   font-size: 8.4rem;
+
+  ${media.large`
+    font-size: 7rem;
+  `}
 `;
 
 const Grid = styled.div`
